@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.GreenMate.CardView"
+    android:layout_width="130dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp"
+    app:layout_constraintDimensionRatio="1:2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/greenMateImageView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/background_round_image"
+            android:clipToOutline="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/plant2"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/greenMateNameTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_vertical_margin"
+            android:ellipsize="end"
+            android:text="그리니"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+
+        <TextView
+            android:id="@+id/greenMateTypeTextView"
+            style="@style/Style.GreenMate.Text.Body.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="식물 종류"
+            app:layout_constraintEnd_toStartOf="@id/lightImageView"
+            app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
+
+        <ImageView
+            android:id="@+id/lightImageView"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/background_profile_img"
+            android:backgroundTint="@color/progress_activate_color"
+            android:padding="2dp"
+            android:src="@drawable/icon_sun"
+            app:layout_constraintBottom_toBottomOf="@id/waterImageView"
+            app:layout_constraintEnd_toStartOf="@id/waterImageView"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/waterImageView"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/background_profile_img"
+            android:backgroundTint="@color/progress_activate_color"
+            android:padding="2dp"
+            android:src="@drawable/icon_water"
+            app:layout_constraintBottom_toBottomOf="@id/temperatureImageView"
+            app:layout_constraintEnd_toStartOf="@id/temperatureImageView"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/temperatureImageView"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:background="@drawable/background_profile_img"
+            android:backgroundTint="@color/progress_activate_color"
+            android:padding="2dp"
+            android:src="@drawable/icon_temperature"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/greenMateTypeTextView"
+            app:tint="@color/white" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

@@ -1,7 +1,8 @@
-package com.greenmate.greenmate
+package com.greenmate.greenmate.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.greenmate.greenmate.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

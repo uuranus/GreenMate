@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Style.GreenMate.Text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Title">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Title.Accent">
+        <item name="android:textColor">@color/accent_text_color</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body" />
+
+    <style name="Style.GreenMate.Text.Body.Title">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Sub">
+        <item name="android:textColor">@color/sub_text_color</item>
+    </style>
+
+
+</resources>

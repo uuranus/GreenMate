@@ -1,4 +1,4 @@
-package com.greenmate.greenmate
+package com.greenmate.greenmate.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.FragmentLoadingBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
