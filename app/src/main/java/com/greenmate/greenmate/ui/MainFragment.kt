@@ -1,5 +1,7 @@
 package com.greenmate.greenmate.ui
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -9,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
@@ -28,7 +31,15 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = GreenMateListAdapter()
+        val adapter = GreenMateListAdapter(onClickListener = {
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            var options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                requireActivity(), binding.greenMateImageView, "String"
+            )
+            startActivity(intent, options.toBundle())
+//            findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+        })
+
         val data =
             listOf("그리니", "그린조아", "greenMate", "greenJoa", "그리니", "그린조아", "greenMate", "greenJoa")
         binding.run {
@@ -45,6 +56,14 @@ class MainFragment : Fragment() {
                 ), 2, string.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             )
             myGreenMateTextView.text = string
+
+            mainGreenMateCardView.setOnClickListener {
+                val intent = Intent(requireContext(), DetailActivity::class.java)
+                var options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
+                    requireActivity(), it, "String"
+                )
+                startActivity(intent, options.toBundle())
+            }
         }
     }
 

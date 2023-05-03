@@ -15,4 +15,10 @@
 
         <item name="android:includeFontPadding">false</item>
     </style>
+
+    <style name="Theme.GreenMate.TransparentActionBar">
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
 </resources>

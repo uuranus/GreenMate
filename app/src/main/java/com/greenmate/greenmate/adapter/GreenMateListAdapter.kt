@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemGreenMateBinding
 
-class GreenMateListAdapter() :
+class GreenMateListAdapter(private val onClickListener: (String) -> Unit) :
     ListAdapter<String, GreenMateListAdapter.GreenMaterViewHolder>(diffUtil) {
 
-    inner class GreenMaterViewHolder(private val binding: ItemGreenMateBinding) :
+    inner class GreenMaterViewHolder(binding: ItemGreenMateBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                onClickListener(currentList[adapterPosition])
+            }
+        }
 
         fun bind(data: String) {
 
