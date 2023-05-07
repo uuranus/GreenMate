@@ -31,6 +31,10 @@
         <item name="android:textColor">@color/accent_text_color</item>
     </style>
 
+    <style name="Style.GreenMate.Text.Body.Title.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
     <style name="Style.GreenMate.Text.Body.Small">
         <item name="android:textSize">10sp</item>
     </style>

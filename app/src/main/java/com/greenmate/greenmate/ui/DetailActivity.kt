@@ -3,6 +3,7 @@ package com.greenmate.greenmate.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.greenmate.greenmate.R
+import com.greenmate.greenmate.adapter.DiaryListAdapter
 import com.greenmate.greenmate.adapter.TodoListAdapter
 import com.greenmate.greenmate.databinding.ActivityDetailBinding
 
@@ -10,6 +11,7 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private lateinit var todoAdapter: TodoListAdapter
+    private lateinit var diaryAdapter: DiaryListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,9 +19,13 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         todoAdapter = TodoListAdapter()
+        diaryAdapter = DiaryListAdapter()
 
         binding.todoRecyclerView.adapter = todoAdapter
         todoAdapter.submitList(listOf("물주기", "환기하기", "영양관리"))
+
+        binding.diaryRecyclerView.adapter = diaryAdapter
+        diaryAdapter.submitList(listOf("물주기", "환기하기", "영양관리"))
 
     }
 
