@@ -8,9 +8,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="background_color">#FFF5F5F5</color>
-    <color name="accent_text_color">#FF036819</color>
-    <color name="sub_text_color">#FF4D4D4D</color>
+    <color name="background_color">#FFFFFEFB</color>
+    <color name="primary_color">#FF79BD9A</color>
+    <color name="secondary_color">#FFA8DBA8</color>
+    <color name="border_color">#FFA8DBA8</color>
+    <color name="accent_text_color">#FF025955</color>
+    <color name="hint_text_color">#FFBDBDBD</color>
+    <color name="img_background_color">#FFD9D9D9</color>
+    <color name="accent_icon_color">#FF025955</color>
+    <color name="sub_text_color">#FF876445</color>
+
+
     <color name="disabled_color">#FFD9D9D9</color>
     <color name="progress_activate_color">#FF7CAF9D</color>
     <color name="chart_disabled_color">#FFE9E9E9</color>

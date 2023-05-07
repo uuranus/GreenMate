@@ -16,12 +16,13 @@
             style="@style/Style.GreenMate.Text.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="안녕, 이름"
+            android:text="안녕, 이름🍃"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/greetTextView"
+            style="@style/Style.GreenMate.Text.Body.Sub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_vertical_margin"
@@ -74,6 +75,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:elevation="2dp"
+                    app:iconSrc="@drawable/icon_sun"
+                    app:labelTitle="조도"
+                    app:labelValue="좋음"
                     app:layout_constraintBottom_toTopOf="@id/waterAttributeView"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -87,6 +91,9 @@
                     android:layout_marginTop="18dp"
                     android:background="@android:color/transparent"
                     android:elevation="2dp"
+                    app:iconSrc="@drawable/icon_water"
+                    app:labelTitle="습도"
+                    app:labelValue="나쁨"
                     app:layout_constraintBottom_toTopOf="@id/temperatureAttributeView"
                     app:layout_constraintStart_toStartOf="@id/lightAttributeView"
                     app:layout_constraintTop_toBottomOf="@id/lightAttributeView" />
@@ -99,6 +106,9 @@
                     android:layout_marginTop="15dp"
                     android:background="@android:color/transparent"
                     android:elevation="2dp"
+                    app:iconSrc="@drawable/icon_temperature"
+                    app:labelTitle="온도"
+                    app:labelValue="보통"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/lightAttributeView"
                     app:layout_constraintTop_toBottomOf="@id/waterAttributeView" />
