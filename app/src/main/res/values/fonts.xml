@@ -27,6 +27,10 @@
         <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
     </style>
 
+    <style name="Style.GreenMate.Text.Body.Title.Accent">
+        <item name="android:textColor">@color/accent_text_color</item>
+    </style>
+
     <style name="Style.GreenMate.Text.Body.Small">
         <item name="android:textSize">10sp</item>
     </style>

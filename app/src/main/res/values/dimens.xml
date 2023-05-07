@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="activity_padding">16dp</dimen>
+    <dimen name="activity_padding">24dp</dimen>
     <dimen name="text_vertical_margin">10dp</dimen>
+    <dimen name="text_small_vertical_margin">5dp</dimen>
+    <dimen name="text_horizontal_margin">20dp</dimen>
     <dimen name="body_vertical_margin">40dp</dimen>
+    <dimen name="button_horizontal_margin">20dp</dimen>
     <dimen name="title_body_vertical_margin">30dp</dimen>
+    <dimen name="title_list_margin">20dp</dimen>
+    <dimen name="category_vertical_margin">44dp</dimen>
     <dimen name="card_radius">10dp</dimen>
+    <dimen name="item_radius">15dp</dimen>
+    <dimen name="item_padding_horizontal">16dp</dimen>
+    <dimen name="item_padding_vertical">8dp</dimen>
+    <dimen name="list_margin">6dp</dimen>
 </resources>

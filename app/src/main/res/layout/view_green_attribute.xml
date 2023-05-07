@@ -16,7 +16,7 @@
             android:id="@+id/attributeImageView"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/icon_water"
+            android:src="@drawable/icon_humidity"
             app:layout_constraintBottom_toBottomOf="@id/attributeValueTextView"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"

@@ -57,7 +57,7 @@
             android:background="@drawable/background_profile_img"
             android:backgroundTint="@color/progress_activate_color"
             android:padding="2dp"
-            android:src="@drawable/icon_sun"
+            android:src="@drawable/icon_light"
             app:layout_constraintBottom_toBottomOf="@id/waterImageView"
             app:layout_constraintEnd_toStartOf="@id/waterImageView"
             app:tint="@color/white" />
@@ -70,7 +70,7 @@
             android:background="@drawable/background_profile_img"
             android:backgroundTint="@color/progress_activate_color"
             android:padding="2dp"
-            android:src="@drawable/icon_water"
+            android:src="@drawable/icon_humidity"
             app:layout_constraintBottom_toBottomOf="@id/temperatureImageView"
             app:layout_constraintEnd_toStartOf="@id/temperatureImageView"
             app:tint="@color/white" />
