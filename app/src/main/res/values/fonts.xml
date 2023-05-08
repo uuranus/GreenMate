@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Style.GreenMate.Text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/apple_sd_gothic_neo_medium</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_medium</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Title">
+        <item name="fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Title.Accent">
+        <item name="android:textColor">@color/accent_text_color</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body.Title">
+        <item name="fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body.Title.Accent">
+        <item name="android:textColor">@color/accent_text_color</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body.Title.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Body.Sub">
+        <item name="android:textColor">@color/sub_text_color</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Sub">
+        <item name="android:textColor">@color/hint_text_color</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Sub.Accent">
+        <item name="android:textColor">@color/sub_text_color</item>
+    </style>
+
+</resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loadingFragment"
-        android:name="com.greenmate.greenmate.LoadingFragment"
+        android:name="com.greenmate.greenmate.ui.LoadingFragment"
         android:label="fragment_loading"
         tools:layout="@layout/fragment_loading" >
         <action
@@ -16,12 +16,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.greenmate.greenmate.DetailFragment"
+        android:name="com.greenmate.greenmate.ui.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.greenmate.greenmate.MainFragment"
+        android:name="com.greenmate.greenmate.ui.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
