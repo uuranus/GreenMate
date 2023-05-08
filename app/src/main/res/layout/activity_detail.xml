@@ -129,23 +129,10 @@
         app:layout_constraintTop_toTopOf="@id/todoTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/diaryRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="@dimen/activity_padding"
-        android:layout_marginTop="@dimen/title_list_margin"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todoTextView"
-        tools:listitem="@layout/item_diary" />
-
-    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/todoRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/title_list_margin"
+        android:layout_marginTop="12dp"
         android:clipToPadding="false"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -154,4 +141,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/todoTextView"
         tools:listitem="@layout/item_todo" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/diaryRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/todoTextView"
+        tools:listitem="@layout/item_diary" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

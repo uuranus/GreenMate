@@ -12,6 +12,14 @@ class TodoListAdapter :
 
     inner class TodoViewHolder(private val binding: ItemTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.run {
+                clipToPadding = false
+                elevation = 5f
+            }
+        }
+
         fun bind(data: String) {
             binding.todoTextView.text = data
         }
