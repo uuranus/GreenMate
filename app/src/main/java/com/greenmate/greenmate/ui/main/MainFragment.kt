@@ -1,7 +1,5 @@
-package com.greenmate.greenmate.ui
+package com.greenmate.greenmate.ui.main
 
-import android.app.ActivityOptions
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -11,14 +9,22 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
+    private val mainViewModel: MainViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,19 +37,13 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = GreenMateListAdapter(onClickListener = {
-            val intent = Intent(requireContext(), DetailActivity::class.java)
-            var options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                requireActivity(), binding.greenMateImageView, "String"
-            )
-            startActivity(intent, options.toBundle())
-//            findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+            //메인 화면에 데이터 값 세팅
+            mainViewModel.setMainGreenMate(it)
         })
 
-        val data =
-            listOf("그리니", "그린조아", "greenMate", "greenJoa", "그리니", "그린조아", "greenMate", "greenJoa")
         binding.run {
             greenMateRecyclerView.adapter = adapter
-            adapter.submitList(data)
+            vm = mainViewModel
 
             val string = SpannableString(myGreenMateTextView.text)
             string.setSpan(
@@ -57,13 +57,19 @@ class MainFragment : Fragment() {
             myGreenMateTextView.text = string
 
             mainGreenMateCardView.setOnClickListener {
-                val intent = Intent(requireContext(), DetailActivity::class.java)
-                var options: ActivityOptions = ActivityOptions.makeSceneTransitionAnimation(
-                    requireActivity(), it, "String"
-                )
-                startActivity(intent, options.toBundle())
+                findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainViewModel.greenMates.collectLatest {
+                    adapter.submitList(it)
+                }
+            }
+        }
+
+
     }
 
     override fun onDestroyView() {

@@ -3,29 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/green_mate_navigation"
-    app:startDestination="@id/loadingFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/loadingFragment"
-        android:name="com.greenmate.greenmate.ui.LoadingFragment"
-        android:label="fragment_loading"
-        tools:layout="@layout/fragment_loading" >
-        <action
-            android:id="@+id/action_loadingFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.greenmate.greenmate.ui.DetailFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
-    <fragment
         android:id="@+id/mainFragment"
-        android:name="com.greenmate.greenmate.ui.MainFragment"
+        android:name="com.greenmate.greenmate.ui.main.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_loadingFragment"
+            app:destination="@id/loadingFragment" />
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loadingFragment"
+        android:name="com.greenmate.greenmate.ui.main.LoadingFragment"
+        android:label="fragment_loading"
+        tools:layout="@layout/fragment_loading" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.greenmate.greenmate.ui.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" />
 </navigation>

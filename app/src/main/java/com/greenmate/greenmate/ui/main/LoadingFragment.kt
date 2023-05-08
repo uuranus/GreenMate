@@ -1,4 +1,4 @@
-package com.greenmate.greenmate.ui
+package com.greenmate.greenmate.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.FragmentLoadingBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -29,7 +28,7 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             delay(3000)
-            findNavController().navigate(R.id.action_loadingFragment_to_mainFragment)
+            findNavController().navigateUp()
         }
     }
 

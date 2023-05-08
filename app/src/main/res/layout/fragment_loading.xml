@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LoadingFragment">
+    android:padding="@dimen/activity_padding"
+    tools:context=".ui.main.LoadingFragment">
 
     <ImageView
         android:id="@+id/loadingImageView"

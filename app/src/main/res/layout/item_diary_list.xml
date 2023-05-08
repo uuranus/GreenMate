@@ -17,7 +17,7 @@
         android:id="@+id/todoIconImageView"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/water"
+        android:src="@drawable/icon_water"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

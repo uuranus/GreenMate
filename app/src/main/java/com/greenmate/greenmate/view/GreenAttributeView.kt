@@ -39,4 +39,9 @@ class GreenAttributeView(
 
         }
     }
+
+    fun setLabelValue(value: String) {
+        labelValue = value
+        invalidate()
+    }
 }

@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:icon="@drawable/pencil"
+        android:icon="@drawable/icon_pencil"
         android:title="수정"
         app:showAsAction="always" />
     <item
-        android:icon="@drawable/trash"
+        android:icon="@drawable/icon_trash"
         android:title="삭제"
         app:showAsAction="always" />
 

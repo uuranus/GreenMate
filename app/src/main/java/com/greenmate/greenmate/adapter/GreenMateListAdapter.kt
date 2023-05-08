@@ -6,11 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemGreenMateBinding
+import com.greenmate.greenmate.model.GreenMate
 
-class GreenMateListAdapter(private val onClickListener: (String) -> Unit) :
-    ListAdapter<String, GreenMateListAdapter.GreenMaterViewHolder>(diffUtil) {
+class GreenMateListAdapter(private val onClickListener: (GreenMate) -> Unit) :
+    ListAdapter<GreenMate, GreenMateListAdapter.GreenMaterViewHolder>(diffUtil) {
 
-    inner class GreenMaterViewHolder(binding: ItemGreenMateBinding) :
+    inner class GreenMaterViewHolder(private val binding: ItemGreenMateBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
@@ -18,8 +19,8 @@ class GreenMateListAdapter(private val onClickListener: (String) -> Unit) :
             }
         }
 
-        fun bind(data: String) {
-
+        fun bind(data: GreenMate) {
+            binding.data = data
         }
 
     }
@@ -39,12 +40,12 @@ class GreenMateListAdapter(private val onClickListener: (String) -> Unit) :
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-                return oldItem == newItem
+        val diffUtil = object : DiffUtil.ItemCallback<GreenMate>() {
+            override fun areItemsTheSame(oldItem: GreenMate, newItem: GreenMate): Boolean {
+                return oldItem.name == newItem.name
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: GreenMate, newItem: GreenMate): Boolean {
                 return oldItem == newItem
             }
 

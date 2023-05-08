@@ -1,155 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_padding"
-    tools:context=".ui.MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="com.greenmate.greenmate.ui.main.MainViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/activity_padding"
+        tools:context=".ui.MainActivity">
 
-        <TextView
-            android:id="@+id/helloTextView"
-            style="@style/Style.GreenMate.Text.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="안녕, 이름🍃"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/greetTextView"
-            style="@style/Style.GreenMate.Text.Body.Sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/text_vertical_margin"
-            android:text="잘 지내고 있나요?"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/helloTextView" />
+            <TextView
+                android:id="@+id/helloTextView"
+                style="@style/Style.GreenMate.Text.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="안녕, 이름🍃"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:layout_width="67dp"
-            android:layout_height="67dp"
-            android:background="@drawable/background_profile_img"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/helloTextView" />
+            <TextView
+                android:id="@+id/greetTextView"
+                style="@style/Style.GreenMate.Text.Body.Sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/text_vertical_margin"
+                android:text="잘 지내고 있나요?"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/helloTextView" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/mainGreenMateCardView"
-            style="@style/Widget.GreenMate.CardView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            android:padding="15dp"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/greetTextView">
+            <ImageView
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:background="@drawable/background_profile_img"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/helloTextView" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mainGreenMateCardView"
+                style="@style/Widget.GreenMate.CardView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="30dp"
+                android:padding="15dp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/greetTextView">
 
-                <ImageView
-                    android:id="@+id/greenMateImageView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:background="@drawable/background_round_image"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/plant1"
-                    android:transitionName="greenMateImage"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="1:1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent">
 
-                <com.greenmate.greenmate.view.GreenAttributeView
-                    android:id="@+id/lightAttributeView"
-                    style="@style/Widget.GreenMate.CardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    app:cardElevation="5dp"
-                    app:iconSrc="@drawable/icon_light"
-                    app:labelTitle="조도"
-                    app:labelValue="좋음"
-                    app:layout_constraintBottom_toTopOf="@id/waterAttributeView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                    <ImageView
+                        android:id="@+id/greenMateImageView"
+                        setImage="@{vm.mainGreenMate.image}"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@drawable/background_round_image"
+                        android:clipToOutline="true"
+                        android:scaleType="centerCrop"
+                        android:transitionName="greenMateImage"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <com.greenmate.greenmate.view.GreenAttributeView
-                    android:id="@+id/waterAttributeView"
-                    style="@style/Widget.GreenMate.CardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="18dp"
-                    android:background="@android:color/transparent"
-                    app:cardElevation="5dp"
-                    app:iconSrc="@drawable/icon_humidity"
-                    app:labelTitle="습도"
-                    app:labelValue="나쁨"
-                    app:layout_constraintBottom_toTopOf="@id/temperatureAttributeView"
-                    app:layout_constraintStart_toStartOf="@id/lightAttributeView"
-                    app:layout_constraintTop_toBottomOf="@id/lightAttributeView" />
+                    <com.greenmate.greenmate.view.GreenAttributeView
+                        android:id="@+id/lightAttributeView"
+                        style="@style/Widget.GreenMate.CardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        app:cardElevation="5dp"
+                        app:iconSrc="@drawable/icon_light"
+                        app:labelTitle="조도"
+                        app:setValue="@{vm.mainGreenMate.light}"
+                        app:layout_constraintBottom_toTopOf="@id/waterAttributeView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_chainStyle="packed" />
 
-                <com.greenmate.greenmate.view.GreenAttributeView
-                    android:id="@+id/temperatureAttributeView"
-                    style="@style/Widget.GreenMate.CardView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@android:color/transparent"
-                    app:cardElevation="5dp"
-                    app:iconSrc="@drawable/icon_temperature"
-                    app:labelTitle="온도"
-                    app:labelValue="보통"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/lightAttributeView"
-                    app:layout_constraintTop_toBottomOf="@id/waterAttributeView" />
+                    <com.greenmate.greenmate.view.GreenAttributeView
+                        android:id="@+id/waterAttributeView"
+                        style="@style/Widget.GreenMate.CardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:background="@android:color/transparent"
+                        app:cardElevation="5dp"
+                        app:iconSrc="@drawable/icon_humidity"
+                        app:labelTitle="습도"
+                        app:setValue="@{vm.mainGreenMate.humidity}"
+                        app:layout_constraintBottom_toTopOf="@id/temperatureAttributeView"
+                        app:layout_constraintStart_toStartOf="@id/lightAttributeView"
+                        app:layout_constraintTop_toBottomOf="@id/lightAttributeView" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.greenmate.greenmate.view.GreenAttributeView
+                        android:id="@+id/temperatureAttributeView"
+                        style="@style/Widget.GreenMate.CardView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:background="@android:color/transparent"
+                        app:cardElevation="5dp"
+                        app:iconSrc="@drawable/icon_temperature"
+                        app:labelTitle="온도"
+                        app:setValue="@{vm.mainGreenMate.temperature}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/lightAttributeView"
+                        app:layout_constraintTop_toBottomOf="@id/waterAttributeView" />
 
-        </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/myGreenMateTextView"
-            style="@style/Style.GreenMate.Text.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/body_vertical_margin"
-            android:text="나의 그린메이트"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mainGreenMateCardView" />
+            </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_profile_img"
-            android:backgroundTint="@color/progress_activate_color"
-            android:padding="2dp"
-            android:src="@drawable/ic_baseline_add_24"
-            app:layout_constraintBottom_toBottomOf="@id/myGreenMateTextView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/myGreenMateTextView" />
+            <TextView
+                android:id="@+id/myGreenMateTextView"
+                style="@style/Style.GreenMate.Text.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/body_vertical_margin"
+                android:text="나의 그린메이트"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mainGreenMateCardView" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/greenMateRecyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/title_body_vertical_margin"
-            android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/myGreenMateTextView"
-            tools:listitem="@layout/item_green_mate" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_profile_img"
+                android:backgroundTint="@color/progress_activate_color"
+                android:padding="2dp"
+                android:src="@drawable/icon_add"
+                app:layout_constraintBottom_toBottomOf="@id/myGreenMateTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/myGreenMateTextView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/greenMateRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/title_body_vertical_margin"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/myGreenMateTextView"
+                tools:listitem="@layout/item_green_mate" />
 
-</androidx.core.widget.NestedScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>
