@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.FragmentLoadingBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -27,7 +28,14 @@ class LoadingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            delay(3000)
+            for (i in 0 until 3) {
+                binding.progressBar.progress =
+                    (binding.progressBar.progress + 100 / 3).coerceAtMost(100)
+                binding.loadingImageView.setImageResource(if (i % 2 == 0) R.drawable.loading_1 else R.drawable.loading_2)
+                binding.loadingTextView.text =
+                    if (i == 1) "거의 다 끝났어요! 조금만 기다려주세요" else if (i == 0) "요정이 메이트를 측정하고 있어요" else "같이 성장해요"
+                delay(800)
+            }
             findNavController().navigateUp()
         }
     }

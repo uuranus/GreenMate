@@ -2,9 +2,11 @@ package com.greenmate.greenmate.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ItemGreenMateBinding
 import com.greenmate.greenmate.model.GreenMate
 
@@ -27,8 +29,9 @@ class GreenMateListAdapter(private val onClickListener: (GreenMate) -> Unit) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GreenMaterViewHolder {
         return GreenMaterViewHolder(
-            ItemGreenMateBinding.inflate(
+            DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
+                R.layout.item_green_mate,
                 parent,
                 false
             )

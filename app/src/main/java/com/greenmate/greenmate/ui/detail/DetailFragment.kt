@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -19,12 +21,13 @@ class DetailFragment : Fragment() {
     private val binding: FragmentDetailBinding get() = _binding!!
     private lateinit var todoAdapter: TodoListAdapter
     private lateinit var diaryAdapter: DiaryListAdapter
+    private val detailViewModel: DetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         return binding.root
     }
 
@@ -36,6 +39,9 @@ class DetailFragment : Fragment() {
 
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.run {
+            vm = detailViewModel
+            lifecycleOwner = this@DetailFragment.viewLifecycleOwner
+
             toolbar.setupWithNavController(findNavController(), appBarConfiguration)
             toolbar.title = ""
             toolbar.setNavigationIcon(R.drawable.icon_back_arrow)
@@ -43,13 +49,13 @@ class DetailFragment : Fragment() {
             todoRecyclerView.adapter = todoAdapter
             diaryRecyclerView.adapter = diaryAdapter
 
-            todoRecyclerView.setOnClickListener {
-
+            todoTextView.setOnClickListener {
+                detailViewModel.setFocus(true)
             }
 
-            diaryRecyclerView.setOnClickListener {
+            diaryTextView.setOnClickListener {
+                detailViewModel.setFocus(false)
             }
-
         }
 
         todoAdapter.submitList(listOf("물주기", "환기하기", "영양관리"))
