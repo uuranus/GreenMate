@@ -29,12 +29,14 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             for (i in 0 until 3) {
-                binding.progressBar.progress =
-                    (binding.progressBar.progress + 100 / 3).coerceAtMost(100)
                 binding.loadingImageView.setImageResource(if (i % 2 == 0) R.drawable.loading_1 else R.drawable.loading_2)
                 binding.loadingTextView.text =
                     if (i == 1) "거의 다 끝났어요! 조금만 기다려주세요" else if (i == 0) "요정이 메이트를 측정하고 있어요" else "같이 성장해요"
-                delay(800)
+                for(j in 0 until 10) {
+                    binding.progressBar.progress =
+                        (binding.progressBar.progress + 10 / 3).coerceAtMost(100)
+                    delay(80)
+                }
             }
             findNavController().navigateUp()
         }
