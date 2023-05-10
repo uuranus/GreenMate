@@ -1,9 +1,11 @@
 package com.greenmate.greenmate.ui.detail
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -11,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.transition.TransitionInflater
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.DiaryListAdapter
 import com.greenmate.greenmate.adapter.TodoListAdapter
@@ -24,6 +27,12 @@ class DetailFragment : Fragment() {
     private lateinit var diaryAdapter: DiaryListAdapter
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +56,12 @@ class DetailFragment : Fragment() {
             detailViewModel.setCurrentInfo(args.selectedGreenMate)
 
             toolbar.setupWithNavController(findNavController(), appBarConfiguration)
-            toolbar.title = ""
+            toolbar.setTitleTextColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    android.R.color.transparent
+                )
+            )
             toolbar.setNavigationIcon(R.drawable.icon_back_arrow)
 
             todoRecyclerView.adapter = todoAdapter

@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.GreenMateListAdapter
@@ -62,7 +63,8 @@ class MainFragment : Fragment() {
             mainGreenMateCardView.setOnClickListener {
                 val action =
                     MainFragmentDirections.actionMainFragmentToDetailFragment(mainViewModel.getSelectedGreenMate())
-                findNavController().navigate(action)
+                val extras = FragmentNavigatorExtras(binding.greenMateImageView to "detailGreenMateImage")
+                findNavController().navigate(action, extras)
             }
         }
 

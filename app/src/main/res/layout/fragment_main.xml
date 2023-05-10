@@ -73,7 +73,7 @@
                         android:background="@drawable/background_round_image"
                         android:clipToOutline="true"
                         android:scaleType="centerCrop"
-                        android:transitionName="greenMateImage"
+                        android:transitionName="detailGreenMateImage"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="1:1"
                         app:layout_constraintEnd_toEndOf="parent"

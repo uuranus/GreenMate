@@ -15,10 +15,10 @@
             app:destination="@id/loadingFragment" />
         <action
             android:id="@+id/action_mainFragment_to_detailFragment"
-            app:destination="@id/detailFragment" >
+            app:destination="@id/detailFragment">
             <argument
                 android:name="selectedGreenMate"
-                app:argType="com.greenmate.greenmate.model.GreenMate"/>
+                app:argType="com.greenmate.greenmate.model.GreenMate" />
         </action>
     </fragment>
     <fragment
