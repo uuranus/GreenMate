@@ -1,17 +1,20 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
+import com.greenmate.greenmate.model.GreenMate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class DetailViewModel : ViewModel() {
+
+    private val _currentInfo = MutableStateFlow(GreenMate("", "", "","", "", "", 0))
+    val currentInfo: StateFlow<GreenMate> get() = _currentInfo
 
     private val _todoState = MutableStateFlow(1)
     val todoState: StateFlow<Int> get() = _todoState
 
     private val _diarySate = MutableStateFlow(0)
     val diaryState: StateFlow<Int> get() = _diarySate
-
 
     fun setFocus(isTodo: Boolean) {
         if (isTodo) {
@@ -21,5 +24,9 @@ class DetailViewModel : ViewModel() {
             _todoState.value = 0
             _diarySate.value = 1
         }
+    }
+
+    fun setCurrentInfo(greenMate: GreenMate) {
+        _currentInfo.value = greenMate
     }
 }

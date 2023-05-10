@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.greenmate.greenmate.R
@@ -22,6 +23,7 @@ class DetailFragment : Fragment() {
     private lateinit var todoAdapter: TodoListAdapter
     private lateinit var diaryAdapter: DiaryListAdapter
     private val detailViewModel: DetailViewModel by viewModels()
+    private val args: DetailFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,8 @@ class DetailFragment : Fragment() {
         binding.run {
             vm = detailViewModel
             lifecycleOwner = this@DetailFragment.viewLifecycleOwner
+
+            detailViewModel.setCurrentInfo(args.selectedGreenMate)
 
             toolbar.setupWithNavController(findNavController(), appBarConfiguration)
             toolbar.title = ""

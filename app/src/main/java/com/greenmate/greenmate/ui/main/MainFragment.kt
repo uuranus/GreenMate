@@ -60,7 +60,9 @@ class MainFragment : Fragment() {
             myGreenMateTextView.text = string
 
             mainGreenMateCardView.setOnClickListener {
-                findNavController().navigate(R.id.action_mainFragment_to_detailFragment)
+                val action =
+                    MainFragmentDirections.actionMainFragmentToDetailFragment(mainViewModel.getSelectedGreenMate())
+                findNavController().navigate(action)
             }
         }
 

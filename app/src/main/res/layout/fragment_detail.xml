@@ -27,11 +27,12 @@
 
         <ImageView
             android:id="@+id/greenMateImageView"
+            setImage="@{vm.currentInfo.image}"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginStart="@dimen/activity_padding"
+            android:background="@drawable/background_round_image"
             android:scaleType="centerCrop"
-            android:src="@drawable/plant1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_goneMarginStart="@dimen/button_horizontal_margin" />
@@ -42,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_horizontal_margin"
-            android:text="이름"
+            android:text="@{vm.currentInfo.name}"
             app:layout_constraintBottom_toTopOf="@id/greenMateTypeTextView"
             app:layout_constraintStart_toEndOf="@id/greenMateImageView"
             app:layout_constraintTop_toTopOf="@id/greenMateImageView"
@@ -53,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_small_vertical_margin"
-            android:text="종류"
+            android:text="@{vm.currentInfo.type}"
             app:layout_constraintBottom_toTopOf="@id/startRaiseDateTextView"
             app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
             app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
@@ -63,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_small_vertical_margin"
-            android:text="키우기 시작한 지 30일"
+            android:text="@{vm.currentInfo.startDate}"
             app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
             app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
             app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView" />
@@ -71,6 +72,7 @@
         <com.greenmate.greenmate.view.GreenAttributeView
             android:id="@+id/lightAttributeView"
             style="@style/Widget.GreenMate.CardView"
+            setValue="@{vm.currentInfo.light}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_padding"
@@ -79,7 +81,6 @@
             app:cardElevation="5dp"
             app:iconSrc="@drawable/icon_light"
             app:labelTitle="조도"
-            app:labelValue="나쁨"
             app:layout_constraintEnd_toStartOf="@id/waterAttributeView"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +89,7 @@
         <com.greenmate.greenmate.view.GreenAttributeView
             android:id="@+id/waterAttributeView"
             style="@style/Widget.GreenMate.CardView"
+            setValue="@{vm.currentInfo.humidity}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/button_horizontal_margin"
@@ -95,7 +97,6 @@
             app:cardElevation="5dp"
             app:iconSrc="@drawable/icon_humidity"
             app:labelTitle="습도"
-            app:labelValue="좋음"
             app:layout_constraintEnd_toStartOf="@id/temperatureAttributeView"
             app:layout_constraintStart_toEndOf="@id/lightAttributeView"
             app:layout_constraintTop_toTopOf="@id/lightAttributeView" />
@@ -103,6 +104,7 @@
         <com.greenmate.greenmate.view.GreenAttributeView
             android:id="@+id/temperatureAttributeView"
             style="@style/Widget.GreenMate.CardView"
+            setValue="@{vm.currentInfo.temperature}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/button_horizontal_margin"
@@ -111,7 +113,6 @@
             app:cardElevation="5dp"
             app:iconSrc="@drawable/icon_temperature"
             app:labelTitle="온도"
-            app:labelValue="나쁨"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/waterAttributeView"
             app:layout_constraintTop_toTopOf="@id/lightAttributeView" />
@@ -120,22 +121,22 @@
         <TextView
             android:id="@+id/todoTextView"
             style="@style/Style.GreenMate.Text.Body.Title.Accent"
+            setFocused="@{vm.todoState}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/category_vertical_margin"
             android:text="할 일"
-            setFocused="@{vm.todoState}"
             app:layout_constraintStart_toStartOf="@id/greenMateImageView"
             app:layout_constraintTop_toBottomOf="@id/lightAttributeView" />
 
         <TextView
             android:id="@+id/diaryTextView"
             style="@style/Style.GreenMate.Text.Body.Title"
+            setFocused="@{vm.diaryState}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_horizontal_margin"
             android:text="일기"
-            setFocused="@{vm.diaryState}"
             app:layout_constraintStart_toEndOf="@id/todoTextView"
             app:layout_constraintTop_toTopOf="@id/todoTextView" />
 
@@ -152,11 +153,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todoRecyclerView"
+            setVisibility="@{vm.todoState}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
             android:clipToPadding="false"
-            setVisibility="@{vm.todoState}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -166,11 +167,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/diaryRecyclerView"
+            setVisibility="@{vm.diaryState}"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="14dp"
             android:clipToPadding="false"
-            setVisibility="@{vm.diaryState}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
