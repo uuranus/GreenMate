@@ -6,6 +6,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.view.GreenAttributeView
 
@@ -45,4 +48,12 @@ fun setFocused(view: TextView, value: Int) {
         )
     )
     else view.setTextColor(ContextCompat.getColor(view.context, R.color.black))
+}
+
+@BindingAdapter("submitList")
+fun <T> submitList(view: RecyclerView, data: List<T>) {
+
+    val adapter = view.adapter as ListAdapter<T, RecyclerView.ViewHolder>
+
+    adapter.submitList(data)
 }

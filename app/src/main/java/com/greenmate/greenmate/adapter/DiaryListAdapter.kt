@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemDiaryBinding
+import com.greenmate.greenmate.model.Diary
 
 class DiaryListAdapter :
-    ListAdapter<String, DiaryListAdapter.DiaryViewHolder>(diffUtil) {
+    ListAdapter<Diary, DiaryListAdapter.DiaryViewHolder>(diffUtil) {
 
     inner class DiaryViewHolder(private val binding: ItemDiaryBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -19,8 +20,9 @@ class DiaryListAdapter :
             binding.diaryListRecyclerView.adapter = listAdapter
         }
 
-        fun bind(data: String) {
-            listAdapter.submitList(listOf("물주기", "환기하기", "양양제주기"))
+        fun bind(data: Diary) {
+            binding.data = data
+            listAdapter.submitList(data.list)
         }
 
     }
@@ -40,12 +42,12 @@ class DiaryListAdapter :
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-                return oldItem == newItem
+        val diffUtil = object : DiffUtil.ItemCallback<Diary>() {
+            override fun areItemsTheSame(oldItem: Diary, newItem: Diary): Boolean {
+                return oldItem.dateDate == newItem.dateDate
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: Diary, newItem: Diary): Boolean {
                 return oldItem == newItem
             }
 

@@ -1,53 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/activity_padding"
-    android:layout_marginEnd="6dp">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <View
-        android:id="@+id/dateBackground"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="6dp"
-        android:background="@drawable/background_round_image"
-        android:backgroundTint="@color/secondary_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="data"
+            type="com.greenmate.greenmate.model.Diary" />
 
-    <TextView
-        android:id="@+id/monthTextView"
-        style="@style/Style.GreenMate.Text.Body.Title.Small"
-        android:layout_width="wrap_content"
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="05월"
-        app:layout_constraintBottom_toTopOf="@id/dateTextView"
-        app:layout_constraintEnd_toEndOf="@id/dateBackground"
-        app:layout_constraintStart_toStartOf="@id/dateBackground"
-        app:layout_constraintTop_toTopOf="@id/dateBackground"
-        app:layout_constraintVertical_chainStyle="packed" />
+        android:layout_marginStart="@dimen/activity_padding"
+        android:layout_marginEnd="6dp">
 
-    <TextView
-        android:id="@+id/dateTextView"
-        style="@style/Style.GreenMate.Text.Body.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="06"
-        app:layout_constraintBottom_toBottomOf="@id/dateBackground"
-        app:layout_constraintEnd_toEndOf="@id/dateBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/monthTextView" />
+        <View
+            android:id="@+id/dateBackground"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/background_round_image"
+            android:backgroundTint="@color/secondary_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/diaryListRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:clipToPadding="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dateBackground"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_diary_list" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/monthTextView"
+            style="@style/Style.GreenMate.Text.Body.Title.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.dateMonth}"
+            app:layout_constraintBottom_toTopOf="@id/dateTextView"
+            app:layout_constraintEnd_toEndOf="@id/dateBackground"
+            app:layout_constraintStart_toStartOf="@id/dateBackground"
+            app:layout_constraintTop_toTopOf="@id/dateBackground"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.dateDate}"
+            app:layout_constraintBottom_toBottomOf="@id/dateBackground"
+            app:layout_constraintEnd_toEndOf="@id/dateBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/monthTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/diaryListRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dateBackground"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_diary_list" />
+
+        <TextView
+            android:id="@+id/emptyTodoTextView"
+            style="@style/Style.GreenMate.Text.Body.Sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="아직 오늘의 일기가 없어요"
+            android:visibility="@{data.list.size==0 ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/dateBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dateBackground"
+            app:layout_constraintTop_toTopOf="@id/dateBackground" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
