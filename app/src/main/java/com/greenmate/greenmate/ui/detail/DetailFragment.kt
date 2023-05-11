@@ -17,15 +17,13 @@ import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.DiaryListAdapter
 import com.greenmate.greenmate.adapter.TodoListAdapter
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
-import com.greenmate.greenmate.model.Diary
-import com.greenmate.greenmate.model.Todo
 
 class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding: FragmentDetailBinding get() = _binding!!
-    private lateinit var todoAdapter: TodoListAdapter
-    private lateinit var diaryAdapter: DiaryListAdapter
+    private val todoAdapter: TodoListAdapter = TodoListAdapter()
+    private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
 
@@ -45,9 +43,6 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        todoAdapter = TodoListAdapter()
-        diaryAdapter = DiaryListAdapter()
 
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.run {
@@ -76,32 +71,6 @@ class DetailFragment : Fragment() {
                 detailViewModel.setFocus(false)
             }
         }
-
-        todoAdapter.submitList(
-            listOf(
-                Todo("물주기", R.drawable.icon_water, true),
-                Todo("환기하기", R.drawable.icon_wind, true),
-                Todo("영양관리", R.drawable.icon_medical, false)
-            )
-        )
-        diaryAdapter.submitList(
-            listOf(
-                Diary("05월", "11", emptyList()),
-                Diary(
-                    "05월", "10", listOf(
-                        Todo("물주기", R.drawable.icon_water, true),
-                        Todo("환기하기", R.drawable.icon_wind, true),
-                        Todo("영양관리", R.drawable.icon_medical, true)
-                    )
-                ),
-                Diary(
-                    "05월", "9", listOf(
-                        Todo("물주기", R.drawable.icon_water, true),
-                        Todo("환기하기", R.drawable.icon_wind, true)
-                    )
-                )
-            )
-        )
     }
 
     override fun onDestroyView() {

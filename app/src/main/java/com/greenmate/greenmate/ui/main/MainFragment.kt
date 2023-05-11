@@ -11,16 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
 
@@ -65,14 +60,6 @@ class MainFragment : Fragment() {
                     MainFragmentDirections.actionMainFragmentToDetailFragment(mainViewModel.getSelectedGreenMate())
                 val extras = FragmentNavigatorExtras(binding.greenMateImageView to "detailGreenMateImage")
                 findNavController().navigate(action, extras)
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mainViewModel.greenMates.collectLatest {
-                    adapter.submitList(it)
-                }
             }
         }
     }

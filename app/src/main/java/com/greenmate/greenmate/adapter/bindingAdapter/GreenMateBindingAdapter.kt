@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.view.GreenAttributeView
 

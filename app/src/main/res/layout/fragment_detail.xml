@@ -29,11 +29,11 @@
             android:id="@+id/greenMateImageView"
             setImage="@{vm.currentInfo.image}"
             android:layout_width="100dp"
-            android:transitionName="detailGreenMateImage"
             android:layout_height="100dp"
             android:layout_marginStart="@dimen/activity_padding"
             android:background="@drawable/background_round_image"
             android:scaleType="centerCrop"
+            android:transitionName="detailGreenMateImage"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:layout_goneMarginStart="@dimen/button_horizontal_margin" />
@@ -155,6 +155,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/todoRecyclerView"
             setVisibility="@{vm.todoState}"
+            submitList="@{vm.todoList}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="12dp"
@@ -169,6 +170,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/diaryRecyclerView"
             setVisibility="@{vm.diaryState}"
+            submitList="@{vm.diaryList}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="14dp"
