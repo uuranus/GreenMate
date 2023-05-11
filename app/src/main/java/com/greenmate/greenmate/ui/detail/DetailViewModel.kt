@@ -19,7 +19,7 @@ class DetailViewModel : ViewModel() {
     private val _diarySate = MutableStateFlow(0)
     val diaryState: StateFlow<Int> get() = _diarySate
 
-    private val _todoList = MutableStateFlow<List<Todo>>(
+    private val _todoList = MutableStateFlow(
         listOf(
             Todo("물주기", R.drawable.icon_water, true),
             Todo("환기하기", R.drawable.icon_wind, true),
@@ -30,16 +30,22 @@ class DetailViewModel : ViewModel() {
 
     private val _diaryList = MutableStateFlow(
         listOf(
-            Diary("05월", "11", emptyList()),
             Diary(
-                "05월", "10", listOf(
+                "05월", "11",
+                mutableListOf(),
+            ),
+            Diary(
+                "05월",
+                "10",
+                mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true),
                     Todo("영양관리", R.drawable.icon_medical, true)
-                )
+                ),
             ),
             Diary(
-                "05월", "9", listOf(
+                "05월", "9",
+                mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true)
                 )
@@ -61,4 +67,27 @@ class DetailViewModel : ViewModel() {
     fun setCurrentInfo(greenMate: GreenMate) {
         _currentInfo.value = greenMate
     }
+
+    fun addNewDiary(newTask: String) {
+        val newList = _diaryList.value.toList().mapIndexed { index, diary ->
+            if (index == 0) {
+                Diary(
+                    diary.dateMonth,
+                    diary.dateDate,
+                    diary.list.toMutableList().also {
+                        it.add(
+                            Todo(
+                                newTask,
+                                R.drawable.icon_water
+                            )
+                        )
+                    }
+                )
+            } else {
+                diary
+            }
+        }
+        _diaryList.value = newList
+    }
+
 }

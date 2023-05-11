@@ -15,6 +15,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.transition.TransitionInflater
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputEditText
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.DiaryListAdapter
 import com.greenmate.greenmate.adapter.TodoListAdapter
@@ -30,13 +31,15 @@ class DetailFragment : Fragment() {
     private val args: DetailFragmentArgs by navArgs()
 
     private val addDiaryAlertDialog: AlertDialog by lazy {
+        val view = requireActivity().layoutInflater.inflate(R.layout.dialog_background, null)
         MaterialAlertDialogBuilder(
             requireContext(),
             R.style.ThemeOverlay_GreenMate_MaterialAlertDialog
         )
-            .setView(R.layout.dialog_background)
+            .setView(view)
             .setPositiveButton("추가") { _, _ ->
-
+                val newTask = view.findViewById<TextInputEditText>(R.id.newTaskTextInput)
+                detailViewModel.addNewDiary(newTask.text.toString())
             }
             .setCancelable(true)
             .create()

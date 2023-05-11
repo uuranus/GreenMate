@@ -22,7 +22,6 @@ class DiaryListAdapter :
 
         fun bind(data: Diary) {
             binding.data = data
-            listAdapter.submitList(data.list)
         }
 
     }

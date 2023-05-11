@@ -13,7 +13,6 @@ import com.greenmate.greenmate.view.GreenAttributeView
 
 @BindingAdapter("setImage")
 fun setImage(view: ImageView, url: Int?) {
-    println("url $url")
     if (url == null) {
         view.setImageResource(R.drawable.plant1)
         return
@@ -24,7 +23,6 @@ fun setImage(view: ImageView, url: Int?) {
 
 @BindingAdapter("setValue")
 fun setValue(view: GreenAttributeView, value: String?) {
-    println("setValue $value")
     if (value == null) {
         view.setLabelValue("")
         return
