@@ -29,7 +29,7 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
             for (i in 0 until 3) {
-                binding.loadingImageView.setImageResource(if (i % 2 == 0) R.drawable.loading_1 else R.drawable.loading_2)
+                binding.loadingImageView.setImageResource(if (i % 2 == 0) R.drawable.loading1 else R.drawable.loading2)
                 binding.loadingTextView.text =
                     if (i == 1) "거의 다 끝났어요! 조금만 기다려주세요" else if (i == 0) "요정이 메이트를 측정하고 있어요" else "같이 성장해요"
                 for(j in 0 until 10) {

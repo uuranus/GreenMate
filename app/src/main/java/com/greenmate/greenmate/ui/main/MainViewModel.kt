@@ -1,12 +1,10 @@
 package com.greenmate.greenmate.ui.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.GreenMate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 

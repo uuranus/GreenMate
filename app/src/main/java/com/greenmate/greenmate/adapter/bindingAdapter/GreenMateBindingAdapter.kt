@@ -1,6 +1,5 @@
 package com.greenmate.greenmate.adapter.bindingAdapter
 
-import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
