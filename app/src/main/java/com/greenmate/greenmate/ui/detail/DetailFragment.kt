@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.transition.TransitionInflater
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.DiaryListAdapter
 import com.greenmate.greenmate.adapter.TodoListAdapter
@@ -26,6 +28,19 @@ class DetailFragment : Fragment() {
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
+
+    private val addDiaryAlertDialog: AlertDialog by lazy {
+        MaterialAlertDialogBuilder(
+            requireContext(),
+            R.style.ThemeOverlay_GreenMate_MaterialAlertDialog
+        )
+            .setView(R.layout.dialog_background)
+            .setPositiveButton("추가") { _, _ ->
+
+            }
+            .setCancelable(true)
+            .create()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +84,10 @@ class DetailFragment : Fragment() {
 
             diaryTextView.setOnClickListener {
                 detailViewModel.setFocus(false)
+            }
+
+            addDiaryImageButton.setOnClickListener {
+                addDiaryAlertDialog.show()
             }
         }
     }

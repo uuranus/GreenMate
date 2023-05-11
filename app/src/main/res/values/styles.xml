@@ -19,4 +19,13 @@
         <item name="android:backgroundTint">@color/primary_color</item>
         <item name="android:padding">2dp</item>
     </style>
+
+    <style name="MaterialAlertDialog.GreenMate" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.GreenMate.MediumComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.GreenMate.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>
