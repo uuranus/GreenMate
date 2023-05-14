@@ -35,4 +35,14 @@
             android:name="selectedGreenMate"
             app:argType="com.greenmate.greenmate.model.GreenMate"/>
     </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.greenmate.greenmate.ui.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="com.greenmate.greenmate.ui.setting.SettingFragment"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
 </navigation>
