@@ -14,6 +14,9 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
         <item name="android:includeFontPadding">false</item>
+
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.GreenMate.MaterialAlertDialog
+        </item>
     </style>
 
     <style name="Theme.GreenMate.TransparentActionBar">
@@ -22,4 +25,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="ThemeOverlay.GreenMate.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/MaterialAlertDialog.GreenMate</item>
+    </style>
 </resources>

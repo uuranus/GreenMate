@@ -2,7 +2,7 @@
 <resources>
 
     <style name="Widget.GreenMate.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:progressTint">@color/progress_activate_color</item>
+        <item name="android:progressTint">@color/primary_color</item>
         <item name="android:backgroundTint">@color/disabled_color</item>
         <item name="minHeight">10dp</item>
     </style>
@@ -14,11 +14,18 @@
         <item name="contentPadding">5dp</item>
     </style>
 
-    <style name="TextAppearance.GreenMate.CollapsingToolbar.Expanded" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+    <style name="Widget.GreenMate.IconButton" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/background_circle_img</item>
+        <item name="android:backgroundTint">@color/primary_color</item>
+        <item name="android:padding">2dp</item>
     </style>
 
-    <style name="TextAppearance.GreenMate.CollapsingToolbar.Collapsed" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+    <style name="MaterialAlertDialog.GreenMate" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/ShapeAppearance.GreenMate.MediumComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.GreenMate.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
     </style>
 </resources>

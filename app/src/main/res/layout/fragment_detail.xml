@@ -1,137 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:theme="@style/Theme.GreenMate.TransparentActionBar"
-    tools:context=".ui.DetailFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/detail_menu" />
+    <data>
 
-    <ImageView
-        android:id="@+id/greenMateImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/plant1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        <variable
+            name="vm"
+            type="com.greenmate.greenmate.ui.detail.DetailViewModel" />
+    </data>
 
-    <TextView
-        android:id="@+id/greenMateNameTextView"
-        style="@style/Style.GreenMate.Text.Body.Title.Accent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_horizontal_margin"
-        android:text="이름"
-        app:layout_constraintBottom_toTopOf="@id/greenMateTypeTextView"
-        app:layout_constraintStart_toEndOf="@id/greenMateImageView"
-        app:layout_constraintTop_toTopOf="@id/greenMateImageView"
-        app:layout_constraintVertical_chainStyle="packed" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.detail.DetailFragment">
 
-    <TextView
-        android:id="@+id/greenMateTypeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_small_vertical_margin"
-        android:text="종류"
-        app:layout_constraintBottom_toTopOf="@id/startRaiseDateTextView"
-        app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
-        app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/detail_menu" />
 
-    <TextView
-        android:id="@+id/startRaiseDateTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/text_small_vertical_margin"
-        android:text="키우기 시작한 지 30일"
-        app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
-        app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
-        app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView" />
+        <ImageView
+            android:id="@+id/greenMateImageView"
+            setImage="@{vm.currentInfo.image}"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="@dimen/activity_padding"
+            android:background="@drawable/background_round_image"
+            android:scaleType="centerCrop"
+            android:transitionName="detailGreenMateImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_goneMarginStart="@dimen/button_horizontal_margin" />
 
-    <com.greenmate.greenmate.view.GreenAttributeView
-        android:id="@+id/lightAttributeView"
-        style="@style/Widget.GreenMate.CardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/button_horizontal_margin"
-        android:layout_marginTop="@dimen/title_body_vertical_margin"
-        android:background="@android:color/transparent"
-        android:elevation="2dp"
-        app:iconSrc="@drawable/icon_light"
-        app:labelTitle="조도"
-        app:labelValue="나쁨"
-        app:layout_constraintEnd_toStartOf="@id/waterAttributeView"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+        <TextView
+            android:id="@+id/greenMateNameTextView"
+            style="@style/Style.GreenMate.Text.Body.Title.Accent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_horizontal_margin"
+            android:text="@{vm.currentInfo.name}"
+            app:layout_constraintBottom_toTopOf="@id/greenMateTypeTextView"
+            app:layout_constraintStart_toEndOf="@id/greenMateImageView"
+            app:layout_constraintTop_toTopOf="@id/greenMateImageView"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <com.greenmate.greenmate.view.GreenAttributeView
-        android:id="@+id/waterAttributeView"
-        style="@style/Widget.GreenMate.CardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/button_horizontal_margin"
-        android:background="@android:color/transparent"
-        android:elevation="2dp"
-        app:iconSrc="@drawable/icon_humidity"
-        app:labelTitle="습도"
-        app:labelValue="좋음"
-        app:layout_constraintEnd_toStartOf="@id/temperatureAttributeView"
-        app:layout_constraintStart_toEndOf="@id/lightAttributeView"
-        app:layout_constraintTop_toTopOf="@id/lightAttributeView" />
+        <TextView
+            android:id="@+id/greenMateTypeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_small_vertical_margin"
+            android:text="@{vm.currentInfo.type}"
+            app:layout_constraintBottom_toTopOf="@id/startRaiseDateTextView"
+            app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
 
-    <com.greenmate.greenmate.view.GreenAttributeView
-        android:id="@+id/temperatureAttributeView"
-        style="@style/Widget.GreenMate.CardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:elevation="2dp"
-        app:iconSrc="@drawable/icon_temperature"
-        app:labelTitle="온도"
-        app:labelValue="나쁨"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/waterAttributeView"
-        app:layout_constraintTop_toTopOf="@id/lightAttributeView" />
+        <TextView
+            android:id="@+id/startRaiseDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/text_small_vertical_margin"
+            android:text="@{vm.currentInfo.startDate}"
+            app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
+            app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView" />
+
+        <com.greenmate.greenmate.view.GreenAttributeView
+            android:id="@+id/lightAttributeView"
+            style="@style/Widget.GreenMate.CardView"
+            setValue="@{vm.currentInfo.light}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_padding"
+            android:layout_marginTop="@dimen/title_body_vertical_margin"
+            android:background="@android:color/transparent"
+            app:cardElevation="5dp"
+            app:iconSrc="@drawable/icon_light"
+            app:labelTitle="조도"
+            app:layout_constraintEnd_toStartOf="@id/waterAttributeView"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+
+        <com.greenmate.greenmate.view.GreenAttributeView
+            android:id="@+id/waterAttributeView"
+            style="@style/Widget.GreenMate.CardView"
+            setValue="@{vm.currentInfo.humidity}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/button_horizontal_margin"
+            android:background="@android:color/transparent"
+            app:cardElevation="5dp"
+            app:iconSrc="@drawable/icon_humidity"
+            app:labelTitle="습도"
+            app:layout_constraintEnd_toStartOf="@id/temperatureAttributeView"
+            app:layout_constraintStart_toEndOf="@id/lightAttributeView"
+            app:layout_constraintTop_toTopOf="@id/lightAttributeView" />
+
+        <com.greenmate.greenmate.view.GreenAttributeView
+            android:id="@+id/temperatureAttributeView"
+            style="@style/Widget.GreenMate.CardView"
+            setValue="@{vm.currentInfo.temperature}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/button_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_padding"
+            android:background="@android:color/transparent"
+            app:cardElevation="5dp"
+            app:iconSrc="@drawable/icon_temperature"
+            app:labelTitle="온도"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/waterAttributeView"
+            app:layout_constraintTop_toTopOf="@id/lightAttributeView" />
 
 
-    <TextView
-        android:id="@+id/todoTextView"
-        style="@style/Style.GreenMate.Text.Body.Title.Accent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/category_vertical_margin"
-        android:text="할 일"
-        app:layout_constraintStart_toStartOf="@id/lightAttributeView"
-        app:layout_constraintTop_toBottomOf="@id/lightAttributeView" />
+        <TextView
+            android:id="@+id/todoTextView"
+            style="@style/Style.GreenMate.Text.Body.Title.Accent"
+            setFocused="@{vm.todoState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/category_vertical_margin"
+            android:text="할 일"
+            app:layout_constraintStart_toStartOf="@id/greenMateImageView"
+            app:layout_constraintTop_toBottomOf="@id/lightAttributeView" />
 
-    <TextView
-        android:id="@+id/diaryTextView"
-        style="@style/Style.GreenMate.Text.Body.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/text_horizontal_margin"
-        android:text="일기"
-        app:layout_constraintStart_toEndOf="@id/todoTextView"
-        app:layout_constraintTop_toTopOf="@id/todoTextView" />
+        <TextView
+            android:id="@+id/diaryTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            setFocused="@{vm.diaryState}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_horizontal_margin"
+            android:text="일기"
+            app:layout_constraintStart_toEndOf="@id/todoTextView"
+            app:layout_constraintTop_toTopOf="@id/todoTextView" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/title_list_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/todoTextView"
-        tools:listitem="@layout/item_todo" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/addDiaryImageButton"
+            style="@style/Widget.GreenMate.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_padding"
+            android:src="@drawable/icon_add"
+            app:layout_constraintBottom_toBottomOf="@id/diaryTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/diaryTextView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/todoRecyclerView"
+            setVisibility="@{vm.todoState}"
+            submitList="@{vm.todoList}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todoTextView"
+            tools:listitem="@layout/item_todo" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/diaryRecyclerView"
+            setVisibility="@{vm.diaryState}"
+            submitList="@{vm.diaryList}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="14dp"
+            android:clipToPadding="false"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/todoTextView"
+            tools:listitem="@layout/item_diary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

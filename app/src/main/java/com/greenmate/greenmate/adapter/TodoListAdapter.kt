@@ -6,22 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemTodoBinding
+import com.greenmate.greenmate.model.Todo
 
 class TodoListAdapter :
-    ListAdapter<String, TodoListAdapter.TodoViewHolder>(diffUtil) {
+    ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(diffUtil) {
 
     inner class TodoViewHolder(private val binding: ItemTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            binding.root.run {
-                clipToPadding = false
-                elevation = 5f
-            }
-        }
-
-        fun bind(data: String) {
-            binding.todoTextView.text = data
+        fun bind(data: Todo) {
+            binding.data = data
         }
 
     }
@@ -41,12 +35,12 @@ class TodoListAdapter :
     }
 
     companion object {
-        val diffUtil = object : DiffUtil.ItemCallback<String>() {
-            override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
-                return oldItem == newItem
+        val diffUtil = object : DiffUtil.ItemCallback<Todo>() {
+            override fun areItemsTheSame(oldItem: Todo, newItem: Todo): Boolean {
+                return oldItem.name == newItem.name
             }
 
-            override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+            override fun areContentsTheSame(oldItem: Todo, newItem: Todo): Boolean {
                 return oldItem == newItem
             }
 

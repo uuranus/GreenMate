@@ -1,6 +1,7 @@
 package com.greenmate.greenmate.view
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.cardview.widget.CardView
@@ -27,16 +28,29 @@ class GreenAttributeView(
             0, 0
         ).apply {
 
-            labelTitle = getString(R.styleable.GreenAttributeView_labelTitle).toString()
-            labelValue = getString(R.styleable.GreenAttributeView_labelValue).toString()
-            iconSrc = getResourceId(R.styleable.GreenAttributeView_iconSrc, R.drawable.icon_light)
-
-            binding?.run {
-                attributeNameTextView.text = labelTitle
-                attributeValueTextView.text = labelValue
-                attributeImageView.setImageResource(iconSrc ?: R.drawable.icon_light)
+            try {
+                labelTitle = getString(R.styleable.GreenAttributeView_labelTitle).toString()
+                labelValue = getString(R.styleable.GreenAttributeView_labelValue).toString()
+                iconSrc =
+                    getResourceId(R.styleable.GreenAttributeView_iconSrc, R.drawable.icon_light)
+            } finally {
+                recycle()
             }
-
         }
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        binding?.run {
+            attributeNameTextView.text = labelTitle
+            attributeValueTextView.text = labelValue
+            attributeImageView.setImageResource(iconSrc ?: R.drawable.icon_light)
+        }
+    }
+
+    fun setLabelValue(value: String) {
+        labelValue = value
+        invalidate()
+        requestLayout()
     }
 }

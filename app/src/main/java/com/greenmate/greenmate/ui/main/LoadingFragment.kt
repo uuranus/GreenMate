@@ -1,4 +1,4 @@
-package com.greenmate.greenmate.ui
+package com.greenmate.greenmate.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,8 +28,17 @@ class LoadingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launch {
-            delay(3000)
-            findNavController().navigate(R.id.action_loadingFragment_to_mainFragment)
+            for (i in 0 until 3) {
+                binding.loadingImageView.setImageResource(if (i % 2 == 0) R.drawable.loading1 else R.drawable.loading2)
+                binding.loadingTextView.text =
+                    if (i == 1) "거의 다 끝났어요! 조금만 기다려주세요" else if (i == 0) "요정이 메이트를 측정하고 있어요" else "같이 성장해요"
+                for(j in 0 until 10) {
+                    binding.progressBar.progress =
+                        (binding.progressBar.progress + 10 / 3).coerceAtMost(100)
+                    delay(80)
+                }
+            }
+            findNavController().navigateUp()
         }
     }
 
