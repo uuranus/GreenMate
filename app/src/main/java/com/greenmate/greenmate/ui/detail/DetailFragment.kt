@@ -76,6 +76,20 @@ class DetailFragment : Fragment() {
                     android.R.color.transparent
                 )
             )
+            toolbar.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.editMenu -> {
+                        findNavController().navigate(R.id.action_detailFragment_to_detailEditFragment)
+                        return@setOnMenuItemClickListener true
+                    }
+                    R.id.deleteMenu -> {
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> {
+                        return@setOnMenuItemClickListener false
+                    }
+                }
+            }
 
             todoRecyclerView.adapter = todoAdapter
             diaryRecyclerView.adapter = diaryAdapter

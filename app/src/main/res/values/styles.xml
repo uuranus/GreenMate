@@ -14,6 +14,19 @@
         <item name="contentPadding">5dp</item>
     </style>
 
+    <!-- Button -->
+    <style name="Widget.GreenMate.Button" parent="Widget.MaterialComponents.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.GreenMate.SmallComponent</item>
+        <item name="android:textAppearance">@style/TextAppearance.GreenMate.Button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/primary_color</item>
+    </style>
+
+    <style name="TextAppearance.GreenMate.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
+    </style>
+
     <style name="Widget.GreenMate.IconButton" parent="Widget.AppCompat.ImageButton">
         <item name="android:background">@drawable/background_circle_img</item>
         <item name="android:backgroundTint">@color/primary_color</item>
@@ -23,6 +36,12 @@
     <!-- Dialog -->
     <style name="MaterialAlertDialog.GreenMate" parent="MaterialAlertDialog.MaterialComponents">
         <item name="shapeAppearance">@style/ShapeAppearance.GreenMate.MediumComponent</item>
+    </style>
+
+    <!-- shapeAppearance -->
+    <style name="ShapeAppearance.GreenMate.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
     <style name="ShapeAppearance.GreenMate.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
