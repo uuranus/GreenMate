@@ -17,6 +17,7 @@
 
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.GreenMate.MaterialAlertDialog
         </item>
+        <item name="toolbarStyle">@style/Widget.GreenMate.Toolbar</item>
     </style>
 
     <style name="Theme.GreenMate.TransparentActionBar">
@@ -25,7 +26,12 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <!-- ThemeOverlay -->
     <style name="ThemeOverlay.GreenMate.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="alertDialogStyle">@style/MaterialAlertDialog.GreenMate</item>
+    </style>
+
+    <style name="ThemeOverlay.GreenMate.Toolbar" parent="">
+        <item name="colorPrimary">@color/background_color</item>
     </style>
 </resources>

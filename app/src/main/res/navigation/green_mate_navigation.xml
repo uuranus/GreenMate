@@ -30,19 +30,23 @@
         android:id="@+id/detailFragment"
         android:name="com.greenmate.greenmate.ui.detail.DetailFragment"
         android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" >
+        tools:layout="@layout/fragment_detail">
         <argument
             android:name="selectedGreenMate"
-            app:argType="com.greenmate.greenmate.model.GreenMate"/>
+            app:argType="com.greenmate.greenmate.model.GreenMate" />
     </fragment>
     <fragment
-        android:id="@+id/chatFragment"
-        android:name="com.greenmate.greenmate.ui.chat.ChatFragment"
+        android:id="@+id/chatRoomFragment"
+        android:name="com.greenmate.greenmate.ui.chat.ChatRoomFragment"
         android:label="fragment_chat"
-        tools:layout="@layout/fragment_chat" >
+        tools:layout="@layout/fragment_chat_room">
         <action
-            android:id="@+id/action_chatFragment_to_chatDetailFragment"
-            app:destination="@id/chatDetailFragment" />
+            android:id="@+id/action_chatRoomFragment_to_chatFragment"
+            app:destination="@id/chatFragment" >
+            <argument
+                android:name="selectedChatRoom"
+                app:argType="com.greenmate.greenmate.model.ChatRoom" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/settingFragment"
@@ -50,7 +54,12 @@
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
     <fragment
-        android:id="@+id/chatDetailFragment"
-        android:name="com.greenmate.greenmate.ui.chat.ChatDetailFragment"
-        android:label="ChatDetailFragment" />
+        android:id="@+id/chatFragment"
+        android:name="com.greenmate.greenmate.ui.chat.ChatFragment"
+        android:label="ChatFragment"
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="selectedChatRoom"
+            app:argType="com.greenmate.greenmate.model.ChatRoom" />
+    </fragment>
 </navigation>

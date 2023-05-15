@@ -14,7 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.adapter.GreenMateListAdapter
+import com.greenmate.greenmate.adapter.main.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {

@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:id="@+id/greenMateImageView"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/background_circle_img"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/greenMateNameTextView"
-        style="@style/Style.GreenMate.Text.Body.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:text="이름"
-        app:layout_constraintBottom_toTopOf="@id/lastChatTextView"
-        app:layout_constraintStart_toEndOf="@id/greenMateImageView"
-        app:layout_constraintTop_toTopOf="@id/greenMateImageView"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <variable
+            name="data"
+            type="com.greenmate.greenmate.model.ChatRoom" />
+    </data>
 
-    <TextView
-        android:id="@+id/lastChatTextView"
-        style="@style/Style.GreenMate.Text.Body.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="내용"
-        app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
-        app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
-        app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/lastChatTimeTextView"
-        style="@style/Style.GreenMate.Text.Body.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="20:30"
-        android:textColor="@color/sub_text_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/greenMateImageView"
+            setImage="@{data.imageUrl}"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/background_circle_img"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:backgroundTint="@color/disabled_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+        <TextView
+            android:id="@+id/greenMateNameTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{data.name}"
+            app:layout_constraintBottom_toTopOf="@id/lastChatTextView"
+            app:layout_constraintStart_toEndOf="@id/greenMateImageView"
+            app:layout_constraintTop_toTopOf="@id/greenMateImageView"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/lastChatTextView"
+            style="@style/Style.GreenMate.Text.Body.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.lastMsg}"
+            app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
+            app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
+
+        <TextView
+            android:id="@+id/lastChatTimeTextView"
+            style="@style/Style.GreenMate.Text.Body.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.lastMsgTime}"
+            android:textColor="@color/sub_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/disabled_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

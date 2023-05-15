@@ -1,4 +1,4 @@
-package com.greenmate.greenmate.adapter
+package com.greenmate.greenmate.adapter.detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -17,8 +17,8 @@ import androidx.transition.TransitionInflater
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.adapter.DiaryListAdapter
-import com.greenmate.greenmate.adapter.TodoListAdapter
+import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
+import com.greenmate.greenmate.adapter.detail.TodoListAdapter
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
@@ -53,7 +53,7 @@ class DetailFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         return binding.root
@@ -76,7 +76,6 @@ class DetailFragment : Fragment() {
                     android.R.color.transparent
                 )
             )
-            toolbar.setNavigationIcon(R.drawable.icon_back_arrow)
 
             todoRecyclerView.adapter = todoAdapter
             diaryRecyclerView.adapter = diaryAdapter
