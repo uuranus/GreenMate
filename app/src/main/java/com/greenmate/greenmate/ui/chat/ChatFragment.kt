@@ -50,6 +50,7 @@ class ChatFragment : Fragment() {
 
             chatDetailRecyclerView.adapter = chatAdapter
             chatToolbar.setupWithNavController(findNavController())
+            chatToolbar.setNavigationIcon(R.drawable.icon_back_arrow)
 
             sendButton.setOnClickListener {
                 if (messageEditText.text.isNullOrEmpty()) return@setOnClickListener

@@ -53,7 +53,6 @@
     <style name="Widget.GreenMate.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
         <item name="materialThemeOverlay">@style/ThemeOverlay.GreenMate.Toolbar</item>
         <item name="titleTextAppearance">@style/Style.GreenMate.Text.Bold</item>
-        <item name="android:navigationIcon">@drawable/icon_back_arrow</item>
     </style>
 
 </resources>

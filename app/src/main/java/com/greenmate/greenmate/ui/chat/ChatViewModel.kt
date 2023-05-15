@@ -12,10 +12,10 @@ class ChatViewModel : ViewModel() {
 
     private val _chats = MutableStateFlow(mutableListOf(
         Chat(0, "안녕!", "11:20"),
-        Chat(1, "반가워", "11:21"),
-        Chat(1, "오늘 발표해야 하는 데 너무 떨려", "11:21"),
-        Chat(0, "오늘 발표 잘하고 와!", "11:22")
+        Chat(0, "반가워요", "11:21"),
+        Chat(0, "오늘 하루 어땠어요?", "11:21"),
     ))
+
     val chats: StateFlow<List<Chat>> get() = _chats
 
     fun setChatName(name: String) {

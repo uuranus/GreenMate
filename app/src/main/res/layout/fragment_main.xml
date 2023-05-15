@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_padding"
                 android:layout_marginTop="@dimen/activity_padding"
-                android:text="안녕, 이름🍃"
+                android:text="안녕, PEPL🍃"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

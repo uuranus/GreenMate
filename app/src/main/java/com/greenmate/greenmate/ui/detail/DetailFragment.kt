@@ -70,6 +70,7 @@ class DetailFragment : Fragment() {
             detailViewModel.setCurrentInfo(args.selectedGreenMate)
 
             toolbar.setupWithNavController(findNavController(), appBarConfiguration)
+            toolbar.setNavigationIcon(R.drawable.icon_back_arrow)
             toolbar.setTitleTextColor(
                 ContextCompat.getColor(
                     requireContext(),
