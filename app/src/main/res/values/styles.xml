@@ -18,13 +18,9 @@
     <style name="Widget.GreenMate.Button" parent="Widget.MaterialComponents.Button">
         <item name="shapeAppearance">@style/ShapeAppearance.GreenMate.SmallComponent</item>
         <item name="android:textAppearance">@style/TextAppearance.GreenMate.Button</item>
+        <item name="android:minHeight">50dp</item>
+        <item name="android:padding">16dp</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:background">@color/primary_color</item>
-    </style>
-
-    <style name="TextAppearance.GreenMate.Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/apple_sd_gothic_neo_bold</item>
-        <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
     </style>
 
     <style name="Widget.GreenMate.IconButton" parent="Widget.AppCompat.ImageButton">
@@ -38,6 +34,12 @@
         <item name="shapeAppearance">@style/ShapeAppearance.GreenMate.MediumComponent</item>
     </style>
 
+    <!-- toolbar -->
+    <style name="Widget.GreenMate.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.GreenMate.Toolbar</item>
+        <item name="titleTextAppearance">@style/Style.GreenMate.Text.Bold</item>
+    </style>
+
     <!-- shapeAppearance -->
     <style name="ShapeAppearance.GreenMate.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerFamily">rounded</item>
@@ -49,10 +51,12 @@
         <item name="cornerSize">16dp</item>
     </style>
 
-    <!-- toolbar -->
-    <style name="Widget.GreenMate.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.GreenMate.Toolbar</item>
-        <item name="titleTextAppearance">@style/Style.GreenMate.Text.Bold</item>
+    <!-- textAppearance -->
+    <style name="TextAppearance.GreenMate.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.GreenMate.Button</item>
     </style>
 
 </resources>

@@ -29,21 +29,20 @@ class DetailFragment : Fragment() {
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
-
-    private val addDiaryAlertDialog: AlertDialog by lazy {
-        val view = requireActivity().layoutInflater.inflate(R.layout.dialog_background, null)
-        MaterialAlertDialogBuilder(
-            requireContext(),
-            R.style.ThemeOverlay_GreenMate_MaterialAlertDialog
-        )
-            .setView(view)
-            .setPositiveButton("추가") { _, _ ->
-                val newTask = view.findViewById<TextInputEditText>(R.id.newTaskTextInput)
-                detailViewModel.addNewDiary(newTask.text.toString())
-            }
-            .setCancelable(true)
-            .create()
-    }
+//    private val addDiaryAlertDialog: AlertDialog by lazy {
+//        val view = requireActivity().layoutInflater.inflate(R.layout.dialog_background, null)
+//        MaterialAlertDialogBuilder(
+//            requireContext(),
+//            R.style.ThemeOverlay_GreenMate_MaterialAlertDialog
+//        )
+//            .setView(view)
+//            .setPositiveButton("추가") { _, _ ->
+//                val newTask = view.findViewById<TextInputEditText>(R.id.newTaskTextInput)
+//                detailViewModel.addNewDiary(newTask.text.toString())
+//            }
+//            .setCancelable(true)
+//            .create()
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +103,8 @@ class DetailFragment : Fragment() {
             }
 
             addDiaryImageButton.setOnClickListener {
-                addDiaryAlertDialog.show()
+                findNavController().navigate(R.id.action_detailFragment_to_addDiaryFragment)
+
             }
         }
     }

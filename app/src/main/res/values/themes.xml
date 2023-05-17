@@ -35,4 +35,10 @@
     <style name="ThemeOverlay.GreenMate.Toolbar" parent="">
         <item name="colorPrimary">@color/background_color</item>
     </style>
+
+    <style name="ThemeOverlay.GreenMate.Button" parent="">
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
 </resources>

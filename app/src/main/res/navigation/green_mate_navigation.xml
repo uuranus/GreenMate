@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_detailFragment_to_detailEditFragment"
             app:destination="@id/detailEditFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_addDiaryFragment"
+            app:destination="@id/addDiaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/chatRoomFragment"
@@ -70,4 +73,9 @@
         android:name="com.greenmate.greenmate.ui.detail.DetailEditFragment"
         android:label="DetailEditFragment"
         tools:layout="@layout/fragment_detail_edit" />
+    <fragment
+        android:id="@+id/addDiaryFragment"
+        android:name="com.greenmate.greenmate.ui.detail.AddDiaryFragment"
+        android:label="AddDiaryFragment"
+        tools:layout="@layout/fragment_add_diary" />
 </navigation>

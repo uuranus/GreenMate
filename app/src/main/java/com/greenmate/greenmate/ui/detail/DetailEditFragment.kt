@@ -28,8 +28,8 @@ class DetailEditFragment() : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-//        val appBarConfiguration = AppBarConfiguration(findNavController().graph)
-        binding.toolbar.setupWithNavController(findNavController())
+        val appBarConfiguration = AppBarConfiguration(findNavController().graph)
+        binding.toolbar.setupWithNavController(findNavController(), appBarConfiguration)
         binding.toolbar.setNavigationIcon(R.drawable.icon_back_arrow)
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
