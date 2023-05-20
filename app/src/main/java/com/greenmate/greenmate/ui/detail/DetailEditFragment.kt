@@ -25,8 +25,8 @@ class DetailEditFragment() : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.setupWithNavController(findNavController(), appBarConfiguration)
@@ -41,6 +41,17 @@ class DetailEditFragment() : Fragment() {
                 android.R.color.transparent
             )
         )
+
+        binding.saveButton.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+
+
         _binding = null
     }
 }

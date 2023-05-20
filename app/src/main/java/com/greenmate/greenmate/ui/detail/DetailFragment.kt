@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
+import com.greenmate.greenmate.databinding.DialogBackgroundBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
@@ -29,20 +30,11 @@ class DetailFragment : Fragment() {
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
-//    private val addDiaryAlertDialog: AlertDialog by lazy {
-//        val view = requireActivity().layoutInflater.inflate(R.layout.dialog_background, null)
-//        MaterialAlertDialogBuilder(
-//            requireContext(),
-//            R.style.ThemeOverlay_GreenMate_MaterialAlertDialog
-//        )
-//            .setView(view)
-//            .setPositiveButton("추가") { _, _ ->
-//                val newTask = view.findViewById<TextInputEditText>(R.id.newTaskTextInput)
-//                detailViewModel.addNewDiary(newTask.text.toString())
-//            }
-//            .setCancelable(true)
-//            .create()
-//    }
+    private lateinit var dialogView: DialogBackgroundBinding
+
+
+    private lateinit var deleteAlertDialog: AlertDialog
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +47,20 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
+        dialogView = DialogBackgroundBinding.inflate(requireActivity().layoutInflater).apply {
+            yesButton.setOnClickListener {
+                detailViewModel.deleteGreenMate()
+                deleteAlertDialog.dismiss()
+            }
+            noButton.setOnClickListener {
+                deleteAlertDialog.dismiss()
+            }
+        }
+        deleteAlertDialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogView.root)
+            .setCancelable(true)
+            .create()
+
         return binding.root
     }
 
@@ -83,6 +89,7 @@ class DetailFragment : Fragment() {
                         return@setOnMenuItemClickListener true
                     }
                     R.id.deleteMenu -> {
+                        deleteAlertDialog.show()
                         return@setOnMenuItemClickListener true
                     }
                     else -> {

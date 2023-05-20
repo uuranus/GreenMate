@@ -6,22 +6,36 @@
     android:padding="20dp">
 
     <TextView
-        android:id="@+id/addDiaryTextView"
+        android:id="@+id/deleteTextView"
         style="@style/Style.GreenMate.Text.Body.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="일기 추가하기"
+        android:text="그린 메이트를 삭제하시겠습니까?"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/newTaskTextInput"
-        android:layout_width="0dp"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/yesButton"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="23dp"
+        android:padding="0dp"
+        android:text="네"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deleteTextView" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/noButton"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/hint_text_color"
+        android:padding="0dp"
+        android:text="아니오"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addDiaryTextView" />
+        app:layout_constraintTop_toBottomOf="@id/yesButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

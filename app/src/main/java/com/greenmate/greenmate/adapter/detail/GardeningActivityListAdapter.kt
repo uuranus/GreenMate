@@ -10,8 +10,9 @@ import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ItemDiaryListBinding
 import com.greenmate.greenmate.databinding.ItemGardeningActivityBinding
 import com.greenmate.greenmate.model.Todo
+import com.greenmate.greenmate.ui.detail.AddDiaryViewModel
 
-class GardeningActivityListAdapter :
+class GardeningActivityListAdapter(private val selectedActivityListener: (Todo) -> Unit) :
     ListAdapter<Todo, GardeningActivityListAdapter.GardeningActivityViewHolder>(diffUtil) {
 
     inner class GardeningActivityViewHolder(private val binding: ItemGardeningActivityBinding) :
@@ -21,6 +22,17 @@ class GardeningActivityListAdapter :
             binding.run {
                 root.setOnClickListener {
                     root.requestFocus()
+                }
+
+                root.setOnFocusChangeListener { _, b ->
+                    if (b) {
+                        imageView.setColorFilter(ContextCompat.getColor(root.context,
+                            R.color.white))
+                        selectedActivityListener(currentList[adapterPosition])
+                    } else {
+                        imageView.setColorFilter(ContextCompat.getColor(root.context,
+                            R.color.primary_color))
+                    }
                 }
             }
         }

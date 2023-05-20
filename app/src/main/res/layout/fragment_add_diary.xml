@@ -61,10 +61,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/activity_padding"
-            android:text="2023-05-12"
+            android:text="@{vm.currentDate}"
             app:layout_constraintBottom_toBottomOf="@id/calendarTextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/calendarTextView" />
+            app:layout_constraintTop_toTopOf="@id/calendarTextView"
+            tools:text="2023-05-12" />
 
         <ImageView
             android:id="@+id/gardeningImageView"

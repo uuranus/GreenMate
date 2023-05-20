@@ -7,18 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.GardeningActivityListAdapter
 import com.greenmate.greenmate.databinding.FragmentAddDiaryBinding
 import com.greenmate.greenmate.model.Todo
 import com.greenmate.greenmate.util.makeDateString
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class AddDiaryFragment : Fragment() {
     private var _binding: FragmentAddDiaryBinding? = null
     private val binding: FragmentAddDiaryBinding get() = _binding!!
     private val addDiaryViewModel: AddDiaryViewModel by viewModels()
-    private val gardeningActivityAdapter = GardeningActivityListAdapter()
+    private val gardeningActivityAdapter = GardeningActivityListAdapter {
+        addDiaryViewModel.setGardeningActivity(it)
+    }
 
     private val calendarBottomSheetFragment = AddDiaryBottomSheetFragment()
 
@@ -37,7 +45,7 @@ class AddDiaryFragment : Fragment() {
             lifecycleOwner = this@AddDiaryFragment.viewLifecycleOwner
 
             gardeningActivityRecyclerView.adapter = gardeningActivityAdapter
-            gardeningActivityRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3,)
+            gardeningActivityRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
             gardeningActivityAdapter.submitList(listOf(
                 Todo("물주기", R.drawable.icon_water),
                 Todo("환기하기", R.drawable.icon_wind),
@@ -49,6 +57,21 @@ class AddDiaryFragment : Fragment() {
                     "CHOOSE_DATE")
                 calendarBottomSheetFragment.setOnDateClickListener { year, month, date ->
                     dateTextView.text = makeDateString(year, month, date)
+                }
+            }
+
+            saveButton.setOnClickListener {
+                addDiaryViewModel.saveNewGardening()
+            }
+
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    addDiaryViewModel.isSaveSuccess.collectLatest {
+                        if (it) {
+                            findNavController().navigateUp()
+                        }
+                    }
                 }
             }
         }

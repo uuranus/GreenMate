@@ -90,4 +90,8 @@ class DetailViewModel : ViewModel() {
         _diaryList.value = newList
     }
 
+    fun deleteGreenMate(){
+
+    }
+
 }

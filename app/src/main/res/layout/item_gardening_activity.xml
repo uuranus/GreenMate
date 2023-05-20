@@ -23,6 +23,8 @@
             setImage="@{data.icon}"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_marginHorizontal="29dp"
             android:layout_marginTop="22dp"
             app:layout_constraintEnd_toEndOf="parent"
