@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.databinding.ItemDiaryListBinding
 import com.greenmate.greenmate.databinding.ItemGardeningActivityBinding
 import com.greenmate.greenmate.model.Todo
-import com.greenmate.greenmate.ui.detail.AddDiaryViewModel
 
 class GardeningActivityListAdapter(private val selectedActivityListener: (Todo) -> Unit) :
     ListAdapter<Todo, GardeningActivityListAdapter.GardeningActivityViewHolder>(diffUtil) {

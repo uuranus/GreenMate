@@ -68,6 +68,8 @@ class DetailViewModel : ViewModel() {
         _currentInfo.value = greenMate
     }
 
+    fun getImageUrl(): Int = _currentInfo.value.image
+
     fun addNewDiary(newTask: String) {
         val newList = _diaryList.value.toList().mapIndexed { index, diary ->
             if (index == 0) {
@@ -90,7 +92,7 @@ class DetailViewModel : ViewModel() {
         _diaryList.value = newList
     }
 
-    fun deleteGreenMate(){
+    fun deleteGreenMate() {
 
     }
 

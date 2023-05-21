@@ -9,18 +9,19 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import androidx.transition.TransitionInflater
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
-import com.greenmate.greenmate.databinding.DialogBackgroundBinding
+import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
+import com.greenmate.greenmate.ui.main.MainFragmentDirections
 
 class DetailFragment : Fragment() {
 
@@ -30,9 +31,7 @@ class DetailFragment : Fragment() {
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by viewModels()
     private val args: DetailFragmentArgs by navArgs()
-    private lateinit var dialogView: DialogBackgroundBinding
-
-
+    private lateinit var dialogView: DialogDeleteGreenMateBinding
     private lateinit var deleteAlertDialog: AlertDialog
 
 
@@ -47,10 +46,11 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        dialogView = DialogBackgroundBinding.inflate(requireActivity().layoutInflater).apply {
+        dialogView = DialogDeleteGreenMateBinding.inflate(requireActivity().layoutInflater).apply {
             yesButton.setOnClickListener {
                 detailViewModel.deleteGreenMate()
                 deleteAlertDialog.dismiss()
+
             }
             noButton.setOnClickListener {
                 deleteAlertDialog.dismiss()
@@ -68,24 +68,22 @@ class DetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
-        binding.run {
-            vm = detailViewModel
-            lifecycleOwner = this@DetailFragment.viewLifecycleOwner
-
-            detailViewModel.setCurrentInfo(args.selectedGreenMate)
-
-            toolbar.setupWithNavController(findNavController(), appBarConfiguration)
-            toolbar.setNavigationIcon(R.drawable.icon_back_arrow)
-            toolbar.setTitleTextColor(
+        binding.toolbar.run {
+            setupWithNavController(findNavController(), appBarConfiguration)
+            setNavigationIcon(R.drawable.icon_back_arrow)
+            setTitleTextColor(
                 ContextCompat.getColor(
                     requireContext(),
                     android.R.color.transparent
                 )
             )
-            toolbar.setOnMenuItemClickListener {
+            setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.editMenu -> {
-                        findNavController().navigate(R.id.action_detailFragment_to_detailEditFragment)
+                        val action =
+                            DetailFragmentDirections.actionDetailFragmentToDetailEditFragment(
+                                detailViewModel.getImageUrl())
+                        findNavController().navigate(action)
                         return@setOnMenuItemClickListener true
                     }
                     R.id.deleteMenu -> {
@@ -97,6 +95,11 @@ class DetailFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        binding.run {
+            vm = detailViewModel
+            lifecycleOwner = this@DetailFragment.viewLifecycleOwner
 
             todoRecyclerView.adapter = todoAdapter
             diaryRecyclerView.adapter = diaryAdapter
@@ -114,6 +117,8 @@ class DetailFragment : Fragment() {
 
             }
         }
+
+        detailViewModel.setCurrentInfo(args.selectedGreenMate)
     }
 
     override fun onDestroyView() {
