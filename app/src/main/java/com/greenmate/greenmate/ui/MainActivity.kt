@@ -20,18 +20,18 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        binding.bottomNavigationView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.chatRoomFragment, R.id.mainFragment, R.id.settingFragment -> {
-                    binding.bottomNavigationView.isVisible = true
-                }
-                else -> {
-                    binding.bottomNavigationView.isVisible = false
-                }
-            }
-        }
+//        binding.bottomNavigationView.setupWithNavController(navController)
+//
+//        navController.addOnDestinationChangedListener { _, destination, _ ->
+//            when (destination.id) {
+//                R.id.chatRoomFragment, R.id.mainFragment, R.id.settingFragment -> {
+//                    binding.bottomNavigationView.isVisible = true
+//                }
+//                else -> {
+//                    binding.bottomNavigationView.isVisible = false
+//                }
+//            }
+//        }
 
         navController.navigate(R.id.action_mainFragment_to_loadingFragment)
 

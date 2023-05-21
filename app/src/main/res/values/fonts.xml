@@ -25,6 +25,16 @@
         <item name="android:textColor">@color/accent_text_color</item>
     </style>
 
+    <style name="Style.GreenMate.Text.Medium">
+        <item name="android:textSize">25sp</item>
+    </style>
+
+    <style name="Style.GreenMate.Text.Medium.Bold">
+
+        <item name="fontFamily">@font/apple_sd_gothic_neo_bold</item>
+        <item name="android:fontFamily">@font/apple_sd_gothic_neo_bold</item>
+    </style>
+
     <style name="Style.GreenMate.Text.Body">
         <item name="android:textSize">15sp</item>
     </style>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_padding"
+    tools:context=".ui.addGreenMate.module.SerialNumberFragment">
+
+    <TextView
+        android:id="@+id/serialNumberTextView"
+        style="@style/Style.GreenMate.Text.Medium.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="시리얼 넘버 입력"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/serialNumberEditText"
+        style="@style/Style.GreenMate.Text.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/background_round_view_border"
+        android:hint="시리얼 넘버를 입력해주세요"
+        android:padding="21dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/serialNumberTextView" />
+
+    <TextView
+        android:id="@+id/serialNumberInfoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시리얼 넘버?"
+        style="@style/Style.GreenMate.Text.Body"
+        android:textColor="@color/hint_text_color"
+        app:layout_constraintEnd_toEndOf="@id/serialNumberEditText"
+        app:layout_constraintTop_toBottomOf="@id/serialNumberEditText"
+        android:layout_marginTop="12dp"/>
+
+    <Button
+        android:id="@+id/continueButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="167dp"
+        android:text="계속하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
