@@ -78,6 +78,18 @@ class DetailEditFragment() : Fragment() {
                 )
             )
 
+            setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.deleteMenu -> {
+                        deleteAlertDialog.show()
+                        return@setOnMenuItemClickListener true
+                    }
+                    else -> {
+                        return@setOnMenuItemClickListener false
+                    }
+                }
+            }
+
         }
 
         binding.run {

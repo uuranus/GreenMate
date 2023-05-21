@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/deleteMenu"
         android:icon="@drawable/icon_trash"
         android:title="삭제"
         app:showAsAction="always" />
