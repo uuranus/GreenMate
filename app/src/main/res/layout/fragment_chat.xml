@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.greenmate.greenmate.ui.chat.ChatViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/chatToolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/chat_detail_menu"
+            app:title="@{vm.chatName}" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatDetailRecyclerView"
+            submitList="@{vm.chats}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="@dimen/activity_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/chatInputBackgroundView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chatToolbar"
+            tools:listitem="@layout/item_chat_from_me" />
+
+        <View
+            android:id="@+id/chatInputBackgroundView"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="@dimen/activity_padding"
+            android:layout_marginEnd="@dimen/activity_padding"
+            android:layout_marginBottom="@dimen/activity_padding"
+            android:background="@drawable/background_chat_input"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <EditText
+            android:id="@+id/messageEditText"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="10dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="5dp"
+            android:background="@android:color/transparent"
+            android:maxLines="1"
+            android:inputType="text"
+            android:imeOptions="actionSend"
+            android:lines="1"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/chatInputBackgroundView"
+            app:layout_constraintEnd_toStartOf="@id/sendButton"
+            app:layout_constraintStart_toStartOf="@id/chatInputBackgroundView"
+            app:layout_constraintTop_toTopOf="@id/chatInputBackgroundView" />
+
+        <ImageButton
+            android:id="@+id/sendButton"
+            style="@style/Widget.GreenMate.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:padding="10dp"
+            android:src="@drawable/icon_send"
+            app:layout_constraintBottom_toBottomOf="@id/chatInputBackgroundView"
+            app:layout_constraintEnd_toEndOf="@id/chatInputBackgroundView"
+            app:layout_constraintTop_toTopOf="@id/chatInputBackgroundView"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

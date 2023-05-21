@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.greenmate.greenmate.ui.detail.AddDiaryViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.detail.AddDiary">
+
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                style="@style/Style.GreenMate.Text.Body.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="관리 기록 추가" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+
+        <ImageView
+            android:id="@+id/calenderImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="@dimen/activity_padding"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_calendar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+        <TextView
+            android:id="@+id/calendarTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:text="관리 날짜"
+            app:layout_constraintBottom_toBottomOf="@id/calenderImageView"
+            app:layout_constraintStart_toEndOf="@id/calenderImageView"
+            app:layout_constraintTop_toTopOf="@id/calenderImageView" />
+
+        <TextView
+            android:id="@+id/dateTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_padding"
+            android:text="@{vm.currentDate}"
+            app:layout_constraintBottom_toBottomOf="@id/calendarTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/calendarTextView"
+            tools:text="2023-05-12" />
+
+        <ImageView
+            android:id="@+id/gardeningImageView"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="@dimen/activity_padding"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/icon_bottom_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calenderImageView" />
+
+        <TextView
+            android:id="@+id/gardeningTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="9dp"
+            android:text="가드닝 활동"
+            app:layout_constraintBottom_toBottomOf="@id/gardeningImageView"
+            app:layout_constraintStart_toEndOf="@id/gardeningImageView"
+            app:layout_constraintTop_toTopOf="@id/gardeningImageView" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gardeningActivityRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/activity_padding"
+            android:layout_marginTop="17dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/saveButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gardeningImageView"
+            tools:listitem="@layout/item_gardening_activity" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_padding"
+            android:layout_marginBottom="90dp"
+            android:text="저장"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

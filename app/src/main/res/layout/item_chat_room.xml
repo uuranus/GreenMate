@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.greenmate.greenmate.model.ChatRoom" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/greenMateImageView"
+            setImage="@{data.imageUrl}"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/background_circle_img"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/greenMateNameTextView"
+            style="@style/Style.GreenMate.Text.Body.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="@{data.name}"
+            app:layout_constraintBottom_toTopOf="@id/lastChatTextView"
+            app:layout_constraintStart_toEndOf="@id/greenMateImageView"
+            app:layout_constraintTop_toTopOf="@id/greenMateImageView"
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="PEPL" />
+
+        <TextView
+            android:id="@+id/lastChatTextView"
+            style="@style/Style.GreenMate.Text.Body.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@{data.lastMsg}"
+            app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
+            app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView"
+            tools:text="오늘 하루 어땠나요?" />
+
+        <TextView
+            android:id="@+id/lastChatTimeTextView"
+            style="@style/Style.GreenMate.Text.Body.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{data.lastMsgTime}"
+            android:textColor="@color/sub_text_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="20:30" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/disabled_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

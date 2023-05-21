@@ -3,14 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/editMenu"
-        android:icon="@drawable/icon_pencil"
-        android:title="수정"
-        app:showAsAction="always" />
-    <item
         android:id="@+id/deleteMenu"
         android:icon="@drawable/icon_trash"
         android:title="삭제"
         app:showAsAction="always" />
-
 </menu>

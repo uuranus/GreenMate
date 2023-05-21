@@ -19,6 +19,7 @@ fun setImage(view: ImageView, url: Int?) {
     }
 
     view.setImageResource(url)
+    view.clipToOutline = true
 }
 
 @BindingAdapter("setValue")
@@ -38,18 +39,13 @@ fun setVisibility(view: View, value: Int) {
 
 @BindingAdapter("setFocused")
 fun setFocused(view: TextView, value: Int) {
-    if (value == 1) view.setTextColor(
-        ContextCompat.getColor(
-            view.context,
-            R.color.accent_text_color
-        )
-    )
+    if (value == 1) view.setTextColor(ContextCompat.getColor(view.context,
+        R.color.accent_text_color))
     else view.setTextColor(ContextCompat.getColor(view.context, R.color.black))
 }
 
 @BindingAdapter("submitList")
 fun <T> submitList(view: RecyclerView, data: List<T>) {
-
     val adapter = view.adapter as ListAdapter<T, RecyclerView.ViewHolder>
 
     adapter.submitList(data)

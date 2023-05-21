@@ -22,7 +22,4 @@
     <color name="disabled_color">#FFD9D9D9</color>
     <color name="progress_activate_color">#FF7CAF9D</color>
     <color name="chart_disabled_color">#FFE9E9E9</color>
-    <color name="light_chart_color">#FFF4E87D</color>
-    <color name="humidity_chart_color">#FF87B9DD</color>
-    <color name="temperate_chart_color">#FFDA3D46</color>
 </resources>
