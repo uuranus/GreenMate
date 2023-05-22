@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerPhoneFragment"
+            app:destination="@id/registerPhoneFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerPhoneFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterPhoneFragment"
+        android:label="fragment_register_phone"
+        tools:layout="@layout/fragment_register_phone" >
+        <action
+            android:id="@+id/action_registerPhoneFragment_to_registerAuthFragment"
+            app:destination="@id/registerAuthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerProfileFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterProfileFragment"
+        android:label="fragment_register_profile"
+        tools:layout="@layout/fragment_register_profile" >
+        <action
+            android:id="@+id/action_registerProfileFragment_to_registerWelcomeFragment"
+            app:destination="@id/registerWelcomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerAuthFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterAuthFragment"
+        android:label="fragment_register_auth"
+        tools:layout="@layout/fragment_register_auth" >
+        <action
+            android:id="@+id/action_registerAuthFragment_to_registerProfileFragment"
+            app:destination="@id/registerProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerWelcomeFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterWelcomeFragment"
+        android:label="fragment_register_welcome"
+        tools:layout="@layout/fragment_register_welcome" />
+</navigation>

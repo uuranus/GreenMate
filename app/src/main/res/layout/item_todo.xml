@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_horizontal_margin"
             android:text="@{data.name}"
+            tools:text="물주기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/todoCheckbox"
             app:layout_constraintStart_toEndOf="@id/todoIconImageView"

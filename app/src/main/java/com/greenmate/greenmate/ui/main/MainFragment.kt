@@ -1,5 +1,6 @@
 package com.greenmate.greenmate.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.main.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
+import com.greenmate.greenmate.ui.addGreenMate.module.AddModuleActivity
 
 class MainFragment : Fragment() {
 
@@ -25,7 +27,7 @@ class MainFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_main, container, false)
         return binding.root
@@ -55,10 +57,16 @@ class MainFragment : Fragment() {
             )
             myGreenMateTextView.text = string
 
+            addImageButton.setOnClickListener {
+                val intent = Intent(requireActivity(), AddModuleActivity::class.java)
+                startActivity(intent)
+            }
+
             mainGreenMateCardView.setOnClickListener {
                 val action =
                     MainFragmentDirections.actionMainFragmentToDetailFragment(mainViewModel.getSelectedGreenMate())
-                val extras = FragmentNavigatorExtras(binding.greenMateImageView to "detailGreenMateImage")
+                val extras =
+                    FragmentNavigatorExtras(binding.greenMateImageView to "detailGreenMateImage")
                 findNavController().navigate(action, extras)
             }
         }

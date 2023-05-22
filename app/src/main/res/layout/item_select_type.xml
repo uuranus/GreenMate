@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:layout_marginHorizontal="@dimen/activity_padding"
+    android:layout_marginVertical="@dimen/list_margin"
+    android:layout_marginBottom="@dimen/list_margin"
+    android:background="@drawable/background_item"
+    android:backgroundTint="@color/white"
+    android:elevation="3dp"
+    android:paddingHorizontal="@dimen/item_padding_horizontal"
+    android:paddingVertical="@dimen/item_padding_vertical">
+
+    <ImageView
+        android:id="@+id/plantImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/icon_plant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/plantNameTextView"
+        style="@style/Style.GreenMate.Text.Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/plantImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="몬스테라" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
