@@ -20,6 +20,9 @@
                 android:name="selectedGreenMate"
                 app:argType="com.greenmate.greenmate.model.GreenMate" />
         </action>
+        <action
+            android:id="@+id/action_mainFragment_to_notFoundFragment2"
+            app:destination="@id/notFoundFragment" />
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -89,5 +92,10 @@
             android:name="selectedChatRoom"
             app:argType="com.greenmate.greenmate.model.ChatRoom" />
     </fragment>
+    <fragment
+        android:id="@+id/notFoundFragment"
+        android:name="com.greenmate.greenmate.ui.main.NotFoundFragment"
+        android:label="fragment_not_found"
+        tools:layout="@layout/fragment_not_found" />
 
 </navigation>

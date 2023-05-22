@@ -1,16 +1,13 @@
 package com.greenmate.greenmate.ui.addGreenMate.plantInfo
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ActivityAddGreenMateBinding
-import com.greenmate.greenmate.databinding.ActivityMainBinding
-import com.greenmate.greenmate.ui.detail.DetailFragmentDirections
 
 class AddGreenMateActivity : AppCompatActivity() {
 

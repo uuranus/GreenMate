@@ -18,7 +18,6 @@ import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.main.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
 import com.greenmate.greenmate.ui.addGreenMate.module.AddModuleActivity
-import com.greenmate.greenmate.ui.addGreenMate.plantInfo.AddGreenMateActivity
 
 class MainFragment : Fragment() {
 

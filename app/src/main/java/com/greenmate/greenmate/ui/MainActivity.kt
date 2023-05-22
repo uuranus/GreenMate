@@ -2,9 +2,7 @@ package com.greenmate.greenmate.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ActivityMainBinding
 
