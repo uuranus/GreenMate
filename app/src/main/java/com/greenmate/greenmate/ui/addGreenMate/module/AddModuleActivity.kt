@@ -1,5 +1,6 @@
 package com.greenmate.greenmate.ui.addGreenMate.module
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,6 +12,15 @@ import com.greenmate.greenmate.databinding.ActivityAddModuleBinding
 
 class AddModuleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddModuleBinding
+
+    private var isPlantAdded: Boolean? = null
+
+    override fun getIntent(): Intent {
+        intent?.let {
+            isPlantAdded = it.getBooleanExtra("PLANT_INFO_ADDED", false)
+        }
+        return super.getIntent()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

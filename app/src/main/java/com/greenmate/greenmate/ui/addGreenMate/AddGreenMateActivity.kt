@@ -1,9 +1,11 @@
-package com.greenmate.greenmate.ui.addGreenMate.plantInfo
+package com.greenmate.greenmate.ui.addGreenMate
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.greenmate.greenmate.R
@@ -12,12 +14,13 @@ import com.greenmate.greenmate.databinding.ActivityAddGreenMateBinding
 class AddGreenMateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddGreenMateBinding
+    private val addGreenMateViewModel: AddGreenMateViewModel by viewModels()
+    private val navArgs: AddGreenMateActivityArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddGreenMateBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
@@ -34,5 +37,11 @@ class AddGreenMateActivity : AppCompatActivity() {
                 )
             )
         }
+
+        println("navArgs ${navArgs.addModule}")
+        if (navArgs.addModule == 0) {
+            navController.navigate(R.id.action_serialNumberFragment_to_selectTypeFragment)
+        }
+
     }
 }

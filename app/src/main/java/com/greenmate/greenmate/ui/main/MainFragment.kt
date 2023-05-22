@@ -1,6 +1,5 @@
 package com.greenmate.greenmate.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -17,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.main.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
-import com.greenmate.greenmate.ui.addGreenMate.module.AddModuleActivity
 
 class MainFragment : Fragment() {
 
@@ -58,8 +56,8 @@ class MainFragment : Fragment() {
             myGreenMateTextView.text = string
 
             addImageButton.setOnClickListener {
-                val intent = Intent(requireActivity(), AddModuleActivity::class.java)
-                startActivity(intent)
+                val action = MainFragmentDirections.actionMainFragmentToAddGreenMateActivity(0)
+                findNavController().navigate(action)
             }
 
             mainGreenMateCardView.setOnClickListener {

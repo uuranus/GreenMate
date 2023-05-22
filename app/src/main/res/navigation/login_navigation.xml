@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.login.LoginFragment"
+        android:name="com.greenmate.greenmate.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerPhoneFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterPhoneFragment"
+        android:name="com.greenmate.greenmate.ui.login.RegisterPhoneFragment"
         android:label="fragment_register_phone"
         tools:layout="@layout/fragment_register_phone" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerProfileFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterProfileFragment"
+        android:name="com.greenmate.greenmate.ui.login.RegisterProfileFragment"
         android:label="fragment_register_profile"
         tools:layout="@layout/fragment_register_profile" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerAuthFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterAuthFragment"
+        android:name="com.greenmate.greenmate.ui.login.RegisterAuthFragment"
         android:label="fragment_register_auth"
         tools:layout="@layout/fragment_register_auth" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerWelcomeFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.login.RegisterWelcomeFragment"
+        android:name="com.greenmate.greenmate.ui.login.RegisterWelcomeFragment"
         android:label="fragment_register_welcome"
         tools:layout="@layout/fragment_register_welcome" />
 </navigation>

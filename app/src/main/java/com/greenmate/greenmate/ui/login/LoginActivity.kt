@@ -1,7 +1,7 @@
-package com.greenmate.greenmate.ui.addGreenMate.login
+package com.greenmate.greenmate.ui.login
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.greenmate.greenmate.R
 
 class LoginActivity : AppCompatActivity() {
