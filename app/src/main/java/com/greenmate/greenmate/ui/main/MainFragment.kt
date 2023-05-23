@@ -1,6 +1,5 @@
 package com.greenmate.greenmate.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
@@ -11,19 +10,19 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.main.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
-import com.greenmate.greenmate.ui.addGreenMate.module.AddModuleActivity
 
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +34,11 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val adapter = GreenMateListAdapter(onClickListener = {
             mainViewModel.setMainGreenMate(it)
         })
+
 
         binding.run {
 
@@ -58,8 +59,8 @@ class MainFragment : Fragment() {
             myGreenMateTextView.text = string
 
             addImageButton.setOnClickListener {
-                val intent = Intent(requireActivity(), AddModuleActivity::class.java)
-                startActivity(intent)
+                val action = MainFragmentDirections.actionMainFragmentToAddGreenMateActivity(1)
+                findNavController().navigate(action)
             }
 
             mainGreenMateCardView.setOnClickListener {
@@ -68,6 +69,20 @@ class MainFragment : Fragment() {
                 val extras =
                     FragmentNavigatorExtras(binding.greenMateImageView to "detailGreenMateImage")
                 findNavController().navigate(action, extras)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //TODO network 요청
+        if(mainViewModel.isDataLoaded()){
+            if (mainViewModel.isGreenMateEmpty()) {
+                findNavController().navigate(R.id.action_mainFragment_to_notFoundFragment)
+            }
+
+            if(mainViewModel.isMainGreenMateEmpty()){
+                mainViewModel.setMainGreenMateByFirst()
             }
         }
     }

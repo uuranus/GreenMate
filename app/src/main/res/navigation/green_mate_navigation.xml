@@ -21,8 +21,16 @@
                 app:argType="com.greenmate.greenmate.model.GreenMate" />
         </action>
         <action
-            android:id="@+id/action_mainFragment_to_notFoundFragment2"
+            android:id="@+id/action_mainFragment_to_notFoundFragment"
             app:destination="@id/notFoundFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_addGreenMateActivity"
+            app:destination="@id/addGreenMateActivity">
+            <argument
+                android:name="addModule"
+                android:defaultValue="1"
+                app:argType="integer" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/loadingFragment"
@@ -39,10 +47,10 @@
             app:argType="com.greenmate.greenmate.model.GreenMate" />
         <action
             android:id="@+id/action_detailFragment_to_detailEditFragment"
-            app:destination="@id/detailEditFragment" >
+            app:destination="@id/detailEditFragment">
             <argument
                 android:name="greenMateImageUrl"
-                app:argType="integer"/>
+                app:argType="integer" />
         </action>
         <action
             android:id="@+id/action_detailFragment_to_addDiaryFragment"
@@ -53,18 +61,16 @@
         android:id="@+id/detailEditFragment"
         android:name="com.greenmate.greenmate.ui.detail.DetailEditFragment"
         android:label="DetailEditFragment"
-        tools:layout="@layout/fragment_detail_edit" >
+        tools:layout="@layout/fragment_detail_edit">
         <argument
             android:name="greenMateImageUrl"
-            app:argType="integer"/>
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/addDiaryFragment"
         android:name="com.greenmate.greenmate.ui.detail.AddDiaryFragment"
         android:label="AddDiaryFragment"
         tools:layout="@layout/fragment_add_diary" />
-
-
     <fragment
         android:id="@+id/chatRoomFragment"
         android:name="com.greenmate.greenmate.ui.chat.ChatRoomFragment"
@@ -96,6 +102,25 @@
         android:id="@+id/notFoundFragment"
         android:name="com.greenmate.greenmate.ui.main.NotFoundFragment"
         android:label="fragment_not_found"
-        tools:layout="@layout/fragment_not_found" />
+        tools:layout="@layout/fragment_not_found" >
+        <action
+            android:id="@+id/action_notFoundFragment_to_addGreenMateActivity"
+            app:destination="@id/addGreenMateActivity">
+            <argument
+                android:name="addModule"
+                android:defaultValue="1"
+                app:argType="integer" />
+        </action>
+    </fragment>
+    <activity
+        android:id="@+id/addGreenMateActivity"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.AddGreenMateActivity"
+        android:label="activity_add_green_mate"
+        tools:layout="@layout/activity_add_green_mate">
+        <argument
+            android:name="addModule"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </activity>
 
 </navigation>

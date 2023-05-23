@@ -5,18 +5,5 @@
     android:id="@+id/add_module_navigation"
     app:startDestination="@id/serialNumberFragment">
 
-    <fragment
-        android:id="@+id/findModuleFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.module.FindModuleFragment"
-        android:label="fragment_find_module"
-        tools:layout="@layout/fragment_find_module" />
-    <fragment
-        android:id="@+id/serialNumberFragment"
-        android:name="com.greenmate.greenmate.ui.addGreenMate.module.SerialNumberFragment"
-        android:label="fragment_serial_number"
-        tools:layout="@layout/fragment_serial_number" >
-        <action
-            android:id="@+id/action_serialNumberFragment_to_findModuleFragment"
-            app:destination="@id/findModuleFragment" />
-    </fragment>
+
 </navigation>

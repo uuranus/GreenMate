@@ -1,14 +1,11 @@
-package com.greenmate.greenmate.ui.addGreenMate.login
+package com.greenmate.greenmate.ui.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.greenmate.greenmate.R
+import androidx.fragment.app.Fragment
 import com.greenmate.greenmate.databinding.FragmentLoginBinding
-import com.greenmate.greenmate.databinding.FragmentSerialNumberBinding
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
