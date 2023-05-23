@@ -21,7 +21,7 @@
                 app:argType="com.greenmate.greenmate.model.GreenMate" />
         </action>
         <action
-            android:id="@+id/action_mainFragment_to_notFoundFragment2"
+            android:id="@+id/action_mainFragment_to_notFoundFragment"
             app:destination="@id/notFoundFragment" />
         <action
             android:id="@+id/action_mainFragment_to_addGreenMateActivity"
@@ -112,7 +112,6 @@
                 app:argType="integer" />
         </action>
     </fragment>
-    <include app:graph="@navigation/add_module_navigation" />
     <activity
         android:id="@+id/addGreenMateActivity"
         android:name="com.greenmate.greenmate.ui.addGreenMate.AddGreenMateActivity"

@@ -37,7 +37,6 @@ class SelectTypeFragment : Fragment() {
             searchView.setOnQueryTextListener(object :
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(text: String?): Boolean {
-                    //TODO 검색
                     text ?: return true
                     addGreenMateViewModel.search(text)
                     return true
@@ -51,7 +50,11 @@ class SelectTypeFragment : Fragment() {
             plantTypeRecyclerView.adapter = plantTypeAdapter
 
             continueButton.setOnClickListener {
-                findNavController().navigate(R.id.action_selectTypeFragment_to_makeNameFragment)
+                if (addGreenMateViewModel.isModuleAdded()) {
+                    findNavController().navigate(R.id.action_selectTypeFragment_to_makeNameFragment)
+                } else {
+                    findNavController().navigate(R.id.action_selectTypeFragment2_to_makeNameFragment2)
+                }
             }
         }
     }

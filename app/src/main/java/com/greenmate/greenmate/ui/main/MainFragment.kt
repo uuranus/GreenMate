@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -21,7 +22,7 @@ class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
     private val binding: FragmentMainBinding get() = _binding!!
-    private val mainViewModel: MainViewModel by viewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +34,11 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val adapter = GreenMateListAdapter(onClickListener = {
             mainViewModel.setMainGreenMate(it)
         })
+
 
         binding.run {
 
@@ -56,7 +59,7 @@ class MainFragment : Fragment() {
             myGreenMateTextView.text = string
 
             addImageButton.setOnClickListener {
-                val action = MainFragmentDirections.actionMainFragmentToAddGreenMateActivity(0)
+                val action = MainFragmentDirections.actionMainFragmentToAddGreenMateActivity(1)
                 findNavController().navigate(action)
             }
 
@@ -66,6 +69,20 @@ class MainFragment : Fragment() {
                 val extras =
                     FragmentNavigatorExtras(binding.greenMateImageView to "detailGreenMateImage")
                 findNavController().navigate(action, extras)
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        //TODO network 요청
+        if(mainViewModel.isDataLoaded()){
+            if (mainViewModel.isGreenMateEmpty()) {
+                findNavController().navigate(R.id.action_mainFragment_to_notFoundFragment)
+            }
+
+            if(mainViewModel.isMainGreenMateEmpty()){
+                mainViewModel.setMainGreenMateByFirst()
             }
         }
     }

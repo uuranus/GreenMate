@@ -29,7 +29,11 @@ class SerialNumberFragment : Fragment() {
 
         binding.run {
             continueButton.setOnClickListener {
-                findNavController().navigate(R.id.action_serialNumberFragment_to_findModuleFragment)
+                if (addGreenMateViewModel.isModuleAdded()) {
+                    findNavController().navigate(R.id.action_serialNumberFragment_to_findModuleFragment)
+                } else {
+                    findNavController().navigate(R.id.action_serialNumberFragment2_to_findModuleFragment2)
+                }
             }
         }
     }

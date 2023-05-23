@@ -38,9 +38,10 @@ class AddGreenMateActivity : AppCompatActivity() {
             )
         }
 
-        println("navArgs ${navArgs.addModule}")
+        addGreenMateViewModel.setModuleAdded(navArgs.addModule == 1)
+
         if (navArgs.addModule == 0) {
-            navController.navigate(R.id.action_serialNumberFragment_to_selectTypeFragment)
+            navController.navigate(R.id.action_serialNumberFragment_to_selectTypeFragment2)
         }
 
     }
