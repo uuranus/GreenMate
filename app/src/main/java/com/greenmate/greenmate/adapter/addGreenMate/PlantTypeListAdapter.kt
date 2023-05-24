@@ -6,12 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemSelectTypeBinding
+import com.greenmate.greenmate.ui.addGreenMate.AddGreenMateViewModel
 
-class PlantTypeListAdapter :
+class PlantTypeListAdapter(private val vm: AddGreenMateViewModel) :
     ListAdapter<String, PlantTypeListAdapter.PlantTypeViewHolder>(diffUtil) {
 
     inner class PlantTypeViewHolder(private val binding: ItemSelectTypeBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.run {
+                root.setOnClickListener {
+                    root.requestFocus()
+                    vm.setCurrentPlantType(adapterPosition)
+                }
+            }
+        }
 
         fun bind(data: String) {
             binding.plantNameTextView.text = data

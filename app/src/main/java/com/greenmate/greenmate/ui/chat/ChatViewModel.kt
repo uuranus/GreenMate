@@ -1,7 +1,7 @@
 package com.greenmate.greenmate.ui.chat
 
 import androidx.lifecycle.ViewModel
-import com.greenmate.greenmate.model.Chat
+import com.greenmate.greenmate.model.data.Chat
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

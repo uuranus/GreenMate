@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.greenmate.greenmate.model.Todo" />
+            type="com.greenmate.greenmate.model.data.Todo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

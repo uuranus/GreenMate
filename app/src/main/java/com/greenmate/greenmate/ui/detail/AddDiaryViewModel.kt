@@ -1,7 +1,7 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
-import com.greenmate.greenmate.model.Todo
+import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.util.makeDateString
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

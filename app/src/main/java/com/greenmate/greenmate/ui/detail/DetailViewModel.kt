@@ -2,15 +2,19 @@ package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.model.Diary
-import com.greenmate.greenmate.model.GreenMate
-import com.greenmate.greenmate.model.Todo
+import com.greenmate.greenmate.model.data.Diary
+import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.model.data.Todo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class DetailViewModel : ViewModel() {
 
-    private val _currentInfo = MutableStateFlow(GreenMate("", "", "", "", "", "", 0))
+    private val _currentInfo = MutableStateFlow(
+        GreenMate(
+            name = "", type = "", image = R.drawable.plant1
+        )
+    )
     val currentInfo: StateFlow<GreenMate> get() = _currentInfo
 
     private val _todoState = MutableStateFlow(1)

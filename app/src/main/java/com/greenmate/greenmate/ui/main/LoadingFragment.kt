@@ -37,9 +37,9 @@ class LoadingFragment : Fragment() {
                 for (j in 0 until 10) {
                     binding.progressBar.progress =
                         (binding.progressBar.progress + 10 / 3).coerceAtMost(100)
-                    delay(80)
                 }
             }
+            mainViewModel.getAllGreenMates()
             mainViewModel.setIsDataLoaded(true)
             findNavController().navigateUp()
         }

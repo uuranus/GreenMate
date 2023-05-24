@@ -17,13 +17,14 @@ class SelectTypeFragment : Fragment() {
     private var _binding: FragmentSelectTypeBinding? = null
     private val binding: FragmentSelectTypeBinding get() = _binding!!
     private val addGreenMateViewModel: AddGreenMateViewModel by activityViewModels()
-    private val plantTypeAdapter = PlantTypeListAdapter()
+    private lateinit var plantTypeAdapter: PlantTypeListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentSelectTypeBinding.inflate(inflater, container, false)
+        plantTypeAdapter = PlantTypeListAdapter(addGreenMateViewModel)
         return binding.root
     }
 

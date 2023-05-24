@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="data"
-            type="com.greenmate.greenmate.model.GreenMate" />
+            type="com.greenmate.greenmate.model.data.GreenMate" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -29,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@drawable/background_round_image"
-                android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 android:transitionName="greenMateImage"
                 app:layout_constraintDimensionRatio="1:1"
@@ -47,7 +47,8 @@
                 android:text="@{data.name}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/greenMateImageView" />
+                app:layout_constraintTop_toBottomOf="@id/greenMateImageView"
+                tools:text="그린메이트" />
 
             <TextView
                 android:id="@+id/greenMateTypeTextView"
@@ -56,10 +57,11 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="식물 종류"
+                android:text="@{data.type}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
-                app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
+                app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView"
+                tools:text="식물 종류" />
 
             <ImageView
                 android:id="@+id/lightImageView"

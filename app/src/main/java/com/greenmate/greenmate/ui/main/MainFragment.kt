@@ -17,7 +17,9 @@ import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.main.GreenMateListAdapter
 import com.greenmate.greenmate.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : Fragment() {
 
     private var _binding: FragmentMainBinding? = null
@@ -76,12 +78,12 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         //TODO network 요청
-        if(mainViewModel.isDataLoaded()){
+        if (mainViewModel.isDataLoaded()) {
             if (mainViewModel.isGreenMateEmpty()) {
                 findNavController().navigate(R.id.action_mainFragment_to_notFoundFragment)
             }
 
-            if(mainViewModel.isMainGreenMateEmpty()){
+            if (mainViewModel.isMainGreenMateEmpty()) {
                 mainViewModel.setMainGreenMateByFirst()
             }
         }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -27,7 +28,7 @@ class MakeNameFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentMakeNameBinding.inflate(inflater, container, false)
+        _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_make_name, container, false)
         return binding.root
     }
 
@@ -35,12 +36,22 @@ class MakeNameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
+            vm = addGreenMateViewModel
+            lifecycleOwner = this@MakeNameFragment.viewLifecycleOwner
+
             continueButton.setOnClickListener {
                 if (addGreenMateViewModel.isModuleAdded()) {
                     addGreenMateViewModel.saveGreenMate()
-                    requireActivity().finish()
                 } else {
                     findNavController().navigate(R.id.action_makeNameFragment2_to_serialNumberFragment2)
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                addGreenMateViewModel.isSavedSuccess.collectLatest {
+                    if (it) requireActivity().finish()
                 }
             }
         }

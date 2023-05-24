@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ItemChatRoomBinding
-import com.greenmate.greenmate.model.ChatRoom
+import com.greenmate.greenmate.model.data.ChatRoom
 
 class ChatRoomListAdapter(private val onClickListener: (ChatRoom) -> Unit) :
     ListAdapter<ChatRoom, ChatRoomListAdapter.ChatRoomViewHolder>(diffUtil) {
