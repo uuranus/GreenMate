@@ -75,8 +75,8 @@ class MainFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         //TODO network 요청
         if (mainViewModel.isDataLoaded()) {
             if (mainViewModel.isGreenMateEmpty()) {
@@ -86,6 +86,10 @@ class MainFragment : Fragment() {
             if (mainViewModel.isMainGreenMateEmpty()) {
                 mainViewModel.setMainGreenMateByFirst()
             }
+            mainViewModel.setIsDataLoaded(false)
+        } else {
+
+            findNavController().navigate(R.id.action_mainFragment_to_loadingFragment)
         }
     }
 

@@ -19,7 +19,7 @@ class AddGreenMateViewModel @Inject constructor(
     private val _isSavedSuccess = MutableStateFlow(false)
     val isSavedSuccess: StateFlow<Boolean> get() = _isSavedSuccess
 
-    private val _plantTypes = MutableStateFlow(listOf("몬스테라", "몬스테라", "몬스테라", "몬스테라", "몬스테라"))
+    private val _plantTypes = MutableStateFlow(listOf("몬스테라", "홍콩야자", "테이블야자", "로즈마리", "커피나무"))
     private val _currentPlantTypes = MutableStateFlow(_plantTypes.value)
     val currentPlantTypes: StateFlow<List<String>> get() = _currentPlantTypes
 
