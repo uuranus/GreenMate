@@ -18,4 +18,7 @@ class GreenMateRepository @Inject constructor(
         return dataSource.editGreenMate(greenMate)
     }
 
+    fun deleteGreenMate(id:String):Boolean{
+        return dataSource.deleteGreenMate(id)
+    }
 }

@@ -31,8 +31,8 @@ object FakeGreenMateService {
         return true
     }
 
-    fun deleteGreenMate(greenMate: GreenMate): Boolean {
-        val target = greenMates.find { it.id == greenMate.id }
+    fun deleteGreenMate(id: String): Boolean {
+        val target = greenMates.find { it.id == id }
         greenMates.remove(target)
         return true
     }

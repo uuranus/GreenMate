@@ -5,10 +5,19 @@ import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.Todo
+import com.greenmate.greenmate.model.repository.GreenMateRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class DetailViewModel : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val repository: GreenMateRepository,
+) : ViewModel() {
+
+    private val _isDeleted = MutableStateFlow(false)
+    val isDeleted: StateFlow<Boolean> get() = _isDeleted
 
     private val _currentInfo = MutableStateFlow(
         GreenMate(
@@ -58,6 +67,26 @@ class DetailViewModel : ViewModel() {
     )
     val diaryList: StateFlow<List<Diary>> get() = _diaryList
 
+    /** edit **/
+    private val _imageUrl = MutableStateFlow(0)
+    val imageUrl: StateFlow<Int> get() = _imageUrl
+
+    private val _greenMateName = MutableStateFlow("")
+    val greenMateName: StateFlow<String> get() = _greenMateName
+
+    fun changeGreenMateInfo() {
+
+    }
+
+    fun setIsDeleted(deleted: Boolean) {
+        _isDeleted.value = deleted
+    }
+
+    fun deleteGreenMate() {
+        repository.deleteGreenMate(_currentInfo.value.id)
+        _isDeleted.value = true
+    }
+
     fun setFocus(isTodo: Boolean) {
         if (isTodo) {
             _todoState.value = 1
@@ -71,8 +100,6 @@ class DetailViewModel : ViewModel() {
     fun setCurrentInfo(greenMate: GreenMate) {
         _currentInfo.value = greenMate
     }
-
-    fun getImageUrl(): Int = _currentInfo.value.image
 
     fun addNewDiary(newTask: String) {
         val newList = _diaryList.value.toList().mapIndexed { index, diary ->
@@ -94,10 +121,6 @@ class DetailViewModel : ViewModel() {
             }
         }
         _diaryList.value = newList
-    }
-
-    fun deleteGreenMate() {
-
     }
 
 }

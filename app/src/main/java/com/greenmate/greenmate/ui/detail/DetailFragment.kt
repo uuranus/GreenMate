@@ -8,7 +8,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
@@ -20,6 +24,8 @@ import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
 import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class DetailFragment : Fragment() {
 
@@ -27,7 +33,7 @@ class DetailFragment : Fragment() {
     private val binding: FragmentDetailBinding get() = _binding!!
     private val todoAdapter: TodoListAdapter = TodoListAdapter()
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
-    private val detailViewModel: DetailViewModel by viewModels()
+    private val detailViewModel: DetailViewModel by activityViewModels()
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var dialogView: DialogDeleteGreenMateBinding
     private lateinit var deleteAlertDialog: AlertDialog
@@ -78,16 +84,15 @@ class DetailFragment : Fragment() {
             setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.editMenu -> {
-                        val action =
-                            DetailFragmentDirections.actionDetailFragmentToDetailEditFragment(
-                                detailViewModel.getImageUrl())
-                        findNavController().navigate(action)
+                        findNavController().navigate(R.id.action_detailFragment_to_detailEditFragment)
                         return@setOnMenuItemClickListener true
                     }
+
                     R.id.deleteMenu -> {
                         deleteAlertDialog.show()
                         return@setOnMenuItemClickListener true
                     }
+
                     else -> {
                         return@setOnMenuItemClickListener false
                     }
@@ -117,6 +122,17 @@ class DetailFragment : Fragment() {
         }
 
         detailViewModel.setCurrentInfo(args.selectedGreenMate)
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                detailViewModel.isDeleted.collectLatest {
+                    if (it) {
+                        detailViewModel.setIsDeleted(false)
+                        findNavController().navigateUp()
+                    }
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

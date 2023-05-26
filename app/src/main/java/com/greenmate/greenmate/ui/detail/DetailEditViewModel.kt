@@ -1,27 +1,14 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
+import com.greenmate.greenmate.model.repository.GreenMateRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class DetailEditViewModel : ViewModel() {
-
-    private val _imageUrl = MutableStateFlow(0)
-    val imageUrl: StateFlow<Int> get() = _imageUrl
-
-    private val _greenMateName = MutableStateFlow("")
-    val greenMateName: StateFlow<String> get() = _greenMateName
+class DetailEditViewModel @Inject constructor(
+    private val repository: GreenMateRepository,
+) : ViewModel() {
 
 
-    fun setSelectedGreenMateInfo(imageUrl: Int) {
-        _imageUrl.value = imageUrl
-    }
-
-    fun changeGreenMateInfo(){
-
-    }
-
-    fun deleteGreenMate(){
-
-    }
 }

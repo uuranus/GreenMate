@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -22,8 +23,7 @@ import com.greenmate.greenmate.ui.camera.CameraActivity
 class DetailEditFragment() : Fragment() {
     private var _binding: FragmentDetailEditBinding? = null
     private val binding: FragmentDetailEditBinding get() = _binding!!
-    private val detailEditViewModel: DetailEditViewModel by viewModels()
-    private val detailDetailArgs: DetailEditFragmentArgs by navArgs()
+    private val detailViewModel: DetailViewModel by activityViewModels()
     private lateinit var dialogView: DialogDeleteGreenMateBinding
     private lateinit var deleteAlertDialog: AlertDialog
 
@@ -35,7 +35,7 @@ class DetailEditFragment() : Fragment() {
         _binding = FragmentDetailEditBinding.inflate(inflater, container, false)
         dialogView = DialogDeleteGreenMateBinding.inflate(requireActivity().layoutInflater).apply {
             yesButton.setOnClickListener {
-                detailEditViewModel.deleteGreenMate() //TODO viewModel 합치기
+                detailViewModel.deleteGreenMate() //TODO viewModel 합치기
                 deleteAlertDialog.dismiss()
 
             }
@@ -54,15 +54,13 @@ class DetailEditFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
-            vm = detailEditViewModel
+            vm = detailViewModel
             lifecycleOwner = this@DetailEditFragment.viewLifecycleOwner
 
             saveButton.setOnClickListener {
                 findNavController().navigateUp()
             }
         }
-
-        detailEditViewModel.setSelectedGreenMateInfo(detailDetailArgs.greenMateImageUrl)
 
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.run {
@@ -84,6 +82,7 @@ class DetailEditFragment() : Fragment() {
                         deleteAlertDialog.show()
                         return@setOnMenuItemClickListener true
                     }
+
                     else -> {
                         return@setOnMenuItemClickListener false
                     }
@@ -103,9 +102,6 @@ class DetailEditFragment() : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
-
-
         _binding = null
     }
 }
