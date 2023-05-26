@@ -7,9 +7,10 @@
     android:layout_marginHorizontal="@dimen/activity_padding"
     android:layout_marginVertical="@dimen/list_margin"
     android:layout_marginBottom="@dimen/list_margin"
-    android:background="@drawable/background_item"
-    android:backgroundTint="@color/white"
+    android:background="@drawable/selector_plant_type"
     android:elevation="3dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     android:paddingHorizontal="@dimen/item_padding_horizontal"
     android:paddingVertical="@dimen/item_padding_vertical">
 

@@ -1,4 +1,4 @@
-package com.greenmate.greenmate.model
+package com.greenmate.greenmate.model.data
 
 data class Diary(
     val dateMonth: String,

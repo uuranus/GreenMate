@@ -18,7 +18,7 @@
             app:destination="@id/detailFragment">
             <argument
                 android:name="selectedGreenMate"
-                app:argType="com.greenmate.greenmate.model.GreenMate" />
+                app:argType="com.greenmate.greenmate.model.data.GreenMate" />
         </action>
         <action
             android:id="@+id/action_mainFragment_to_notFoundFragment"
@@ -44,7 +44,7 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="selectedGreenMate"
-            app:argType="com.greenmate.greenmate.model.GreenMate" />
+            app:argType="com.greenmate.greenmate.model.data.GreenMate" />
         <action
             android:id="@+id/action_detailFragment_to_detailEditFragment"
             app:destination="@id/detailEditFragment">
@@ -81,7 +81,7 @@
             app:destination="@id/chatFragment">
             <argument
                 android:name="selectedChatRoom"
-                app:argType="com.greenmate.greenmate.model.ChatRoom" />
+                app:argType="com.greenmate.greenmate.model.data.ChatRoom" />
         </action>
     </fragment>
     <fragment
@@ -96,7 +96,7 @@
         tools:layout="@layout/fragment_chat">
         <argument
             android:name="selectedChatRoom"
-            app:argType="com.greenmate.greenmate.model.ChatRoom" />
+            app:argType="com.greenmate.greenmate.model.data.ChatRoom" />
     </fragment>
     <fragment
         android:id="@+id/notFoundFragment"

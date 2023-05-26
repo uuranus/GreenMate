@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.chat.ChatRoomListAdapter
 import com.greenmate.greenmate.databinding.FragmentChatRoomBinding
-import com.greenmate.greenmate.model.ChatRoom
+import com.greenmate.greenmate.model.data.ChatRoom
 
 class ChatRoomFragment : Fragment() {
 

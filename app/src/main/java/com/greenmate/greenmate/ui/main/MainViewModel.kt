@@ -2,30 +2,30 @@ package com.greenmate.greenmate.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.model.GreenMate
+import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.model.repository.GreenMateRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val repository: GreenMateRepository,
+) : ViewModel() {
     private val _isDataLoaded = MutableStateFlow(false)
     val isDataLoaded: StateFlow<Boolean> get() = _isDataLoaded
 
-    private val _greenMates = MutableStateFlow<List<GreenMate>>(
-//        emptyList())
+    private val _isSuccess = MutableStateFlow(false)
+    val isSuccess: StateFlow<Boolean> get() = _isSuccess
 
-        listOf(
-            GreenMate("그리니", "식물1", "키우기 시작한지 1일째", "좋음", "좋음", "좋음", R.drawable.plant1),
-            GreenMate("그리니2", "식물2", "키우기 시작한지 15일째", "좋음", "좋음", "나쁨", R.drawable.plant1),
-            GreenMate("그린조아", "식물3", "키우기 시작한지 52일째", "좋음", "나쁨", "좋음", R.drawable.plant2),
-            GreenMate("그리니4", "식물4", "키우기 시작한지 24일째", "좋음", "좋음", "좋음", R.drawable.plant2),
-            GreenMate("그린조아2", "식물5", "키우기 시작한지 10일째", "좋음", "보통", "보통", R.drawable.plant1),
-            GreenMate("그린조아5", "식물6", "키우기 시작한지 30일째", "나쁨", "좋음", "보통", R.drawable.plant2)
-        )
+    private val _greenMates = MutableStateFlow<List<GreenMate>>(
+        emptyList()
     )
     val greenMates: StateFlow<List<GreenMate>> get() = _greenMates
 
     private val _mainGreenMate =
-        MutableStateFlow(GreenMate("", "", image = R.drawable.plant1))
+        MutableStateFlow(GreenMate(name = "", type = "", image = R.drawable.plant1))
     val mainGreenMate: StateFlow<GreenMate> get() = _mainGreenMate
 
     fun isDataLoaded() = _isDataLoaded.value
@@ -34,7 +34,7 @@ class MainViewModel : ViewModel() {
     }
 
     fun isGreenMateEmpty() = _greenMates.value.isEmpty()
-    fun isMainGreenMateEmpty() = _mainGreenMate.value.name.isNullOrEmpty()
+    fun isMainGreenMateEmpty() = _mainGreenMate.value.name.isEmpty()
 
     fun setMainGreenMateByFirst() {
         if (_greenMates.value.isEmpty()) return
@@ -47,5 +47,17 @@ class MainViewModel : ViewModel() {
 
     fun getSelectedGreenMate(): GreenMate {
         return _mainGreenMate.value
+    }
+
+
+    /* network */
+    fun getAllGreenMates() {
+        val response = repository.getAllGreenMates()
+        _greenMates.value = response
+    }
+
+    fun addGreenMate(greenMate: GreenMate) {
+        val response = repository.addGreenMate(greenMate)
+        _isSuccess.value = response
     }
 }

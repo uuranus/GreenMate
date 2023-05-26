@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ItemChatFromGreenBinding
 import com.greenmate.greenmate.databinding.ItemChatFromMeBinding
-import com.greenmate.greenmate.model.Chat
+import com.greenmate.greenmate.model.data.Chat
 
 class ChatListAdapter :
     ListAdapter<Chat, RecyclerView.ViewHolder>(diffUtil) {

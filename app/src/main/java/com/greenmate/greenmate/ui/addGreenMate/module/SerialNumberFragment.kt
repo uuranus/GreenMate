@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -20,7 +21,8 @@ class SerialNumberFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentSerialNumberBinding.inflate(inflater, container, false)
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_serial_number, container, false)
         return binding.root
     }
 
@@ -28,6 +30,9 @@ class SerialNumberFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.run {
+            vm = addGreenMateViewModel
+            lifecycleOwner = this@SerialNumberFragment.viewLifecycleOwner
+
             continueButton.setOnClickListener {
                 if (addGreenMateViewModel.isModuleAdded()) {
                     findNavController().navigate(R.id.action_serialNumberFragment_to_findModuleFragment)

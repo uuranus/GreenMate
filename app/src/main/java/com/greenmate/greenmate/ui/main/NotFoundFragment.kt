@@ -5,12 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.databinding.FragmentNotFoundBinding
 
 class NotFoundFragment : Fragment() {
     private var _binding: FragmentNotFoundBinding? = null
     private val binding: FragmentNotFoundBinding get() = _binding!!
+    private val mainViewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +30,7 @@ class NotFoundFragment : Fragment() {
                 val action =
                     NotFoundFragmentDirections.actionNotFoundFragmentToAddGreenMateActivity(1)
                 findNavController().navigate(action)
+
             }
 
             addPlantButton.setOnClickListener {
@@ -34,6 +38,14 @@ class NotFoundFragment : Fragment() {
                     NotFoundFragmentDirections.actionNotFoundFragmentToAddGreenMateActivity(0)
                 findNavController().navigate(action)
             }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.getAllGreenMates()
+        if (mainViewModel.isGreenMateEmpty().not()) {
+            findNavController().navigateUp()
         }
     }
 

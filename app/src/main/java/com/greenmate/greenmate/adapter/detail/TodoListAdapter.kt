@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemTodoBinding
-import com.greenmate.greenmate.model.Todo
+import com.greenmate.greenmate.model.data.Todo
 
 class TodoListAdapter :
     ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(diffUtil) {

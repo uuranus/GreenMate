@@ -10,7 +10,9 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ActivityAddGreenMateBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddGreenMateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityAddGreenMateBinding

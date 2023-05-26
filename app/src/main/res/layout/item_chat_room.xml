@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.greenmate.greenmate.model.ChatRoom" />
+            type="com.greenmate.greenmate.model.data.ChatRoom" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

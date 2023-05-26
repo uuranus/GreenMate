@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemDiaryBinding
-import com.greenmate.greenmate.model.Diary
+import com.greenmate.greenmate.model.data.Diary
 
 class DiaryListAdapter :
     ListAdapter<Diary, DiaryListAdapter.DiaryViewHolder>(diffUtil) {

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.GardeningActivityListAdapter
 import com.greenmate.greenmate.databinding.FragmentAddDiaryBinding
-import com.greenmate.greenmate.model.Todo
+import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.util.makeDateString
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -50,7 +50,8 @@ class AddDiaryFragment : Fragment() {
                 Todo("물주기", R.drawable.icon_water),
                 Todo("환기하기", R.drawable.icon_wind),
                 Todo("영양관리", R.drawable.icon_medical),
-                Todo("물주기", R.drawable.icon_water)))
+                Todo("물주기", R.drawable.icon_water)
+            ))
 
             dateTextView.setOnClickListener {
                 calendarBottomSheetFragment.show(requireActivity().supportFragmentManager,

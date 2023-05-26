@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ItemGreenMateBinding
-import com.greenmate.greenmate.model.GreenMate
+import com.greenmate.greenmate.model.data.GreenMate
 
 class GreenMateListAdapter(private val onClickListener: (GreenMate) -> Unit) :
     ListAdapter<GreenMate, GreenMateListAdapter.GreenMaterViewHolder>(diffUtil) {

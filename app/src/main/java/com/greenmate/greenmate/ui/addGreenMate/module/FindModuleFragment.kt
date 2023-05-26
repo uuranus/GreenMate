@@ -38,7 +38,14 @@ class FindModuleFragment : Fragment() {
                     findNavController().navigate(R.id.action_findModuleFragment_to_selectTypeFragment)
                 } else {
                     addGreenMateViewModel.saveGreenMate()
-                    requireActivity().finish()
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                addGreenMateViewModel.isSavedSuccess.collectLatest {
+                    if (it) requireActivity().finish()
                 }
             }
         }
