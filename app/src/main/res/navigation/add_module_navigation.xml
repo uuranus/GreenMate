@@ -1,8 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/add_module_navigation"
     app:startDestination="@id/serialNumberFragment">
-
-
+    <fragment
+        android:id="@+id/makeNameFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.plantInfo.MakeNameFragment"
+        android:label="fragment_make_name"
+        tools:layout="@layout/fragment_make_name" />
+    <fragment
+        android:id="@+id/serialNumberFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.module.SerialNumberFragment"
+        android:label="fragment_serial_number"
+        tools:layout="@layout/fragment_serial_number">
+        <action
+            android:id="@+id/action_serialNumberFragment_to_findModuleFragment"
+            app:destination="@id/findModuleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectTypeFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.plantInfo.SelectTypeFragment"
+        android:label="fragment_select_type"
+        tools:layout="@layout/fragment_select_type">
+        <action
+            android:id="@+id/action_selectTypeFragment_to_makeNameFragment"
+            app:destination="@id/makeNameFragment" />
+    </fragment>
+    <action
+        android:id="@+id/action_serialNumberFragment_to_findModuleFragment"
+        app:destination="@id/findModuleFragment" />
+    <fragment
+        android:id="@+id/findModuleFragment"
+        android:name="com.greenmate.greenmate.ui.addGreenMate.module.FindModuleFragment"
+        android:label="fragment_find_module"
+        tools:layout="@layout/fragment_find_module">
+        <action
+            android:id="@+id/action_findModuleFragment_to_selectTypeFragment"
+            app:destination="@id/selectTypeFragment" />
+    </fragment>
 </navigation>

@@ -24,9 +24,17 @@ class AddGreenMateActivity : AppCompatActivity() {
         binding = ActivityAddGreenMateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
         val navController = navHostFragment.navController
+
+
+        if (navArgs.addModule == 1) {
+            navController.setGraph(R.navigation.add_module_navigation)
+        } else {
+            navController.setGraph(R.navigation.add_green_mate_navigation)
+        }
 
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolbar.run {
@@ -41,10 +49,6 @@ class AddGreenMateActivity : AppCompatActivity() {
         }
 
         addGreenMateViewModel.setModuleAdded(navArgs.addModule == 1)
-
-        if (navArgs.addModule == 0) {
-            navController.navigate(R.id.action_serialNumberFragment_to_selectTypeFragment2)
-        }
 
     }
 }

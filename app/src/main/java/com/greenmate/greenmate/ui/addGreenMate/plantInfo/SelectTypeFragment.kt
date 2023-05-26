@@ -26,7 +26,9 @@ class SelectTypeFragment : Fragment() {
     ): View {
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_select_type, container, false)
-        plantTypeAdapter = PlantTypeListAdapter(addGreenMateViewModel)
+        plantTypeAdapter = PlantTypeListAdapter {
+            addGreenMateViewModel.setCurrentPlantType(it)
+        }
         return binding.root
     }
 
