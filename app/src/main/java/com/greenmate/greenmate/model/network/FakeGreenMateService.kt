@@ -1,6 +1,5 @@
 package com.greenmate.greenmate.model.network
 
-import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.GreenMate
 
 object FakeGreenMateService {
@@ -24,11 +23,16 @@ object FakeGreenMateService {
         return true
     }
 
-    fun editGreenMateInfo(greenMate: GreenMate): Boolean {
-        greenMates.find { it.name == greenMate.id }?.let {
-            it.copy(name = greenMate.name, image = greenMate.image)
+    fun editGreenMateInfo(greenMate: GreenMate): GreenMate {
+        var index = 0
+        greenMates.forEachIndexed { idx, it ->
+            if (it.id == greenMate.id) {
+                index = idx
+            }
         }
-        return true
+
+        greenMates[index] = greenMate
+        return greenMate
     }
 
     fun deleteGreenMate(id: String): Boolean {

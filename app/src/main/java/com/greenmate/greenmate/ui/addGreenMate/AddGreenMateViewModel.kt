@@ -40,6 +40,7 @@ class AddGreenMateViewModel @Inject constructor(
     fun isModuleAdded() = _isModuleFirst.value
 
     fun setCurrentPlantType(index: Int) {
+        println("index $index!!")
         _currentPlantIndex.value = index
     }
 
@@ -58,8 +59,8 @@ class AddGreenMateViewModel @Inject constructor(
     fun saveGreenMate() {
         println("greenmate name ${name.value}")
         val newGreenMate = GreenMate(
-            serialNumber.value.toString(),
-            name.value.toString(),
+            serialNumber.value,
+            name.value,
             _plantTypes.value[_currentPlantIndex.value],
             "키우기 시작한 지 1일",
             "좋음",

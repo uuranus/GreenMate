@@ -68,14 +68,16 @@ class DetailViewModel @Inject constructor(
     val diaryList: StateFlow<List<Diary>> get() = _diaryList
 
     /** edit **/
-    private val _imageUrl = MutableStateFlow(0)
+    private val _imageUrl = MutableStateFlow(_currentInfo.value.image)
     val imageUrl: StateFlow<Int> get() = _imageUrl
 
-    private val _greenMateName = MutableStateFlow("")
-    val greenMateName: StateFlow<String> get() = _greenMateName
+    val greenMateName = MutableStateFlow(_currentInfo.value.name)
 
     fun changeGreenMateInfo() {
-
+        val newGreenMate =
+            _currentInfo.value.copy(image = _imageUrl.value, name = greenMateName.value)
+        val response = repository.editGreenMate(newGreenMate)
+        _currentInfo.value = response
     }
 
     fun setIsDeleted(deleted: Boolean) {

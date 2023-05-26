@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.R
@@ -77,7 +76,6 @@ class MainFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        //TODO network 요청
         if (mainViewModel.isDataLoaded()) {
             if (mainViewModel.isGreenMateEmpty()) {
                 findNavController().navigate(R.id.action_mainFragment_to_notFoundFragment)
@@ -85,6 +83,9 @@ class MainFragment : Fragment() {
 
             if (mainViewModel.isMainGreenMateEmpty()) {
                 mainViewModel.setMainGreenMateByFirst()
+            }
+            else{
+                mainViewModel.setMainGreenMateCurrent()
             }
             mainViewModel.setIsDataLoaded(false)
         } else {

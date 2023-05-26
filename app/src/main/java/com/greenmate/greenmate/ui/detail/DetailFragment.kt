@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -117,7 +116,6 @@ class DetailFragment : Fragment() {
 
             addDiaryImageButton.setOnClickListener {
                 findNavController().navigate(R.id.action_detailFragment_to_addDiaryFragment)
-
             }
         }
 

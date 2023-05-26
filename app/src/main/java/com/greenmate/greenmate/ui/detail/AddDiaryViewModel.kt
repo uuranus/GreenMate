@@ -5,7 +5,7 @@ import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.util.makeDateString
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import java.util.*
+import java.util.Calendar
 
 class AddDiaryViewModel : ViewModel() {
     private val _currentDate = MutableStateFlow("")

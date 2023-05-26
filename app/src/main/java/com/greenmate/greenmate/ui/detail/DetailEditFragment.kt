@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -32,12 +31,13 @@ class DetailEditFragment() : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentDetailEditBinding.inflate(inflater, container, false)
+        _binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_detail_edit, container, false)
         dialogView = DialogDeleteGreenMateBinding.inflate(requireActivity().layoutInflater).apply {
             yesButton.setOnClickListener {
-                detailViewModel.deleteGreenMate() //TODO viewModel 합치기
+                detailViewModel.deleteGreenMate()
                 deleteAlertDialog.dismiss()
-
+                findNavController().navigateUp()
             }
             noButton.setOnClickListener {
                 deleteAlertDialog.dismiss()
@@ -58,6 +58,7 @@ class DetailEditFragment() : Fragment() {
             lifecycleOwner = this@DetailEditFragment.viewLifecycleOwner
 
             saveButton.setOnClickListener {
+                detailViewModel.changeGreenMateInfo()
                 findNavController().navigateUp()
             }
         }
