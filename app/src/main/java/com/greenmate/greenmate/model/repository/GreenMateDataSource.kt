@@ -16,7 +16,11 @@ class GreenMateDataSource @Inject constructor(
         return service.addGreenMate(greenMate)
     }
 
-    fun editGreenMate(greenMate: GreenMate):Boolean{
+    fun editGreenMate(greenMate: GreenMate): Boolean {
         return service.editGreenMateInfo(greenMate)
+    }
+
+    fun deleteGreenMate(id: String): Boolean {
+        return service.deleteGreenMate(id)
     }
 }
