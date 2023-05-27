@@ -60,6 +60,7 @@
             android:hint="그린 메이트 애칭을 입력해주세요"
             android:inputType="text"
             android:text="@={vm.greenMateName}"
+            android:onTextChanged="@{()->vm.onNameChanged()}"
             android:maxLines="1"
             android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"

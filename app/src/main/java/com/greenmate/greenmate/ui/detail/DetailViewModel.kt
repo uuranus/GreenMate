@@ -1,6 +1,7 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
+import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
@@ -17,12 +18,18 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val repository: GreenMateRepository,
 ) : ViewModel() {
+    private val _snackBarMessage = MutableStateFlow("")
+    val snackBarMessage: StateFlow<String> get() = _snackBarMessage
+
+    private val _isEditSuccess = MutableStateFlow(false)
+    val isEditSuccess: StateFlow<Boolean> get() = _isEditSuccess
 
     private val _isDeleted = MutableStateFlow(false)
     val isDeleted: StateFlow<Boolean> get() = _isDeleted
 
     private val _currentInfo = MutableStateFlow(
         GreenMate(
+            id = "",
             name = "", type = "", image = R.drawable.plant1
         )
     )
@@ -73,14 +80,28 @@ class DetailViewModel @Inject constructor(
     private val _imageUrl = MutableStateFlow(_currentInfo.value.image)
     val imageUrl: StateFlow<Int> get() = _imageUrl
 
-    val greenMateName = MutableStateFlow(_currentInfo.value.name)
+    private val _greenMateName = MutableStateFlow("")
+    val greenMateName = MutableStateFlow<String>("")
+
+    fun onNameChanged() {
+        _greenMateName.value = greenMateName.value
+    }
 
     fun getCurrentId() = _currentInfo.value.id
     fun changeGreenMateInfo() {
+        if (greenMateName.value.isEmpty()) {
+            _snackBarMessage.value = "닉네임을 입력하세요!"
+            return
+        }
+
         val newGreenMate =
-            _currentInfo.value.copy(image = _imageUrl.value, name = greenMateName.value)
+            _currentInfo.value.copy(
+                image = _imageUrl.value,
+                name = _greenMateName.value,
+                type = _currentInfo.value.type
+            )
         val response = repository.editGreenMate(newGreenMate)
-        _currentInfo.value = response
+        _isEditSuccess.value = true
     }
 
     fun setIsDeleted(deleted: Boolean) {
@@ -103,29 +124,25 @@ class DetailViewModel @Inject constructor(
     }
 
     fun setCurrentInfo(greenMate: GreenMate) {
+        if (_currentInfo.value.id.isNotEmpty()) return
         _currentInfo.value = greenMate
+        _imageUrl.value = greenMate.image
+        greenMateName.value = _currentInfo.value.name
     }
 
-    fun addNewDiary(newTask: String) {
-        val newList = _diaryList.value.toList().mapIndexed { index, diary ->
-            if (index == 0) {
-                Diary(
-                    diary.dateMonth,
-                    diary.dateDate,
-                    diary.list.toMutableList().also {
-                        it.add(
-                            Todo(
-                                newTask,
-                                R.drawable.icon_water
-                            )
-                        )
-                    }
-                )
-            } else {
-                diary
-            }
+    fun setCurrentInfoAgain() {
+        if (_isEditSuccess.value) {
+            _currentInfo.value = _currentInfo.value.copy(
+                name = _greenMateName.value,
+                image = _imageUrl.value
+            )
+
+            _isEditSuccess.value = false
         }
-        _diaryList.value = newList
+    }
+
+    fun getDiaries() {
+
     }
 
 }

@@ -10,14 +10,20 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.FragmentDetailEditBinding
 import com.greenmate.greenmate.ui.camera.CameraActivity
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class DetailEditFragment() : Fragment() {
     private var _binding: FragmentDetailEditBinding? = null
@@ -59,7 +65,6 @@ class DetailEditFragment() : Fragment() {
 
             saveButton.setOnClickListener {
                 detailViewModel.changeGreenMateInfo()
-                findNavController().navigateUp()
             }
         }
 
@@ -96,6 +101,26 @@ class DetailEditFragment() : Fragment() {
             greenMateImageView.setOnClickListener {
                 val intent = Intent(requireActivity(), CameraActivity::class.java)
                 startActivity(intent)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                detailViewModel.snackBarMessage.collectLatest {
+                    if (it.isNotEmpty()) {
+                        Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                detailViewModel.isEditSuccess.collectLatest {
+                    if (it) {
+                        findNavController().navigateUp()
+                    }
+                }
             }
         }
 
