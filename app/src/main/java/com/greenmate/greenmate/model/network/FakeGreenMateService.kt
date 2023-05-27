@@ -9,7 +9,7 @@ import java.util.Date
 
 object FakeGreenMateService {
 
-        private val greenMates = mutableListOf(
+    private val greenMates = mutableListOf(
         GreenMate("1", "그리니", "식물1", "키우기 시작한지 1일째", "좋음", "좋음", "좋음", R.drawable.plant1),
         GreenMate("2", "그리니2", "식물2", "키우기 시작한지 15일째", "좋음", "좋음", "나쁨", R.drawable.plant1),
         GreenMate("3", "그린조아", "식물3", "키우기 시작한지 52일째", "좋음", "나쁨", "좋음", R.drawable.plant2),
@@ -23,6 +23,10 @@ object FakeGreenMateService {
 
     fun getGreenMates(): List<GreenMate> {
         return greenMates
+    }
+
+    fun getAllDiaries(id: String): List<Diary> {
+        return diaries[id] ?: emptyList()
     }
 
     fun addGreenMate(greenMate: GreenMate): Boolean {
@@ -58,6 +62,7 @@ object FakeGreenMateService {
             val todayDiary = diaries[id]!!
             val target =
                 todayDiary.find { it.dateMonth == today.month && it.dateDate == today.date }
+            println("target $target")
             if (target == null) {
                 diaries[id]?.add(
                     Diary(
@@ -72,6 +77,7 @@ object FakeGreenMateService {
                 )
             }
         } else {
+            println("!!!!")
             diaries[id] = mutableListOf(
                 Diary(
                     today.month,

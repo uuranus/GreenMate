@@ -1,5 +1,6 @@
 package com.greenmate.greenmate.model.repository
 
+import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.network.FakeGreenMateService
 import javax.inject.Inject
@@ -30,5 +31,9 @@ class GreenMateDataSource @Inject constructor(
 
     fun addDiary(id: String, diary: String): String {
         return service.addDiary(id,diary)
+    }
+
+    fun getAllDiaries(id:String):List<Diary>{
+        return service.getAllDiaries(id)
     }
 }

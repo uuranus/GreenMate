@@ -19,13 +19,13 @@ class GardeningActivityListAdapter(private val selectedActivityListener: (Todo) 
         init {
             binding.run {
                 root.setOnClickListener {
-                    selectedActivityListener(currentList[adapterPosition])
                 }
 
                 root.setOnFocusChangeListener { _, b ->
                     if (b) {
                         imageView.setColorFilter(ContextCompat.getColor(root.context,
                             R.color.white))
+                        selectedActivityListener(currentList[adapterPosition])
                     } else {
                         imageView.setColorFilter(ContextCompat.getColor(root.context,
                             R.color.primary_color))

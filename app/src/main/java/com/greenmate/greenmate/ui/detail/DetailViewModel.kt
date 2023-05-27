@@ -1,14 +1,11 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
-import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.model.repository.GreenMateRepository
-import com.greenmate.greenmate.util.makeDateString
-import com.greenmate.greenmate.util.makeMonthString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -81,7 +78,7 @@ class DetailViewModel @Inject constructor(
     val imageUrl: StateFlow<Int> get() = _imageUrl
 
     private val _greenMateName = MutableStateFlow("")
-    val greenMateName = MutableStateFlow<String>("")
+    val greenMateName = MutableStateFlow("")
 
     fun onNameChanged() {
         _greenMateName.value = greenMateName.value
@@ -141,8 +138,10 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun getDiaries() {
-
+    fun getAllDiaries() {
+        val response = repository.getAllDiaries(_currentInfo.value.id)
+        println("response $response")
+        _diaryList.value = response
     }
 
 }

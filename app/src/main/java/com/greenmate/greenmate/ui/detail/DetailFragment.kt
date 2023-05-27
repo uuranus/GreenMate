@@ -66,8 +66,8 @@ class DetailFragment : Fragment() {
             .setCancelable(true)
             .create()
 
-        println("oncreate")
         detailViewModel.setCurrentInfo(args.selectedGreenMate)
+        detailViewModel.getAllDiaries()
         return binding.root
     }
 
@@ -134,8 +134,6 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     override fun onResume() {

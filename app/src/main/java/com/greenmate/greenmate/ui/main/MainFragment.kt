@@ -40,7 +40,6 @@ class MainFragment : Fragment() {
             mainViewModel.setMainGreenMate(it)
         })
 
-
         binding.run {
 
             vm = mainViewModel
@@ -83,13 +82,12 @@ class MainFragment : Fragment() {
 
             if (mainViewModel.isMainGreenMateEmpty()) {
                 mainViewModel.setMainGreenMateByFirst()
-            }
-            else{
+            } else {
                 mainViewModel.setMainGreenMateCurrent()
             }
+
             mainViewModel.setIsDataLoaded(false)
         } else {
-
             findNavController().navigate(R.id.action_mainFragment_to_loadingFragment)
         }
     }

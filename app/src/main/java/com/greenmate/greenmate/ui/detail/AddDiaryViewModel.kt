@@ -42,6 +42,7 @@ class AddDiaryViewModel @Inject constructor(
     }
 
     fun setGardeningActivity(todo: Todo) {
+        println("todo $todo")
         _selectedGardeningActivity.value = todo
     }
 
