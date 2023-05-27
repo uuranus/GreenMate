@@ -11,19 +11,24 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.GardeningActivityListAdapter
 import com.greenmate.greenmate.databinding.FragmentAddDiaryBinding
 import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.util.makeDateString
+import com.greenmate.greenmate.util.makeFullDateString
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class AddDiaryFragment : Fragment() {
     private var _binding: FragmentAddDiaryBinding? = null
     private val binding: FragmentAddDiaryBinding get() = _binding!!
     private val addDiaryViewModel: AddDiaryViewModel by viewModels()
+    private val navArgs: AddDiaryFragmentArgs by navArgs()
     private val gardeningActivityAdapter = GardeningActivityListAdapter {
         addDiaryViewModel.setGardeningActivity(it)
     }
@@ -46,18 +51,22 @@ class AddDiaryFragment : Fragment() {
 
             gardeningActivityRecyclerView.adapter = gardeningActivityAdapter
             gardeningActivityRecyclerView.layoutManager = GridLayoutManager(requireContext(), 3)
-            gardeningActivityAdapter.submitList(listOf(
-                Todo("물주기", R.drawable.icon_water),
-                Todo("환기하기", R.drawable.icon_wind),
-                Todo("영양관리", R.drawable.icon_medical),
-                Todo("물주기", R.drawable.icon_water)
-            ))
+            gardeningActivityAdapter.submitList(
+                listOf(
+                    Todo("물주기", R.drawable.icon_water),
+                    Todo("환기하기", R.drawable.icon_wind),
+                    Todo("영양관리", R.drawable.icon_medical),
+                    Todo("물주기", R.drawable.icon_water)
+                )
+            )
 
             dateTextView.setOnClickListener {
-                calendarBottomSheetFragment.show(requireActivity().supportFragmentManager,
-                    "CHOOSE_DATE")
+                calendarBottomSheetFragment.show(
+                    requireActivity().supportFragmentManager,
+                    "CHOOSE_DATE"
+                )
                 calendarBottomSheetFragment.setOnDateClickListener { year, month, date ->
-                    dateTextView.text = makeDateString(year, month, date)
+                    dateTextView.text = makeFullDateString(year, month, date)
                 }
             }
 
@@ -76,6 +85,8 @@ class AddDiaryFragment : Fragment() {
                 }
             }
         }
+
+        addDiaryViewModel.setCurrentId(navArgs.currentId)
 
     }
 

@@ -42,12 +42,12 @@ class SelectTypeFragment : Fragment() {
             searchView.setOnQueryTextListener(object :
                 androidx.appcompat.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(text: String?): Boolean {
-                    text ?: return true
-                    addGreenMateViewModel.search(text)
                     return true
                 }
 
                 override fun onQueryTextChange(text: String?): Boolean {
+                    text ?: return true
+                    addGreenMateViewModel.search(text)
                     return true
                 }
             })

@@ -23,4 +23,12 @@ class GreenMateDataSource @Inject constructor(
     fun deleteGreenMate(id: String): Boolean {
         return service.deleteGreenMate(id)
     }
+
+    fun findSerialNumber(number: String): Boolean {
+        return service.isSerialNumberExist(number)
+    }
+
+    fun addDiary(id: String, diary: String): String {
+        return service.addDiary(id,diary)
+    }
 }

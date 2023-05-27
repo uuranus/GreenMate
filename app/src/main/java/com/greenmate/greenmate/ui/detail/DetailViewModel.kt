@@ -6,6 +6,8 @@ import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.model.repository.GreenMateRepository
+import com.greenmate.greenmate.util.makeDateString
+import com.greenmate.greenmate.util.makeMonthString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -44,12 +46,12 @@ class DetailViewModel @Inject constructor(
     private val _diaryList = MutableStateFlow(
         listOf(
             Diary(
-                "05월", "11",
+                5, 11,
                 mutableListOf(),
             ),
             Diary(
-                "05월",
-                "10",
+                5,
+                11,
                 mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true),
@@ -57,7 +59,7 @@ class DetailViewModel @Inject constructor(
                 ),
             ),
             Diary(
-                "05월", "9",
+                5, 9,
                 mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true)
@@ -73,6 +75,7 @@ class DetailViewModel @Inject constructor(
 
     val greenMateName = MutableStateFlow(_currentInfo.value.name)
 
+    fun getCurrentId() = _currentInfo.value.id
     fun changeGreenMateInfo() {
         val newGreenMate =
             _currentInfo.value.copy(image = _imageUrl.value, name = greenMateName.value)

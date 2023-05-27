@@ -23,6 +23,7 @@ import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
 import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
+import com.greenmate.greenmate.ui.main.MainFragmentDirections
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -69,7 +70,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        println("onviewcreate")
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.run {
             setupWithNavController(findNavController(), appBarConfiguration)
@@ -115,7 +116,10 @@ class DetailFragment : Fragment() {
             }
 
             addDiaryImageButton.setOnClickListener {
-                findNavController().navigate(R.id.action_detailFragment_to_addDiaryFragment)
+                println("getCurrentId ${detailViewModel.getCurrentId()}")
+                val action =
+                    DetailFragmentDirections.actionDetailFragmentToAddDiaryFragment(detailViewModel.getCurrentId())
+                findNavController().navigate(action)
             }
         }
 
@@ -131,6 +135,10 @@ class DetailFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
     }
 
     override fun onDestroyView() {
