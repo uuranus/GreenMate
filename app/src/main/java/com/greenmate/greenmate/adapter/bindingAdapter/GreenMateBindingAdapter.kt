@@ -39,8 +39,12 @@ fun setVisibility(view: View, value: Int) {
 
 @BindingAdapter("setFocused")
 fun setFocused(view: TextView, value: Int) {
-    if (value == 1) view.setTextColor(ContextCompat.getColor(view.context,
-        R.color.accent_text_color))
+    if (value == 1) view.setTextColor(
+        ContextCompat.getColor(
+            view.context,
+            R.color.accent_text_color
+        )
+    )
     else view.setTextColor(ContextCompat.getColor(view.context, R.color.black))
 }
 
@@ -49,4 +53,10 @@ fun <T> submitList(view: RecyclerView, data: List<T>) {
     val adapter = view.adapter as ListAdapter<T, RecyclerView.ViewHolder>
 
     adapter.submitList(data)
+}
+
+@BindingAdapter(value = ["isListEmpty", "isListFocus"], requireAll = true)
+fun setTextVisible(view: TextView, isEmpty: Int, isFocused: Int) {
+
+    view.isVisible = (isEmpty == 0 && isFocused == 1)
 }

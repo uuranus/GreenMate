@@ -8,16 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemSelectTypeBinding
 import com.greenmate.greenmate.ui.addGreenMate.AddGreenMateViewModel
 
-class PlantTypeListAdapter(private val vm: AddGreenMateViewModel) :
+class PlantTypeListAdapter(private val clickListener: (String) -> Unit) :
     ListAdapter<String, PlantTypeListAdapter.PlantTypeViewHolder>(diffUtil) {
 
     inner class PlantTypeViewHolder(private val binding: ItemSelectTypeBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.run {
+                root.setOnFocusChangeListener { _, _ ->
+                    clickListener(currentList[adapterPosition])
+                }
                 root.setOnClickListener {
-                    root.requestFocus()
-                    vm.setCurrentPlantType(adapterPosition)
+
                 }
             }
         }

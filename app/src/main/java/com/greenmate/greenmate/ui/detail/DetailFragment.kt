@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -24,6 +23,8 @@ import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
 import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
+import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.ui.main.MainFragmentDirections
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -65,12 +66,13 @@ class DetailFragment : Fragment() {
             .setCancelable(true)
             .create()
 
+        detailViewModel.setCurrentInfo(args.selectedGreenMate)
+        detailViewModel.getAllDiaries()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.run {
             setupWithNavController(findNavController(), appBarConfiguration)
@@ -116,12 +118,11 @@ class DetailFragment : Fragment() {
             }
 
             addDiaryImageButton.setOnClickListener {
-                findNavController().navigate(R.id.action_detailFragment_to_addDiaryFragment)
-
+                val action =
+                    DetailFragmentDirections.actionDetailFragmentToAddDiaryFragment(detailViewModel.getCurrentId())
+                findNavController().navigate(action)
             }
         }
-
-        detailViewModel.setCurrentInfo(args.selectedGreenMate)
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -133,6 +134,11 @@ class DetailFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        detailViewModel.setCurrentInfoAgain()
     }
 
     override fun onDestroyView() {

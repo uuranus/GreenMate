@@ -1,14 +1,10 @@
 package com.greenmate.greenmate.ui
 
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.ActivityMainBinding
-import com.greenmate.greenmate.ui.detail.DetailViewModel
-import com.greenmate.greenmate.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -13,8 +13,14 @@ import javax.inject.Inject
 class AddGreenMateViewModel @Inject constructor(
     private val repository: GreenMateRepository,
 ) : ViewModel() {
+    private val _snackBarMessage = MutableStateFlow("")
+    val snackBarMessage: StateFlow<String> get() = _snackBarMessage
+
     private val _isModuleFirst = MutableStateFlow(true)
     val isModuleFirst: StateFlow<Boolean> get() = _isModuleFirst
+
+    private val _isSerialNumberFound = MutableStateFlow(false)
+    val isSerialNumberFound: StateFlow<Boolean> get() = _isSerialNumberFound
 
     private val _isSavedSuccess = MutableStateFlow(false)
     val isSavedSuccess: StateFlow<Boolean> get() = _isSavedSuccess
@@ -24,8 +30,8 @@ class AddGreenMateViewModel @Inject constructor(
     val currentPlantTypes: StateFlow<List<String>> get() = _currentPlantTypes
 
     /* info */
-    private val _currentPlantIndex = MutableStateFlow(0)
-    val currentPlantIndex: StateFlow<Int> get() = _currentPlantIndex
+    private val _currentPlantName = MutableStateFlow("")
+    val currentPlantName: StateFlow<String> get() = _currentPlantName
 
     private val _greenMateImage = MutableStateFlow(R.drawable.plant1)
     val greenMateImage: StateFlow<Int> get() = _greenMateImage
@@ -39,8 +45,8 @@ class AddGreenMateViewModel @Inject constructor(
 
     fun isModuleAdded() = _isModuleFirst.value
 
-    fun setCurrentPlantType(index: Int) {
-        _currentPlantIndex.value = index
+    fun setCurrentPlantType(name: String) {
+        _currentPlantName.value = name
     }
 
     fun search(text: String) {
@@ -51,16 +57,28 @@ class AddGreenMateViewModel @Inject constructor(
         }
     }
 
-    fun onTextChanged(){
+    fun onTextChanged() {
 
     }
 
+
+    /** network **/
+    fun findSerialNumber() {
+        if (serialNumber.value.isEmpty()) {
+            _snackBarMessage.value = "시리얼 넘버를 입력해주세요"
+            return
+        }
+
+        val response = repository.findSerialNumber(serialNumber.value)
+        if (response) _isSerialNumberFound.value = true
+        else _snackBarMessage.value = "시리얼 넘버가 일치하지 않습니다"
+    }
+
     fun saveGreenMate() {
-        println("greenmate name ${name.value}")
         val newGreenMate = GreenMate(
-            serialNumber.value.toString(),
-            name.value.toString(),
-            _plantTypes.value[_currentPlantIndex.value],
+            serialNumber.value,
+            name.value,
+            _currentPlantName.value,
             "키우기 시작한 지 1일",
             "좋음",
             "좋음",

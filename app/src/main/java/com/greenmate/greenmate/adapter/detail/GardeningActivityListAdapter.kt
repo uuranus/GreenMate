@@ -19,7 +19,6 @@ class GardeningActivityListAdapter(private val selectedActivityListener: (Todo) 
         init {
             binding.run {
                 root.setOnClickListener {
-                    root.requestFocus()
                 }
 
                 root.setOnFocusChangeListener { _, b ->

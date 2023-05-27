@@ -8,6 +8,8 @@
         <variable
             name="vm"
             type="com.greenmate.greenmate.ui.detail.DetailViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -44,34 +46,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/text_horizontal_margin"
-            tools:text="그린메이트"
             android:text="@{vm.currentInfo.name}"
             app:layout_constraintBottom_toTopOf="@id/greenMateTypeTextView"
             app:layout_constraintStart_toEndOf="@id/greenMateImageView"
             app:layout_constraintTop_toTopOf="@id/greenMateImageView"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_chainStyle="packed"
+            tools:text="그린메이트" />
 
         <TextView
             android:id="@+id/greenMateTypeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_small_vertical_margin"
-            tools:text="식물 종류"
             android:text="@{vm.currentInfo.type}"
             app:layout_constraintBottom_toTopOf="@id/startRaiseDateTextView"
             app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
-            app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView" />
+            app:layout_constraintTop_toBottomOf="@id/greenMateNameTextView"
+            tools:text="식물 종류" />
 
         <TextView
             android:id="@+id/startRaiseDateTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/text_small_vertical_margin"
-            tools:text="키우기 시작한 지 30일째"
             android:text="@{vm.currentInfo.startDate}"
             app:layout_constraintBottom_toBottomOf="@id/greenMateImageView"
             app:layout_constraintStart_toStartOf="@id/greenMateNameTextView"
-            app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView" />
+            app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView"
+            tools:text="키우기 시작한 지 30일째" />
 
         <com.greenmate.greenmate.view.GreenAttributeView
             android:id="@+id/lightAttributeView"
@@ -183,6 +185,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/todoTextView"
             tools:listitem="@layout/item_diary" />
+
+        <TextView
+            android:id="@+id/diaryRecyclerViewEmptyTextView"
+            style="@style/Style.GreenMate.Text.Body.Sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일기가 없습니다"
+            isListEmpty="@{vm.diaryList.size}"
+            isListFocus="@{vm.diaryState}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/addDiaryImageButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

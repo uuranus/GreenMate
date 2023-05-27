@@ -54,7 +54,11 @@
         </action>
         <action
             android:id="@+id/action_detailFragment_to_addDiaryFragment"
-            app:destination="@id/addDiaryFragment" />
+            app:destination="@id/addDiaryFragment">
+            <argument
+                android:name="currentId"
+                app:argType="string" />
+        </action>
     </fragment>
 
     <fragment
@@ -70,7 +74,11 @@
         android:id="@+id/addDiaryFragment"
         android:name="com.greenmate.greenmate.ui.detail.AddDiaryFragment"
         android:label="AddDiaryFragment"
-        tools:layout="@layout/fragment_add_diary" />
+        tools:layout="@layout/fragment_add_diary">
+        <argument
+            android:name="currentId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/chatRoomFragment"
         android:name="com.greenmate.greenmate.ui.chat.ChatRoomFragment"
@@ -102,7 +110,7 @@
         android:id="@+id/notFoundFragment"
         android:name="com.greenmate.greenmate.ui.main.NotFoundFragment"
         android:label="fragment_not_found"
-        tools:layout="@layout/fragment_not_found" >
+        tools:layout="@layout/fragment_not_found">
         <action
             android:id="@+id/action_notFoundFragment_to_addGreenMateActivity"
             app:destination="@id/addGreenMateActivity">

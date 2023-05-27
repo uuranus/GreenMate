@@ -15,12 +15,18 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     private val repository: GreenMateRepository,
 ) : ViewModel() {
+    private val _snackBarMessage = MutableStateFlow("")
+    val snackBarMessage: StateFlow<String> get() = _snackBarMessage
+
+    private val _isEditSuccess = MutableStateFlow(false)
+    val isEditSuccess: StateFlow<Boolean> get() = _isEditSuccess
 
     private val _isDeleted = MutableStateFlow(false)
     val isDeleted: StateFlow<Boolean> get() = _isDeleted
 
     private val _currentInfo = MutableStateFlow(
         GreenMate(
+            id = "",
             name = "", type = "", image = R.drawable.plant1
         )
     )
@@ -44,12 +50,12 @@ class DetailViewModel @Inject constructor(
     private val _diaryList = MutableStateFlow(
         listOf(
             Diary(
-                "05월", "11",
+                5, 11,
                 mutableListOf(),
             ),
             Diary(
-                "05월",
-                "10",
+                5,
+                11,
                 mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true),
@@ -57,7 +63,7 @@ class DetailViewModel @Inject constructor(
                 ),
             ),
             Diary(
-                "05월", "9",
+                5, 9,
                 mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true)
@@ -68,14 +74,31 @@ class DetailViewModel @Inject constructor(
     val diaryList: StateFlow<List<Diary>> get() = _diaryList
 
     /** edit **/
-    private val _imageUrl = MutableStateFlow(0)
+    private val _imageUrl = MutableStateFlow(_currentInfo.value.image)
     val imageUrl: StateFlow<Int> get() = _imageUrl
 
     private val _greenMateName = MutableStateFlow("")
-    val greenMateName: StateFlow<String> get() = _greenMateName
+    val greenMateName = MutableStateFlow("")
 
+    fun onNameChanged() {
+        _greenMateName.value = greenMateName.value
+    }
+
+    fun getCurrentId() = _currentInfo.value.id
     fun changeGreenMateInfo() {
+        if (greenMateName.value.isEmpty()) {
+            _snackBarMessage.value = "닉네임을 입력하세요!"
+            return
+        }
 
+        val newGreenMate =
+            _currentInfo.value.copy(
+                image = _imageUrl.value,
+                name = _greenMateName.value,
+                type = _currentInfo.value.type
+            )
+        val response = repository.editGreenMate(newGreenMate)
+        _isEditSuccess.value = true
     }
 
     fun setIsDeleted(deleted: Boolean) {
@@ -98,29 +121,27 @@ class DetailViewModel @Inject constructor(
     }
 
     fun setCurrentInfo(greenMate: GreenMate) {
+        if (_currentInfo.value.id.isNotEmpty()) return
         _currentInfo.value = greenMate
+        _imageUrl.value = greenMate.image
+        greenMateName.value = _currentInfo.value.name
     }
 
-    fun addNewDiary(newTask: String) {
-        val newList = _diaryList.value.toList().mapIndexed { index, diary ->
-            if (index == 0) {
-                Diary(
-                    diary.dateMonth,
-                    diary.dateDate,
-                    diary.list.toMutableList().also {
-                        it.add(
-                            Todo(
-                                newTask,
-                                R.drawable.icon_water
-                            )
-                        )
-                    }
-                )
-            } else {
-                diary
-            }
+    fun setCurrentInfoAgain() {
+        if (_isEditSuccess.value) {
+            _currentInfo.value = _currentInfo.value.copy(
+                name = _greenMateName.value,
+                image = _imageUrl.value
+            )
+
+            _isEditSuccess.value = false
         }
-        _diaryList.value = newList
+    }
+
+    fun getAllDiaries() {
+        val response = repository.getAllDiaries(_currentInfo.value.id)
+        println("response $response")
+        _diaryList.value = response
     }
 
 }
