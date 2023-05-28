@@ -3,16 +3,26 @@ package com.greenmate.greenmate.model.repository
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.Todo
+import com.greenmate.greenmate.model.data.User
 import javax.inject.Inject
 
 class GreenMateRepository @Inject constructor(
     private val dataSource: GreenMateDataSource,
 ) {
+
+    suspend fun login(id: String, password: String): Result<User> {
+        return dataSource.login(id, password)
+    }
+
     fun getAllGreenMates(): List<GreenMate> {
         return dataSource.getAllGreenMates()
     }
 
-    fun addGreenMate(greenMate: GreenMate): Boolean {
+    suspend fun findSerialNumber(moduleId: String): Result<Boolean> {
+        return dataSource.findSerialNumber(moduleId)
+    }
+
+    suspend fun addGreenMate(greenMate: GreenMate): Result<String> {
         return dataSource.addGreenMate(greenMate)
     }
 
@@ -24,15 +34,11 @@ class GreenMateRepository @Inject constructor(
         return dataSource.deleteGreenMate(id)
     }
 
-    fun findSerialNumber(number: String): Boolean {
-        return dataSource.findSerialNumber(number)
-    }
-
     fun addDiary(id: String, diary: String): String {
-        return dataSource.addDiary(id,diary)
+        return dataSource.addDiary(id, diary)
     }
 
-    fun getAllDiaries(id:String):List<Diary>{
+    fun getAllDiaries(id: String): List<Diary> {
         return dataSource.getAllDiaries(id)
     }
 }

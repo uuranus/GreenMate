@@ -3,6 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="welcome_text_format">안녕, %s🍃</string>
     <string name="month_format">%02d월</string>
     <string name="date_format">%02d일</string>
 </resources>

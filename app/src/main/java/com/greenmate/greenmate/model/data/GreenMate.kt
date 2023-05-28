@@ -1,5 +1,8 @@
 package com.greenmate.greenmate.model.data
 
+import com.greenmate.greenmate.model.network.GreenMateDTO
+import com.greenmate.greenmate.util.USER_ID
+
 data class GreenMate(
     val id: String = "",
     val name: String,
@@ -10,3 +13,13 @@ data class GreenMate(
     val temperature: String = "",
     val image: Int,
 ) : java.io.Serializable
+
+
+fun GreenMate.toDTO(): GreenMateDTO {
+    return GreenMateDTO(
+        id,
+        USER_ID,
+        type,
+        name
+    )
+}

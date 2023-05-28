@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/activity_padding"
                 android:layout_marginTop="@dimen/activity_padding"
-                android:text="안녕, PEPL🍃"
+                tools:text="안녕, PEPL🍃"
+                android:text="@{@string/welcome_text_format(vm.userInfo.name)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +46,7 @@
                 android:layout_width="67dp"
                 android:layout_height="67dp"
                 android:layout_marginEnd="@dimen/activity_padding"
+                setImage="@{vm.userInfo.profileImg}"
                 android:background="@drawable/background_circle_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/helloTextView" />

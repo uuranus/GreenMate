@@ -82,6 +82,7 @@ class SerialNumberFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 addGreenMateViewModel.snackBarMessage.collectLatest {
+                    progressDialog.dismiss()
                     if (it.isNotEmpty()) {
                         Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT)
                             .show()
