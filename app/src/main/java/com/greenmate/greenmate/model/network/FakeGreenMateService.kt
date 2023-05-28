@@ -3,6 +3,8 @@ package com.greenmate.greenmate.model.network
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.model.data.Todo
+import com.greenmate.greenmate.util.getToday
 
 object FakeGreenMateService {
 
@@ -53,36 +55,4 @@ object FakeGreenMateService {
         return true
     }
 
-//    fun addDiary(id: String, diary: String): String {
-//        val today = getToday()
-//        if (diaries.containsKey(id)) {
-//            val todayDiary = diaries[id]!!
-//            val target =
-//                todayDiary.find { it.dateMonth == today.month && it.dateDate == today.date }
-//            println("target $target")
-//            if (target == null) {
-//                diaries[id]?.add(
-//                    Diary(
-//                        today.month,
-//                        today.date,
-//                        mutableListOf(Todo(diary, R.drawable.icon_water))
-//                    )
-//                )
-//            } else {
-//                target.list.add(
-//                    Todo(diary, R.drawable.icon_water)
-//                )
-//            }
-//        } else {
-//            println("!!!!")
-//            diaries[id] = mutableListOf(
-//                Diary(
-//                    today.month,
-//                    today.date,
-//                    mutableListOf(Todo(diary, R.drawable.icon_water))
-//                )
-//            )
-//        }
-//        return "null"
-//    }
 }

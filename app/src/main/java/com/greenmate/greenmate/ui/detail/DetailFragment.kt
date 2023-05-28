@@ -21,7 +21,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
-import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
+import com.greenmate.greenmate.databinding.DialogYesOrNoBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,7 +34,7 @@ class DetailFragment : Fragment() {
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by activityViewModels()
     private val args: DetailFragmentArgs by navArgs()
-    private lateinit var dialogView: DialogDeleteGreenMateBinding
+    private lateinit var dialogView: DialogYesOrNoBinding
     private lateinit var deleteAlertDialog: AlertDialog
 
 
@@ -49,7 +49,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
-        dialogView = DialogDeleteGreenMateBinding.inflate(requireActivity().layoutInflater).apply {
+        dialogView = DialogYesOrNoBinding.inflate(requireActivity().layoutInflater).apply {
+            titleTextView.text = "그린 메이트를 삭제하시겠습니까?"
             yesButton.setOnClickListener {
                 detailViewModel.deleteGreenMate()
                 deleteAlertDialog.dismiss()

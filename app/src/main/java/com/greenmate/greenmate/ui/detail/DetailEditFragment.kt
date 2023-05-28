@@ -19,7 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
+import com.greenmate.greenmate.databinding.DialogYesOrNoBinding
 import com.greenmate.greenmate.databinding.FragmentDetailEditBinding
 import com.greenmate.greenmate.ui.camera.CameraActivity
 import kotlinx.coroutines.flow.collectLatest
@@ -29,7 +29,7 @@ class DetailEditFragment() : Fragment() {
     private var _binding: FragmentDetailEditBinding? = null
     private val binding: FragmentDetailEditBinding get() = _binding!!
     private val detailViewModel: DetailViewModel by activityViewModels()
-    private lateinit var dialogView: DialogDeleteGreenMateBinding
+    private lateinit var dialogView: DialogYesOrNoBinding
     private lateinit var deleteAlertDialog: AlertDialog
 
     override fun onCreateView(
@@ -39,7 +39,7 @@ class DetailEditFragment() : Fragment() {
     ): View {
         _binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_edit, container, false)
-        dialogView = DialogDeleteGreenMateBinding.inflate(requireActivity().layoutInflater).apply {
+        dialogView = DialogYesOrNoBinding.inflate(requireActivity().layoutInflater).apply {
             yesButton.setOnClickListener {
                 detailViewModel.deleteGreenMate()
                 deleteAlertDialog.dismiss()
