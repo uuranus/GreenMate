@@ -3,8 +3,6 @@ package com.greenmate.greenmate.model.network
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
-import com.greenmate.greenmate.model.data.Todo
-import com.greenmate.greenmate.util.getToday
 
 object FakeGreenMateService {
 

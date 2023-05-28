@@ -59,11 +59,6 @@ class AddGreenMateViewModel @Inject constructor(
         }
     }
 
-    fun onTextChanged() {
-
-    }
-
-
     /** network **/
     fun findSerialNumber() {
         if (serialNumber.value.isEmpty()) {
@@ -73,7 +68,6 @@ class AddGreenMateViewModel @Inject constructor(
 
         viewModelScope.launch {
             val response = repository.findSerialNumber(serialNumber.value)
-            println("serialNumber $response")
             if (response.isSuccess) {
                 response.getOrNull()?.let{
                     if(it){
@@ -102,7 +96,6 @@ class AddGreenMateViewModel @Inject constructor(
         )
         viewModelScope.launch {
             val response = repository.addGreenMate(newGreenMate)
-            println("addGreenMate response $response")
             _isSavedSuccess.value = response.isSuccess
         }
     }

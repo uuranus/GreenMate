@@ -75,7 +75,6 @@ class MainViewModel @Inject constructor(
             val result = repository.login(id, password)
             if (result.isSuccess) {
                 result.getOrNull()?.let {
-                    println("result $it")
                     _userInfo.value = it
                     setUerId(it.id)
                     _isDataLoaded.value = true

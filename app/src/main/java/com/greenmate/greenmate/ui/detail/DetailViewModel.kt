@@ -49,24 +49,8 @@ class DetailViewModel @Inject constructor(
     )
     val todoList: StateFlow<List<Todo>> get() = _todoList
 
-    private val _diaryList = MutableStateFlow(
-        listOf(
-            Diary(
-                "2023-05-11",
-                mutableListOf(
-                    Todo("물주기", R.drawable.icon_water, true),
-                    Todo("환기하기", R.drawable.icon_wind, true),
-                    Todo("영양관리", R.drawable.icon_medical, true)
-                ),
-            ),
-            Diary(
-                "2023-05-13",
-                mutableListOf(
-                    Todo("물주기", R.drawable.icon_water, true),
-                    Todo("환기하기", R.drawable.icon_wind, true)
-                )
-            )
-        )
+    private val _diaryList = MutableStateFlow<List<Diary>>(
+        emptyList()
     )
     val diaryList: StateFlow<List<Diary>> get() = _diaryList
 

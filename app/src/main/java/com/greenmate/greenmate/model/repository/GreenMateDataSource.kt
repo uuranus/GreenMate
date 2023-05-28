@@ -5,7 +5,6 @@ import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDTO
 import com.greenmate.greenmate.model.network.AddDiaryDTO
-import com.greenmate.greenmate.model.network.DailyDiaryDTO
 import com.greenmate.greenmate.model.network.FakeGreenMateService
 import com.greenmate.greenmate.model.network.GreenMateService
 import com.greenmate.greenmate.model.network.LoginDTO
