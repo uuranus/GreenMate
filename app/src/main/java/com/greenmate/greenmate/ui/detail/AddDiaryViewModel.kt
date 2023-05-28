@@ -1,6 +1,7 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.model.repository.GreenMateRepository
 import com.greenmate.greenmate.util.getToday
@@ -8,6 +9,7 @@ import com.greenmate.greenmate.util.makeFullDateString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -40,13 +42,15 @@ class AddDiaryViewModel @Inject constructor(
     }
 
     fun setGardeningActivity(todo: Todo) {
-        println("todo $todo")
         _selectedGardeningActivity.value = todo
     }
 
     fun saveNewGardening() {
-//        val response = repository.addDiary(_currentId.value, _selectedGardeningActivity.value.name)
-//        _isSaveSuccess.value = response == "null"
+        viewModelScope.launch {
+            val response = repository.addDiary("testModule3", _selectedGardeningActivity.value.name)
+            println("Responseee ee e e $response")
+            _isSaveSuccess.value = response.isSuccess
+        }
     }
 
 }

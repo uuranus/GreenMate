@@ -56,7 +56,7 @@ fun getTodoIcon(diaryName: String): Int {
             R.drawable.icon_wind
         }
 
-        "영양제 주기" -> {
+        "영양관리" -> {
             R.drawable.icon_medical
         }
 

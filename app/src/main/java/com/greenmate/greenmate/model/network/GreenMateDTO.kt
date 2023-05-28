@@ -38,6 +38,11 @@ data class DailyDiaryDTO(
     @SerializedName("dailyRecord") val diaryName: String,
 )
 
+data class AddDiaryDTO(
+    @SerializedName("moduleId") val moduleId: String,
+    @SerializedName("dailyRecord") val diaryName: String
+)
+
 /* Extensions */
 fun UserDTO.toUser(): User {
     return User(

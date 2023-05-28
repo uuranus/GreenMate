@@ -4,6 +4,8 @@ import com.greenmate.greenmate.model.data.DailyDiary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDTO
+import com.greenmate.greenmate.model.network.AddDiaryDTO
+import com.greenmate.greenmate.model.network.DailyDiaryDTO
 import com.greenmate.greenmate.model.network.FakeGreenMateService
 import com.greenmate.greenmate.model.network.GreenMateService
 import com.greenmate.greenmate.model.network.LoginDTO
@@ -64,13 +66,20 @@ class GreenMateDataSource @Inject constructor(
         return fakeService.deleteGreenMate(id)
     }
 
-//    fun addDiary(id: String, diary: String): String {
-//        return service.addDiary(id, diary)
-//    }
+    suspend fun addDiary(moduleId: String, diary: String): Result<Boolean> {
+        val response = service.addDailyRecord(AddDiaryDTO(moduleId, diary))
+        println("addDiary $response")
+        return if (response.isSuccessful) {
+            response.body()?.let {
+                Result.success(true)
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
+    }
 
     suspend fun getAllDiaries(moduleId: String): Result<List<DailyDiary>> {
         val response = service.getAllDiaries(ModuleIdStringDTO(moduleId))
-        println("responsesssss ${response.body()}")
         return if (response.isSuccessful) {
             response.body()?.get("dailyRecordList")?.let {
                 Result.success(it.map { it2 -> it2.toDailyDiary() })

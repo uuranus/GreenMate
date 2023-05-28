@@ -46,6 +46,11 @@ interface GreenMateService {
         @Body data: GreenMateDTO,
     ): Response<ModuleIdStringDTO>
 
+    @POST("/addDailyRecord.do")
+    suspend fun addDailyRecord(
+        @Body data: AddDiaryDTO,
+    ): Response<ModuleIdStringDTO>
+
 //    fun editGreenMateInfo(greenMate: GreenMate): GreenMate {
 //        var index = 0
 //        FakeGreenMateService.greenMates.forEachIndexed { idx, it ->

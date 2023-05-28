@@ -34,9 +34,9 @@ class GreenMateRepository @Inject constructor(
         return dataSource.deleteGreenMate(id)
     }
 
-//    fun addDiary(id: String, diary: String): String {
-//        return dataSource.addDiary(id, diary)
-//    }
+    suspend fun addDiary(id: String, diary: String): Result<Boolean> {
+        return dataSource.addDiary(id, diary)
+    }
 
     suspend fun getAllDiaries(moduleId: String): Result<List<Diary>> {
         val result = dataSource.getAllDiaries(moduleId)
