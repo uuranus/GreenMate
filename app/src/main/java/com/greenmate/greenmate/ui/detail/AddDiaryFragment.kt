@@ -17,7 +17,6 @@ import com.greenmate.greenmate.R
 import com.greenmate.greenmate.adapter.detail.GardeningActivityListAdapter
 import com.greenmate.greenmate.databinding.FragmentAddDiaryBinding
 import com.greenmate.greenmate.model.data.Todo
-import com.greenmate.greenmate.util.makeDateString
 import com.greenmate.greenmate.util.makeFullDateString
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

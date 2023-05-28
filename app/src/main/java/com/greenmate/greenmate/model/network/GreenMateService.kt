@@ -1,10 +1,5 @@
 package com.greenmate.greenmate.model.network
 
-import com.greenmate.greenmate.R
-import com.greenmate.greenmate.model.data.Diary
-import com.greenmate.greenmate.model.data.GreenMate
-import com.greenmate.greenmate.model.data.Todo
-import com.greenmate.greenmate.util.getToday
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
@@ -35,11 +30,10 @@ interface GreenMateService {
 
     /** getData **/
 
-    @FormUrlEncoded
-    @POST("/getDailyRecord.do")
-    fun getAllDiaries(
-        @Field("moduleId") id: String,
-    ): Response<List<Diary>>
+    @POST("/getDailyRecords.do")
+    suspend fun getAllDiaries(
+        @Body data: ModuleIdStringDTO,
+    ): Response<Map<String, List<DailyDiaryDTO>>>
 
     /** Add **/
     @POST("/checkModuleRelation.do")

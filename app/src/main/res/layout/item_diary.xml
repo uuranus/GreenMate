@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.view.View"/>
         <variable
             name="data"
-            type="com.greenmate.greenmate.model.data.Diary" />
+            type="com.greenmate.greenmate.model.data.UIDiary" />
 
     </data>
 
@@ -32,7 +31,7 @@
             style="@style/Style.GreenMate.Text.Body.Title.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/month_format(data.dateMonth)}"
+            android:text="@{@string/month_format(data.month)}"
             app:layout_constraintBottom_toTopOf="@id/dateTextView"
             app:layout_constraintEnd_toEndOf="@id/dateBackground"
             app:layout_constraintStart_toStartOf="@id/dateBackground"
@@ -44,7 +43,7 @@
             style="@style/Style.GreenMate.Text.Body.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/date_format(data.dateDate)}"
+            android:text="@{@string/date_format(data.date)}"
             app:layout_constraintBottom_toBottomOf="@id/dateBackground"
             app:layout_constraintEnd_toEndOf="@id/dateBackground"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,26 +51,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/diaryListRecyclerView"
+            submitList="@{data.list}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            submitList="@{data.list}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/dateBackground"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_diary_list" />
 
-        <TextView
-            android:id="@+id/emptyTodoTextView"
-            style="@style/Style.GreenMate.Text.Body.Sub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="아직 오늘의 일기가 없어요"
-            android:visibility="@{data.list.size==0 ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="@id/dateBackground"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/dateBackground"
-            app:layout_constraintTop_toTopOf="@id/dateBackground" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

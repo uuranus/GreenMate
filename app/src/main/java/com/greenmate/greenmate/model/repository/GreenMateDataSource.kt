@@ -1,6 +1,6 @@
 package com.greenmate.greenmate.model.repository
 
-import com.greenmate.greenmate.model.data.Diary
+import com.greenmate.greenmate.model.data.DailyDiary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDTO
@@ -8,11 +8,10 @@ import com.greenmate.greenmate.model.network.FakeGreenMateService
 import com.greenmate.greenmate.model.network.GreenMateService
 import com.greenmate.greenmate.model.network.LoginDTO
 import com.greenmate.greenmate.model.network.ModuleIdStringDTO
+import com.greenmate.greenmate.model.network.toDailyDiary
 import com.greenmate.greenmate.model.network.toModuleString
 import com.greenmate.greenmate.model.network.toUser
-import java.lang.Exception
 import javax.inject.Inject
-import kotlin.math.log
 
 class GreenMateDataSource @Inject constructor(
     private val fakeService: FakeGreenMateService,
@@ -48,7 +47,6 @@ class GreenMateDataSource @Inject constructor(
 
     suspend fun addGreenMate(greenMate: GreenMate): Result<String> {
         val response = service.addGreenMate(greenMate.toDTO())
-        println("Response $response")
         return if (response.isSuccessful) {
             response.body()?.let {
                 Result.success(it.toModuleString())
@@ -66,11 +64,19 @@ class GreenMateDataSource @Inject constructor(
         return fakeService.deleteGreenMate(id)
     }
 
-    fun addDiary(id: String, diary: String): String {
-        return fakeService.addDiary(id, diary)
-    }
+//    fun addDiary(id: String, diary: String): String {
+//        return service.addDiary(id, diary)
+//    }
 
-    fun getAllDiaries(id: String): List<Diary> {
-        return fakeService.getAllDiaries(id)
+    suspend fun getAllDiaries(moduleId: String): Result<List<DailyDiary>> {
+        val response = service.getAllDiaries(ModuleIdStringDTO(moduleId))
+        println("responsesssss ${response.body()}")
+        return if (response.isSuccessful) {
+            response.body()?.get("dailyRecordList")?.let {
+                Result.success(it.map { it2 -> it2.toDailyDiary() })
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
     }
 }

@@ -10,9 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.FragmentLoadingBinding
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -42,6 +40,7 @@ class LoadingFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mainViewModel.isDataLoaded.collectLatest {
+                    println("it TTTT$it")
                     if (it) {
                         findNavController().navigateUp()
                     }

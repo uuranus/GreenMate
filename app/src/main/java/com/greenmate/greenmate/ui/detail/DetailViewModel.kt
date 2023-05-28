@@ -1,6 +1,7 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
@@ -9,6 +10,7 @@ import com.greenmate.greenmate.model.repository.GreenMateRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -50,12 +52,7 @@ class DetailViewModel @Inject constructor(
     private val _diaryList = MutableStateFlow(
         listOf(
             Diary(
-                5, 11,
-                mutableListOf(),
-            ),
-            Diary(
-                5,
-                11,
+                "2023-05-11",
                 mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true),
@@ -63,7 +60,7 @@ class DetailViewModel @Inject constructor(
                 ),
             ),
             Diary(
-                5, 9,
+                "2023-05-13",
                 mutableListOf(
                     Todo("물주기", R.drawable.icon_water, true),
                     Todo("환기하기", R.drawable.icon_wind, true)
@@ -139,9 +136,13 @@ class DetailViewModel @Inject constructor(
     }
 
     fun getAllDiaries() {
-        val response = repository.getAllDiaries(_currentInfo.value.id)
-        println("response $response")
-        _diaryList.value = response
+        viewModelScope.launch {
+            val response = repository.getAllDiaries("testModule4")
+            println("response $response")
+            response.getOrNull()?.let {
+                _diaryList.value = it
+            }
+        }
     }
 
 }

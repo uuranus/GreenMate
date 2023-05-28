@@ -23,8 +23,6 @@ import com.greenmate.greenmate.adapter.detail.DiaryListAdapter
 import com.greenmate.greenmate.adapter.detail.TodoListAdapter
 import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.FragmentDetailBinding
-import com.greenmate.greenmate.model.data.GreenMate
-import com.greenmate.greenmate.ui.main.MainFragmentDirections
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 

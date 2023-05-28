@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemDiaryBinding
 import com.greenmate.greenmate.model.data.Diary
+import com.greenmate.greenmate.model.data.toUIDiary
 
 class DiaryListAdapter :
     ListAdapter<Diary, DiaryListAdapter.DiaryViewHolder>(diffUtil) {
@@ -21,7 +22,7 @@ class DiaryListAdapter :
         }
 
         fun bind(data: Diary) {
-            binding.data = data
+            binding.data = data.toUIDiary()
         }
 
     }
@@ -43,7 +44,7 @@ class DiaryListAdapter :
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<Diary>() {
             override fun areItemsTheSame(oldItem: Diary, newItem: Diary): Boolean {
-                return oldItem.dateDate == newItem.dateDate
+                return oldItem.date == newItem.date
             }
 
             override fun areContentsTheSame(oldItem: Diary, newItem: Diary): Boolean {

@@ -2,8 +2,8 @@ package com.greenmate.greenmate.model.repository
 
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
-import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.model.data.User
+import com.greenmate.greenmate.model.data.toDiaryList
 import javax.inject.Inject
 
 class GreenMateRepository @Inject constructor(
@@ -34,11 +34,16 @@ class GreenMateRepository @Inject constructor(
         return dataSource.deleteGreenMate(id)
     }
 
-    fun addDiary(id: String, diary: String): String {
-        return dataSource.addDiary(id, diary)
-    }
+//    fun addDiary(id: String, diary: String): String {
+//        return dataSource.addDiary(id, diary)
+//    }
 
-    fun getAllDiaries(id: String): List<Diary> {
-        return dataSource.getAllDiaries(id)
+    suspend fun getAllDiaries(moduleId: String): Result<List<Diary>> {
+        val result = dataSource.getAllDiaries(moduleId)
+        if (result.isFailure) return Result.failure(Exception())
+
+        return result.getOrNull()?.let {
+            Result.success(it.toDiaryList())
+        } ?: Result.failure(Exception())
     }
 }

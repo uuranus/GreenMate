@@ -1,8 +1,9 @@
 package com.greenmate.greenmate.model.network
 
 import com.google.gson.annotations.SerializedName
-import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.model.data.DailyDiary
 import com.greenmate.greenmate.model.data.User
+import com.greenmate.greenmate.util.toDateString
 
 data class UserDTO(
     @SerializedName("name") val userName: String,
@@ -12,8 +13,8 @@ data class UserDTO(
 )
 
 data class LoginDTO(
-    @SerializedName("id") val id:String,
-    @SerializedName("password") val password: String
+    @SerializedName("id") val id: String,
+    @SerializedName("password") val password: String,
 )
 
 data class GreenMateDTO(
@@ -31,6 +32,13 @@ data class UserIdStringDTO(
     @SerializedName("userId") val userId: String,
 )
 
+data class DailyDiaryDTO(
+    @SerializedName("time") val time: String,
+    @SerializedName("moduleId") val moduleId: String,
+    @SerializedName("dailyRecord") val diaryName: String,
+)
+
+/* Extensions */
 fun UserDTO.toUser(): User {
     return User(
         name = userName,
@@ -46,4 +54,11 @@ fun ModuleIdStringDTO.toModuleString(): String {
 
 fun UserIdStringDTO.toUserIdString(): String {
     return userId
+}
+
+fun DailyDiaryDTO.toDailyDiary(): DailyDiary {
+    return DailyDiary(
+        this.time.toDateString(),
+        diaryName
+    )
 }
