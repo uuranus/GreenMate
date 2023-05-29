@@ -47,7 +47,6 @@
             android:maxLines="1"
             android:padding="21dp"
             android:text="@={vm.name}"
-            android:onTextChanged="@{()->vm.onTextChanged()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nameTextView" />

@@ -51,6 +51,8 @@ interface GreenMateService {
         @Body data: AddDiaryDTO,
     ): Response<ModuleIdStringDTO>
 
+    /** edit **/
+
 //    fun editGreenMateInfo(greenMate: GreenMate): GreenMate {
 //        var index = 0
 //        FakeGreenMateService.greenMates.forEachIndexed { idx, it ->

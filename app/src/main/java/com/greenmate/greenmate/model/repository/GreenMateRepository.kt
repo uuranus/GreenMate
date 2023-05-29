@@ -26,8 +26,9 @@ class GreenMateRepository @Inject constructor(
         return dataSource.addGreenMate(greenMate)
     }
 
-    fun editGreenMate(greenMate: GreenMate): GreenMate {
-        return dataSource.editGreenMate(greenMate)
+    suspend fun editGreenMate(imageName: String, newUrl: ByteArray): Boolean {
+        dataSource.editGreenMate(imageName, newUrl)
+        return true
     }
 
     fun deleteGreenMate(id: String): Boolean {

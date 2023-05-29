@@ -72,6 +72,7 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val appBarConfiguration = AppBarConfiguration(findNavController().graph)
         binding.toolbar.run {
             setupWithNavController(findNavController(), appBarConfiguration)

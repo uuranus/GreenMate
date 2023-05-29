@@ -1,10 +1,13 @@
 package com.greenmate.greenmate.ui.detail
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
@@ -16,14 +19,18 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.DialogYesOrNoBinding
 import com.greenmate.greenmate.databinding.FragmentDetailEditBinding
 import com.greenmate.greenmate.ui.camera.CameraActivity
+import com.greenmate.greenmate.ui.camera.CameraCheckFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.io.File
+import java.net.URI
 
 class DetailEditFragment() : Fragment() {
     private var _binding: FragmentDetailEditBinding? = null
@@ -31,6 +38,8 @@ class DetailEditFragment() : Fragment() {
     private val detailViewModel: DetailViewModel by activityViewModels()
     private lateinit var dialogView: DialogYesOrNoBinding
     private lateinit var deleteAlertDialog: AlertDialog
+
+    private var cameraActivityLauncher: ActivityResultLauncher<Intent>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -99,8 +108,7 @@ class DetailEditFragment() : Fragment() {
 
         binding.run {
             greenMateImageView.setOnClickListener {
-                val intent = Intent(requireActivity(), CameraActivity::class.java)
-                startActivity(intent)
+                cameraActivityLauncher?.launch(Intent(requireContext(), CameraActivity::class.java))
             }
         }
 
@@ -123,6 +131,21 @@ class DetailEditFragment() : Fragment() {
                 }
             }
         }
+
+        cameraActivityLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK) {
+                    val imageFilePath =
+                        result.data?.getStringExtra(CameraCheckFragment.IMAGE_NAME_KEY)
+                            ?: return@registerForActivityResult
+                    val uri = File(URI(imageFilePath))
+                    detailViewModel.setImageUrl(uri.readBytes())
+                    Glide.with(requireContext())
+                        .load(uri)
+                        .into(binding.greenMateImageView)
+
+                }
+            }
 
     }
 

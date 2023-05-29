@@ -6,17 +6,21 @@ import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDTO
 import com.greenmate.greenmate.model.network.AddDiaryDTO
 import com.greenmate.greenmate.model.network.FakeGreenMateService
+import com.greenmate.greenmate.model.network.GreenMateImageService
 import com.greenmate.greenmate.model.network.GreenMateService
 import com.greenmate.greenmate.model.network.LoginDTO
 import com.greenmate.greenmate.model.network.ModuleIdStringDTO
 import com.greenmate.greenmate.model.network.toDailyDiary
 import com.greenmate.greenmate.model.network.toModuleString
 import com.greenmate.greenmate.model.network.toUser
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import javax.inject.Inject
 
 class GreenMateDataSource @Inject constructor(
     private val fakeService: FakeGreenMateService,
     private val service: GreenMateService,
+//    private val imageService: GreenMateImageService,
 ) {
 
     suspend fun login(id: String, password: String): Result<User> {
@@ -57,8 +61,15 @@ class GreenMateDataSource @Inject constructor(
         }
     }
 
-    fun editGreenMate(greenMate: GreenMate): GreenMate {
-        return fakeService.editGreenMateInfo(greenMate)
+    suspend fun editGreenMate(imageName: String, newUrl: ByteArray): Boolean {
+//        val response = imageService.changePlantImage(
+//            imageName, RequestBody.create(
+//                MediaType.parse("image/jpeg"),
+//                newUrl
+//            )
+//        )
+//        println("response ${response.body()}")
+        return true
     }
 
     fun deleteGreenMate(id: String): Boolean {
@@ -67,7 +78,6 @@ class GreenMateDataSource @Inject constructor(
 
     suspend fun addDiary(moduleId: String, diary: String): Result<Boolean> {
         val response = service.addDailyRecord(AddDiaryDTO(moduleId, diary))
-        println("addDiary $response")
         return if (response.isSuccessful) {
             response.body()?.let {
                 Result.success(true)
