@@ -72,8 +72,16 @@ class GreenMateDataSource @Inject constructor(
         return true
     }
 
-    fun deleteGreenMate(id: String): Boolean {
-        return fakeService.deleteGreenMate(id)
+    suspend fun deleteGreenMate(moduleId: String): Result<Boolean> {
+        val response = service.deleteGreenMate(ModuleIdStringDTO(moduleId))
+        println("delete $response")
+        return if (response.isSuccessful) {
+            response.body()?.let {
+                Result.success(true)
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
     }
 
     suspend fun addDiary(moduleId: String, diary: String): Result<Boolean> {

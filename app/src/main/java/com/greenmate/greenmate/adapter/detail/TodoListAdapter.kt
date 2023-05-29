@@ -8,11 +8,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.greenmate.greenmate.databinding.ItemTodoBinding
 import com.greenmate.greenmate.model.data.Todo
 
-class TodoListAdapter :
+class TodoListAdapter(private val clickListener: (String) -> Unit) :
     ListAdapter<Todo, TodoListAdapter.TodoViewHolder>(diffUtil) {
 
     inner class TodoViewHolder(private val binding: ItemTodoBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.todoCheckbox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    clickListener(binding.todoTextView.text.toString())
+                }
+            }
+        }
 
         fun bind(data: Todo) {
             binding.data = data

@@ -26,6 +26,9 @@ class DetailViewModel @Inject constructor(
     private val _isDeleted = MutableStateFlow(false)
     val isDeleted: StateFlow<Boolean> get() = _isDeleted
 
+    private val _isSaveSuccess = MutableStateFlow(false)
+    val isSaveSuccess: StateFlow<Boolean> get() = _isSaveSuccess
+
     private val _currentInfo = MutableStateFlow(
         GreenMate(
             id = "",
@@ -42,8 +45,8 @@ class DetailViewModel @Inject constructor(
 
     private val _todoList = MutableStateFlow(
         listOf(
-            Todo("물주기", R.drawable.icon_water, true),
-            Todo("환기하기", R.drawable.icon_wind, true),
+            Todo("물주기", R.drawable.icon_water, false),
+            Todo("환기하기", R.drawable.icon_wind, false),
             Todo("영양관리", R.drawable.icon_medical, false)
         )
     )
@@ -95,8 +98,10 @@ class DetailViewModel @Inject constructor(
     }
 
     fun deleteGreenMate() {
-        repository.deleteGreenMate(_currentInfo.value.id)
-        _isDeleted.value = true
+        viewModelScope.launch {
+            val response = repository.deleteGreenMate("testModule4")
+            _isDeleted.value = response.isSuccess
+        }
     }
 
     fun setFocus(isTodo: Boolean) {
@@ -132,6 +137,18 @@ class DetailViewModel @Inject constructor(
             val response = repository.getAllDiaries("testModule3")
             response.getOrNull()?.let {
                 _diaryList.value = it
+            }
+        }
+    }
+
+    fun saveNewGardening(todoName: String) {
+        println("saveNewGradening $todoName")
+        viewModelScope.launch {
+            val response = repository.addDiary("testModule3", todoName)
+            println("response~~~~~~ $response")
+            _isSaveSuccess.value = response.isSuccess
+            if (response.isSuccess) {
+                _todoList.value = _todoList.value.filter { it.name != todoName }
             }
         }
     }

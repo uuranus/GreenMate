@@ -53,6 +53,13 @@ interface GreenMateService {
 
     /** edit **/
 
+
+    /** delete **/
+    @POST("/deleteModule.do")
+    suspend fun deleteGreenMate(
+        @Body data: ModuleIdStringDTO,
+    ): Response<ModuleIdStringDTO>
+
 //    fun editGreenMateInfo(greenMate: GreenMate): GreenMate {
 //        var index = 0
 //        FakeGreenMateService.greenMates.forEachIndexed { idx, it ->

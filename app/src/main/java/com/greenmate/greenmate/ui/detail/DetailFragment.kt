@@ -30,7 +30,9 @@ class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding: FragmentDetailBinding get() = _binding!!
-    private val todoAdapter: TodoListAdapter = TodoListAdapter()
+    private val todoAdapter: TodoListAdapter = TodoListAdapter(clickListener = {
+        detailViewModel.saveNewGardening(it)
+    })
     private val diaryAdapter: DiaryListAdapter = DiaryListAdapter()
     private val detailViewModel: DetailViewModel by activityViewModels()
     private val args: DetailFragmentArgs by navArgs()
@@ -130,6 +132,16 @@ class DetailFragment : Fragment() {
                     if (it) {
                         detailViewModel.setIsDeleted(false)
                         findNavController().navigateUp()
+                    }
+                }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                detailViewModel.isSaveSuccess.collectLatest {
+                    if (it) {
+                        detailViewModel.getAllDiaries()
                     }
                 }
             }

@@ -31,8 +31,8 @@ class GreenMateRepository @Inject constructor(
         return true
     }
 
-    fun deleteGreenMate(id: String): Boolean {
-        return dataSource.deleteGreenMate(id)
+    suspend fun deleteGreenMate(moduleId: String): Result<Boolean> {
+        return dataSource.deleteGreenMate(moduleId)
     }
 
     suspend fun addDiary(id: String, diary: String): Result<Boolean> {
