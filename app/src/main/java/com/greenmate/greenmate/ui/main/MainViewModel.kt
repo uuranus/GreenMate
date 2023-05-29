@@ -7,6 +7,7 @@ import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.repository.GreenMateRepository
 import com.greenmate.greenmate.util.setUerId
+import com.greenmate.greenmate.util.setUserPassword
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -66,7 +67,7 @@ class MainViewModel @Inject constructor(
 
     /* network */
     fun login(id: String, password: String) {
-        if (_userInfo.value.id.isNotEmpty()){
+        if (_userInfo.value.id.isNotEmpty()) {
             _isDataLoaded.value = true
             return
         }
@@ -77,14 +78,21 @@ class MainViewModel @Inject constructor(
                 result.getOrNull()?.let {
                     _userInfo.value = it
                     setUerId(it.id)
-                    _isDataLoaded.value = true
+                    setUserPassword(it.password)
+                    getAllGreenMates()
                 }
             }
         }
     }
 
     fun getAllGreenMates() {
-        val response = repository.getAllGreenMates()
-        _greenMates.value = response
+        viewModelScope.launch {
+            val response = repository.getAllGreenMates()
+            response.getOrNull()?.let {
+                _userInfo.value = it.userData
+                _greenMates.value = it.greenMates
+                _isDataLoaded.value = true
+            }
+        }
     }
 }

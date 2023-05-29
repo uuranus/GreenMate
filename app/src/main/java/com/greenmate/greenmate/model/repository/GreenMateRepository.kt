@@ -2,6 +2,7 @@ package com.greenmate.greenmate.model.repository
 
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.model.data.GreenMateWithUser
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDiaryList
 import javax.inject.Inject
@@ -14,7 +15,7 @@ class GreenMateRepository @Inject constructor(
         return dataSource.login(id, password)
     }
 
-    fun getAllGreenMates(): List<GreenMate> {
+    suspend fun getAllGreenMates(): Result<GreenMateWithUser> {
         return dataSource.getAllGreenMates()
     }
 

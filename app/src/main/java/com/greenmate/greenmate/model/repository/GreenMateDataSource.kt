@@ -2,19 +2,20 @@ package com.greenmate.greenmate.model.repository
 
 import com.greenmate.greenmate.model.data.DailyDiary
 import com.greenmate.greenmate.model.data.GreenMate
+import com.greenmate.greenmate.model.data.GreenMateWithUser
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDTO
 import com.greenmate.greenmate.model.network.AddDiaryDTO
 import com.greenmate.greenmate.model.network.FakeGreenMateService
-import com.greenmate.greenmate.model.network.GreenMateImageService
 import com.greenmate.greenmate.model.network.GreenMateService
 import com.greenmate.greenmate.model.network.LoginDTO
 import com.greenmate.greenmate.model.network.ModuleIdStringDTO
 import com.greenmate.greenmate.model.network.toDailyDiary
+import com.greenmate.greenmate.model.network.toGreenMateWithUser
 import com.greenmate.greenmate.model.network.toModuleString
 import com.greenmate.greenmate.model.network.toUser
-import okhttp3.MediaType
-import okhttp3.RequestBody
+import com.greenmate.greenmate.util.USER_ID
+import com.greenmate.greenmate.util.USER_PASSWORD
 import javax.inject.Inject
 
 class GreenMateDataSource @Inject constructor(
@@ -35,8 +36,16 @@ class GreenMateDataSource @Inject constructor(
         }
     }
 
-    fun getAllGreenMates(): List<GreenMate> {
-        return fakeService.getGreenMates()
+    suspend fun getAllGreenMates(): Result<GreenMateWithUser> {
+        val response = service.getAllGreenMates(LoginDTO(USER_ID, USER_PASSWORD))
+        println("getAllGreens ${response.body()}")
+        return if (response.isSuccessful) {
+            response.body()?.let {
+                Result.success(it.toGreenMateWithUser())
+            } ?: Result.failure(Exception())
+        } else {
+            Result.failure(Exception())
+        }
     }
 
     suspend fun findSerialNumber(moduleId: String): Result<Boolean> {

@@ -142,10 +142,8 @@ class DetailViewModel @Inject constructor(
     }
 
     fun saveNewGardening(todoName: String) {
-        println("saveNewGradening $todoName")
         viewModelScope.launch {
             val response = repository.addDiary("testModule3", todoName)
-            println("response~~~~~~ $response")
             _isSaveSuccess.value = response.isSuccess
             if (response.isSuccess) {
                 _todoList.value = _todoList.value.filter { it.name != todoName }

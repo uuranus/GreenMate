@@ -65,32 +65,37 @@
 
             <ImageView
                 android:id="@+id/lightImageView"
+                showNeededItem="@{data.light}"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_circle_img"
                 android:backgroundTint="@color/primary_color"
                 android:padding="2dp"
                 android:src="@drawable/icon_light"
-                app:layout_constraintBottom_toBottomOf="@id/waterImageView"
                 app:layout_constraintEnd_toStartOf="@id/waterImageView"
+                app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView"
                 app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/waterImageView"
+                showNeededItem="@{data.humidity}"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/background_circle_img"
                 android:backgroundTint="@color/progress_activate_color"
                 android:padding="2dp"
                 android:src="@drawable/icon_humidity"
-                app:layout_constraintBottom_toBottomOf="@id/temperatureImageView"
                 app:layout_constraintEnd_toStartOf="@id/temperatureImageView"
+                app:layout_constraintTop_toBottomOf="@id/greenMateTypeTextView"
                 app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/temperatureImageView"
+                showNeededItem="@{data.temperature}"
                 android:layout_width="17dp"
                 android:layout_height="17dp"
                 android:layout_marginTop="5dp"

@@ -23,8 +23,8 @@ class LoadingFragment : Fragment() {
     private val binding: FragmentLoadingBinding get() = _binding!!
     private val mainViewModel: MainViewModel by activityViewModels()
 
-    private val id = "11111"
-    private val password = "11111"
+    private val id = "masterUser"
+    private val password = "greenmate1234"
     private lateinit var dialogView: DialogYesOrNoBinding
     private lateinit var againAlertDialog: androidx.appcompat.app.AlertDialog
 
@@ -53,7 +53,6 @@ class LoadingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mainViewModel.login(id, password)
-        mainViewModel.getAllGreenMates()
 
         lifecycleScope.launch {
             delay(5000)

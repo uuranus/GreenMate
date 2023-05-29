@@ -92,6 +92,7 @@ class AddGreenMateViewModel @Inject constructor(
             "좋음",
             "좋음",
             "좋음",
+            "좋음",
             _greenMateImage.value
         )
         viewModelScope.launch {

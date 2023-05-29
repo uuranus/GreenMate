@@ -29,6 +29,10 @@ interface GreenMateService {
 //    }
 
     /** getData **/
+    @POST("/getUserAllData.do")
+    suspend fun getAllGreenMates(
+        @Body data: LoginDTO,
+    ): Response<AllGreenMatesDTO>
 
     @POST("/getDailyRecords.do")
     suspend fun getAllDiaries(
@@ -43,7 +47,7 @@ interface GreenMateService {
 
     @POST("/relationModule.do")
     suspend fun addGreenMate(
-        @Body data: GreenMateDTO,
+        @Body data: AddGreenMateDTO,
     ): Response<ModuleIdStringDTO>
 
     @POST("/addDailyRecord.do")

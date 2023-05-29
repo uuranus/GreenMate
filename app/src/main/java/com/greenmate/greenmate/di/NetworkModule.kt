@@ -3,10 +3,8 @@ package com.greenmate.greenmate.di
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.greenmate.greenmate.model.network.FakeGreenMateService
-import com.greenmate.greenmate.model.network.GreenMateImageService
 import com.greenmate.greenmate.model.network.GreenMateService
 import com.greenmate.greenmate.util.BASE_URL
-import com.greenmate.greenmate.util.IMAGE_BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
