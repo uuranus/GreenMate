@@ -99,7 +99,7 @@ class DetailViewModel @Inject constructor(
 
     fun deleteGreenMate() {
         viewModelScope.launch {
-            val response = repository.deleteGreenMate("testModule4")
+            val response = repository.deleteGreenMate(_currentInfo.value.id)
             _isDeleted.value = response.isSuccess
         }
     }
@@ -115,7 +115,6 @@ class DetailViewModel @Inject constructor(
     }
 
     fun setCurrentInfo(greenMate: GreenMate) {
-        if (_currentInfo.value.id.isNotEmpty()) return
         _currentInfo.value = greenMate
         _imageUrl.value = greenMate.image
         greenMateName.value = _currentInfo.value.name

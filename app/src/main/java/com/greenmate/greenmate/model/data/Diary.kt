@@ -39,5 +39,5 @@ fun List<DailyDiary>.toDiaryList(): List<Diary> {
                 Diary(it.date, mutableListOf(Todo(it.diaryName, getTodoIcon(it.diaryName))))
         }
     }
-    return result.values.toList()
+    return result.values.toList().sortedByDescending { it.date }
 }

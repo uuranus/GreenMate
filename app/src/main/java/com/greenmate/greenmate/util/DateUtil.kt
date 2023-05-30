@@ -52,5 +52,5 @@ fun getTimeDistance(startDate: String?): String {
     val tDate = today.timeInMillis
 
     val diff = (tDate - sDate) / (24 * 60 * 60 * 1000)
-    return "키우기 시작한 지 ${diff}일"
+    return "키우기 시작한 지 ${diff+1}일"
 }

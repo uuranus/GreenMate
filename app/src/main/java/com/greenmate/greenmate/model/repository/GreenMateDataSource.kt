@@ -38,7 +38,7 @@ class GreenMateDataSource @Inject constructor(
 
     suspend fun getAllGreenMates(): Result<GreenMateWithUser> {
         val response = service.getAllGreenMates(LoginDTO(USER_ID, USER_PASSWORD))
-        println("getAllGreens ${response.body()}")
+        println("getAllGreenMates ${response.body()}")
         return if (response.isSuccessful) {
             response.body()?.let {
                 Result.success(it.toGreenMateWithUser())
@@ -61,6 +61,7 @@ class GreenMateDataSource @Inject constructor(
 
     suspend fun addGreenMate(greenMate: GreenMate): Result<String> {
         val response = service.addGreenMate(greenMate.toDTO())
+        println("addGreenMate ${response}")
         return if (response.isSuccessful) {
             response.body()?.let {
                 Result.success(it.toModuleString())

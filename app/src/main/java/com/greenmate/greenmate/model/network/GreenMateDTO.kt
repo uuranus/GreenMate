@@ -101,7 +101,7 @@ fun GreenMateDTO.toGreenMate(): GreenMate {
         type = plantName,
         startDate = getTimeDistance(startDate),
         light = decideLight(illuminance),
-        humidity = decideHumidity(humidity),
+        humidity = decideHumidity(soilWater),
         temperature = decideTemperature(temperature),
         soilWater = decideSoilWater(soilWater),
         image = images.random()

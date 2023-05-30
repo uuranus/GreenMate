@@ -56,6 +56,7 @@ class SerialNumberFragment : Fragment() {
             continueButton.setOnClickListener {
                 viewLifecycleOwner.lifecycleScope.launch {
                     progressDialog.show()
+                    delay(1000)
                     addGreenMateViewModel.findSerialNumber()
 
                     lifecycleScope.launch {

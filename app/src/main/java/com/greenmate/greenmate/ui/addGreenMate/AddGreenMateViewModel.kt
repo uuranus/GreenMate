@@ -97,7 +97,11 @@ class AddGreenMateViewModel @Inject constructor(
         )
         viewModelScope.launch {
             val response = repository.addGreenMate(newGreenMate)
+            println("Response $response")
             _isSavedSuccess.value = response.isSuccess
+            if(response.isSuccess.not()){
+                _snackBarMessage.value = "그린메이트를 추가하는데 실패했습니다"
+            }
         }
     }
 }

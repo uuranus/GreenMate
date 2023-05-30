@@ -67,10 +67,10 @@ class MainViewModel @Inject constructor(
 
     /* network */
     fun login(id: String, password: String) {
-        if (_userInfo.value.id.isNotEmpty()) {
-            _isDataLoaded.value = true
-            return
-        }
+//        if (_userInfo.value.id.isNotEmpty()) {
+//            _isDataLoaded.value = true
+//            return
+//        }
 
         viewModelScope.launch {
             val result = repository.login(id, password)
