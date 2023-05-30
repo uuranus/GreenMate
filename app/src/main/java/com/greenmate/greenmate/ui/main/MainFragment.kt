@@ -77,6 +77,7 @@ class MainFragment : Fragment() {
         super.onStart()
         if (mainViewModel.isDataLoaded()) {
             if (mainViewModel.isGreenMateEmpty()) {
+                mainViewModel.setIsDataLoaded(false)
                 findNavController().navigate(R.id.action_mainFragment_to_notFoundFragment)
             }
 

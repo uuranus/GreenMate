@@ -7,8 +7,13 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.greenmate.greenmate.databinding.FragmentNotFoundBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class NotFoundFragment : Fragment() {
     private var _binding: FragmentNotFoundBinding? = null
@@ -45,14 +50,23 @@ class NotFoundFragment : Fragment() {
                 requireActivity().finish()
             }
         })
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                mainViewModel.isDataLoaded.collectLatest {
+                    if(it){
+                        if (mainViewModel.isGreenMateEmpty().not()) {
+                            findNavController().navigateUp()
+                        }
+                    }
+                }
+            }
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         mainViewModel.getAllGreenMates()
-        if (mainViewModel.isGreenMateEmpty().not()) {
-            findNavController().navigateUp()
-        }
     }
 
     override fun onDestroyView() {

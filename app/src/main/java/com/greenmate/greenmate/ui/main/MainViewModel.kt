@@ -47,13 +47,15 @@ class MainViewModel @Inject constructor(
 
     fun setMainGreenMateByFirst() {
         if (_greenMates.value.isEmpty()) return
-        _mainGreenMate.value = _greenMates.value[0]
+        _mainGreenMate.value = _greenMates.value[0].copy()
     }
 
     fun setMainGreenMateCurrent() {
+        setMainGreenMateByFirst()
         if (_greenMates.value.find { it.id == _mainGreenMate.value.id } == null) {
-            setMainGreenMateByFirst()
+
         }
+//        _mainGreenMate.value = _mainGreenMate.value.copy()
     }
 
     fun setMainGreenMate(greenMate: GreenMate) {
