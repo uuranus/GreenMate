@@ -1,6 +1,7 @@
 package com.greenmate.greenmate.ui.addGreenMate
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -48,7 +49,28 @@ class AddGreenMateActivity : AppCompatActivity() {
             )
         }
 
+//        navController.addOnDestinationChangedListener(object :
+//            NavController.OnDestinationChangedListener {
+//            override fun onDestinationChanged(
+//                controller: NavController,
+//                destination: NavDestination,
+//                arguments: Bundle?,
+//            ) {
+//                when (destination.id) {
+//                    R.id.makeNameFragment, R.id.serialNumberFragment2 -> {
+//                        finish()
+//                    }
+//                }
+//            }
+//
+//        })
         addGreenMateViewModel.setModuleAdded(navArgs.addModule == 1)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==android.R.id.home){
+            println("!!!!")
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

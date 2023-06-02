@@ -1,12 +1,14 @@
 package com.greenmate.greenmate.ui.addGreenMate
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.repository.GreenMateRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -57,11 +59,6 @@ class AddGreenMateViewModel @Inject constructor(
         }
     }
 
-    fun onTextChanged() {
-
-    }
-
-
     /** network **/
     fun findSerialNumber() {
         if (serialNumber.value.isEmpty()) {
@@ -69,9 +66,21 @@ class AddGreenMateViewModel @Inject constructor(
             return
         }
 
-        val response = repository.findSerialNumber(serialNumber.value)
-        if (response) _isSerialNumberFound.value = true
-        else _snackBarMessage.value = "시리얼 넘버가 일치하지 않습니다"
+        viewModelScope.launch {
+            val response = repository.findSerialNumber(serialNumber.value)
+            if (response.isSuccess) {
+                response.getOrNull()?.let{
+                    if(it){
+                        _isSerialNumberFound.value = true
+                    }
+                    else{
+                        _snackBarMessage.value = "시리얼 넘버와 일치하는 모듈이 없습니다"
+                    }
+                }
+            } else {
+                _snackBarMessage.value = "시리얼 넘버가 일치하지 않습니다"
+            }
+        }
     }
 
     fun saveGreenMate() {
@@ -83,9 +92,16 @@ class AddGreenMateViewModel @Inject constructor(
             "좋음",
             "좋음",
             "좋음",
+            "좋음",
             _greenMateImage.value
         )
-        val response = repository.addGreenMate(newGreenMate)
-        _isSavedSuccess.value = response
+        viewModelScope.launch {
+            val response = repository.addGreenMate(newGreenMate)
+            println("Response $response")
+            _isSavedSuccess.value = response.isSuccess
+            if(response.isSuccess.not()){
+                _snackBarMessage.value = "그린메이트를 추가하는데 실패했습니다"
+            }
+        }
     }
 }

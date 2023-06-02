@@ -6,11 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.greenmate.greenmate.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.greenmate.greenmate.databinding.DialogYesOrNoBinding
 import com.greenmate.greenmate.databinding.FragmentLoadingBinding
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class LoadingFragment : Fragment() {
@@ -19,30 +23,50 @@ class LoadingFragment : Fragment() {
     private val binding: FragmentLoadingBinding get() = _binding!!
     private val mainViewModel: MainViewModel by activityViewModels()
 
+    private val id = "masterUser"
+    private val password = "greenmate1234"
+    private lateinit var dialogView: DialogYesOrNoBinding
+    private lateinit var againAlertDialog: androidx.appcompat.app.AlertDialog
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentLoadingBinding.inflate(inflater, container, false)
+        dialogView = DialogYesOrNoBinding.inflate(requireActivity().layoutInflater).apply {
+            titleTextView.text = "네트워크가 불안정합니다.\n다시 시도하시겠습니까?"
+            yesButton.setOnClickListener {
+                findNavController().navigateUp()
+            }
+            noButton.setOnClickListener {
+                requireActivity().finish()
+            }
+        }
+        againAlertDialog = MaterialAlertDialogBuilder(requireContext())
+            .setView(dialogView.root)
+            .setCancelable(true)
+            .create()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        mainViewModel.login(id, password)
+
         lifecycleScope.launch {
-            for (i in 0 until 3) {
-                binding.loadingImageView.setImageResource(if (i % 2 == 0) R.drawable.loading1 else R.drawable.loading2)
-                binding.loadingTextView.text =
-                    if (i == 1) "거의 다 끝났어요! 조금만 기다려주세요" else if (i == 0) "요정이 메이트를 측정하고 있어요" else "같이 성장해요"
-                for (j in 0 until 10) {
-                    binding.progressBar.progress =
-                        (binding.progressBar.progress + 10 / 3).coerceAtMost(100)
+            delay(5000)
+            againAlertDialog.show()
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mainViewModel.isDataLoaded.collectLatest {
+                    if (it) {
+                        findNavController().navigateUp()
+                    }
                 }
-                delay(80)
             }
-            mainViewModel.getAllGreenMates()
-            mainViewModel.setIsDataLoaded(true)
-            findNavController().navigateUp()
         }
     }
 

@@ -2,37 +2,50 @@ package com.greenmate.greenmate.model.repository
 
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
-import com.greenmate.greenmate.model.data.Todo
+import com.greenmate.greenmate.model.data.GreenMateWithUser
+import com.greenmate.greenmate.model.data.User
+import com.greenmate.greenmate.model.data.toDiaryList
 import javax.inject.Inject
 
 class GreenMateRepository @Inject constructor(
     private val dataSource: GreenMateDataSource,
 ) {
-    fun getAllGreenMates(): List<GreenMate> {
+
+    suspend fun login(id: String, password: String): Result<User> {
+        return dataSource.login(id, password)
+    }
+
+    suspend fun getAllGreenMates(): Result<GreenMateWithUser> {
         return dataSource.getAllGreenMates()
     }
 
-    fun addGreenMate(greenMate: GreenMate): Boolean {
+    suspend fun findSerialNumber(moduleId: String): Result<Boolean> {
+        return dataSource.findSerialNumber(moduleId)
+    }
+
+    suspend fun addGreenMate(greenMate: GreenMate): Result<String> {
         return dataSource.addGreenMate(greenMate)
     }
 
-    fun editGreenMate(greenMate: GreenMate): GreenMate {
-        return dataSource.editGreenMate(greenMate)
+    suspend fun editGreenMate(imageName: String, newUrl: ByteArray): Boolean {
+        dataSource.editGreenMate(imageName, newUrl)
+        return true
     }
 
-    fun deleteGreenMate(id: String): Boolean {
-        return dataSource.deleteGreenMate(id)
+    suspend fun deleteGreenMate(moduleId: String): Result<Boolean> {
+        return dataSource.deleteGreenMate(moduleId)
     }
 
-    fun findSerialNumber(number: String): Boolean {
-        return dataSource.findSerialNumber(number)
+    suspend fun addDiary(id: String, diary: String): Result<Boolean> {
+        return dataSource.addDiary(id, diary)
     }
 
-    fun addDiary(id: String, diary: String): String {
-        return dataSource.addDiary(id,diary)
-    }
+    suspend fun getAllDiaries(moduleId: String): Result<List<Diary>> {
+        val result = dataSource.getAllDiaries(moduleId)
+        if (result.isFailure) return Result.failure(Exception())
 
-    fun getAllDiaries(id:String):List<Diary>{
-        return dataSource.getAllDiaries(id)
+        return result.getOrNull()?.let {
+            Result.success(it.toDiaryList())
+        } ?: Result.failure(Exception())
     }
 }

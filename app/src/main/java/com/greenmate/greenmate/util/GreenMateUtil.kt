@@ -1,33 +1,62 @@
 package com.greenmate.greenmate.util
 
-import java.util.Calendar
+import com.greenmate.greenmate.R
 
 
-data class Date(
-    val year: Int,
-    val month: Int,
-    val date: Int,
-)
-
-private val today = Calendar.getInstance()
-
-fun makeFullDateString(year: Int, month: Int, date: Int): String {
-    return String.format("%04d-%02d-%02d", year, month, date)
+fun decideLight(light: Int): String {
+//    return when (light) {
+//        in 2..1500 -> "좋음"
+//        in 0..1 -> "낮음"
+//        else -> "높음"
+//    }
+    return light.toString()
 }
 
-fun makeMonthString(month: Int): String {
-    return String.format("%02d", month)
+fun decideHumidity(humidity: Int): String {
+//    return when (humidity) {
+//        in 40..100 -> "좋음"
+//        in 0..40 -> "낮음"
+//        else -> "높음"
+//    }
+    return humidity.toString()
+}
+
+fun decideTemperature(temp: Int): String {
+//    return when (temp) {
+//        in 16..26 -> "좋음"
+//        in -100..16 -> "낮음"
+//        else -> "높음"
+//    }
+    return temp.toString()
+}
+
+fun decideSoilWater(soilWater: Int): String {
+//    return when (soilWater) {
+//        in 0..500 -> "좋음"
+//        in -100..0 -> "낮음"
+//        else -> "높음"
+//    }
+
+    return soilWater.toString()
 }
 
 
-fun makeDateString(date: Int): String {
-    return String.format("%02d", date)
-}
+fun getTodoIcon(diaryName: String): Int {
+    return when (diaryName) {
+        "물주기" -> {
+            R.drawable.icon_water
+        }
 
-fun getToday(): Date {
-    return Date(
-        today.get(Calendar.YEAR),
-        today.get(Calendar.MONTH) + 1,
-        today.get(Calendar.DATE)
-    )
+        "환기하기" -> {
+            R.drawable.icon_wind
+        }
+
+        "영양관리" -> {
+            R.drawable.icon_medical
+        }
+
+        else -> {
+            R.drawable.icon_water
+        }
+    }
 }

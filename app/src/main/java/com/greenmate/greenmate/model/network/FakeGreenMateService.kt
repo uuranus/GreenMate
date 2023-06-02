@@ -1,23 +1,19 @@
 package com.greenmate.greenmate.model.network
 
-import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
-import com.greenmate.greenmate.model.data.Todo
-import com.greenmate.greenmate.util.getToday
-import java.util.Date
 
 object FakeGreenMateService {
 
-    private val greenMates = mutableListOf(
-        GreenMate("1", "그리니", "식물1", "키우기 시작한지 1일째", "좋음", "좋음", "좋음", R.drawable.plant1),
-        GreenMate("2", "그리니2", "식물2", "키우기 시작한지 15일째", "좋음", "좋음", "나쁨", R.drawable.plant1),
-        GreenMate("3", "그린조아", "식물3", "키우기 시작한지 52일째", "좋음", "나쁨", "좋음", R.drawable.plant2),
-        GreenMate("4", "그리니4", "식물4", "키우기 시작한지 24일째", "좋음", "좋음", "좋음", R.drawable.plant2),
-        GreenMate("5", "그린조아2", "식물5", "키우기 시작한지 10일째", "좋음", "보통", "보통", R.drawable.plant1),
-        GreenMate("6", "그린조아5", "식물6", "키우기 시작한지 30일째", "나쁨", "좋음", "보통", R.drawable.plant2)
-    )
-//    private val greenMates = mutableListOf<GreenMate>()
+    //    private val greenMates = mutableListOf(
+//        GreenMate("1", "그리니", "식물1", "키우기 시작한지 1일째", "좋음", "좋음", "좋음", R.drawable.plant1),
+//        GreenMate("2", "그리니2", "식물2", "키우기 시작한지 15일째", "좋음", "좋음", "나쁨", R.drawable.plant1),
+//        GreenMate("3", "그린조아", "식물3", "키우기 시작한지 52일째", "좋음", "나쁨", "좋음", R.drawable.plant2),
+//        GreenMate("4", "그리니4", "식물4", "키우기 시작한지 24일째", "좋음", "좋음", "좋음", R.drawable.plant2),
+//        GreenMate("5", "그린조아2", "식물5", "키우기 시작한지 10일째", "좋음", "보통", "보통", R.drawable.plant1),
+//        GreenMate("6", "그린조아5", "식물6", "키우기 시작한지 30일째", "나쁨", "좋음", "보통", R.drawable.plant2)
+//    )
+    private val greenMates = mutableListOf<GreenMate>()
 
     private val diaries = HashMap<String, MutableList<Diary>>()
 
@@ -56,36 +52,4 @@ object FakeGreenMateService {
         return true
     }
 
-    fun addDiary(id: String, diary: String): String {
-        val today = getToday()
-        if (diaries.containsKey(id)) {
-            val todayDiary = diaries[id]!!
-            val target =
-                todayDiary.find { it.dateMonth == today.month && it.dateDate == today.date }
-            println("target $target")
-            if (target == null) {
-                diaries[id]?.add(
-                    Diary(
-                        today.month,
-                        today.date,
-                        mutableListOf(Todo(diary, R.drawable.icon_water))
-                    )
-                )
-            } else {
-                target.list.add(
-                    Todo(diary, R.drawable.icon_water)
-                )
-            }
-        } else {
-            println("!!!!")
-            diaries[id] = mutableListOf(
-                Diary(
-                    today.month,
-                    today.date,
-                    mutableListOf(Todo(diary, R.drawable.icon_water))
-                )
-            )
-        }
-        return "null"
-    }
 }

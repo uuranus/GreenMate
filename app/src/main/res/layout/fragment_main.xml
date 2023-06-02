@@ -42,6 +42,7 @@
 
             <ImageView
                 android:id="@+id/profileImageView"
+                setImage="@{vm.userInfo.profileImg}"
                 android:layout_width="67dp"
                 android:layout_height="67dp"
                 android:layout_marginEnd="@dimen/activity_padding"
@@ -79,6 +80,17 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        tools:text="이미지"
+                        android:text="@{vm.mainGreenMate.name}"
+                        style="@style/Style.GreenMate.Text.Body.Title.Accent"
+                        app:layout_constraintStart_toStartOf="@id/greenMateImageView"
+                        app:layout_constraintTop_toTopOf="@id/greenMateImageView"/>
 
                     <com.greenmate.greenmate.view.GreenAttributeView
                         android:id="@+id/lightAttributeView"

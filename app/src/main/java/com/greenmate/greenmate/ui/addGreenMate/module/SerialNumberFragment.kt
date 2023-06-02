@@ -16,7 +16,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
-import com.greenmate.greenmate.databinding.DialogDeleteGreenMateBinding
 import com.greenmate.greenmate.databinding.DialogLoadingBinding
 import com.greenmate.greenmate.databinding.FragmentSerialNumberBinding
 import com.greenmate.greenmate.ui.addGreenMate.AddGreenMateViewModel
@@ -59,6 +58,11 @@ class SerialNumberFragment : Fragment() {
                     progressDialog.show()
                     delay(1000)
                     addGreenMateViewModel.findSerialNumber()
+
+                    lifecycleScope.launch {
+                        delay(5000)
+                        progressDialog.dismiss()
+                    }
                 }
 
             }
@@ -82,6 +86,7 @@ class SerialNumberFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 addGreenMateViewModel.snackBarMessage.collectLatest {
+                    progressDialog.dismiss()
                     if (it.isNotEmpty()) {
                         Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT)
                             .show()

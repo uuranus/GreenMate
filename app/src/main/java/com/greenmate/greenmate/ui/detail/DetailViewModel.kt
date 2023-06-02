@@ -1,6 +1,7 @@
 package com.greenmate.greenmate.ui.detail
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.greenmate.greenmate.R
 import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
@@ -9,6 +10,7 @@ import com.greenmate.greenmate.model.repository.GreenMateRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,6 +25,9 @@ class DetailViewModel @Inject constructor(
 
     private val _isDeleted = MutableStateFlow(false)
     val isDeleted: StateFlow<Boolean> get() = _isDeleted
+
+    private val _isSaveSuccess = MutableStateFlow(false)
+    val isSaveSuccess: StateFlow<Boolean> get() = _isSaveSuccess
 
     private val _currentInfo = MutableStateFlow(
         GreenMate(
@@ -40,41 +45,21 @@ class DetailViewModel @Inject constructor(
 
     private val _todoList = MutableStateFlow(
         listOf(
-            Todo("물주기", R.drawable.icon_water, true),
-            Todo("환기하기", R.drawable.icon_wind, true),
+            Todo("물주기", R.drawable.icon_water, false),
+            Todo("환기하기", R.drawable.icon_wind, false),
             Todo("영양관리", R.drawable.icon_medical, false)
         )
     )
     val todoList: StateFlow<List<Todo>> get() = _todoList
 
-    private val _diaryList = MutableStateFlow(
-        listOf(
-            Diary(
-                5, 11,
-                mutableListOf(),
-            ),
-            Diary(
-                5,
-                11,
-                mutableListOf(
-                    Todo("물주기", R.drawable.icon_water, true),
-                    Todo("환기하기", R.drawable.icon_wind, true),
-                    Todo("영양관리", R.drawable.icon_medical, true)
-                ),
-            ),
-            Diary(
-                5, 9,
-                mutableListOf(
-                    Todo("물주기", R.drawable.icon_water, true),
-                    Todo("환기하기", R.drawable.icon_wind, true)
-                )
-            )
-        )
+    private val _diaryList = MutableStateFlow<List<Diary>>(
+        emptyList()
     )
     val diaryList: StateFlow<List<Diary>> get() = _diaryList
 
     /** edit **/
     private val _imageUrl = MutableStateFlow(_currentInfo.value.image)
+    private val _changedImageUrl = MutableStateFlow(ByteArray(0))
     val imageUrl: StateFlow<Int> get() = _imageUrl
 
     private val _greenMateName = MutableStateFlow("")
@@ -82,6 +67,10 @@ class DetailViewModel @Inject constructor(
 
     fun onNameChanged() {
         _greenMateName.value = greenMateName.value
+    }
+
+    fun setImageUrl(url: ByteArray) {
+        _changedImageUrl.value = url
     }
 
     fun getCurrentId() = _currentInfo.value.id
@@ -97,8 +86,11 @@ class DetailViewModel @Inject constructor(
                 name = _greenMateName.value,
                 type = _currentInfo.value.type
             )
-        val response = repository.editGreenMate(newGreenMate)
-        _isEditSuccess.value = true
+
+        viewModelScope.launch {
+            val response = repository.editGreenMate("testImage", _changedImageUrl.value)
+            _isEditSuccess.value = true
+        }
     }
 
     fun setIsDeleted(deleted: Boolean) {
@@ -106,8 +98,10 @@ class DetailViewModel @Inject constructor(
     }
 
     fun deleteGreenMate() {
-        repository.deleteGreenMate(_currentInfo.value.id)
-        _isDeleted.value = true
+        viewModelScope.launch {
+            val response = repository.deleteGreenMate(_currentInfo.value.id)
+            _isDeleted.value = response.isSuccess
+        }
     }
 
     fun setFocus(isTodo: Boolean) {
@@ -121,7 +115,6 @@ class DetailViewModel @Inject constructor(
     }
 
     fun setCurrentInfo(greenMate: GreenMate) {
-        if (_currentInfo.value.id.isNotEmpty()) return
         _currentInfo.value = greenMate
         _imageUrl.value = greenMate.image
         greenMateName.value = _currentInfo.value.name
@@ -139,9 +132,22 @@ class DetailViewModel @Inject constructor(
     }
 
     fun getAllDiaries() {
-        val response = repository.getAllDiaries(_currentInfo.value.id)
-        println("response $response")
-        _diaryList.value = response
+        viewModelScope.launch {
+            val response = repository.getAllDiaries("testModule3")
+            response.getOrNull()?.let {
+                _diaryList.value = it
+            }
+        }
+    }
+
+    fun saveNewGardening(todoName: String) {
+        viewModelScope.launch {
+            val response = repository.addDiary("testModule3", todoName)
+            _isSaveSuccess.value = response.isSuccess
+            if (response.isSuccess) {
+                _todoList.value = _todoList.value.filter { it.name != todoName }
+            }
+        }
     }
 
 }

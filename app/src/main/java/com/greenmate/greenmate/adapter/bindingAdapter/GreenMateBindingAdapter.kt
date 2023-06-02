@@ -60,3 +60,8 @@ fun setTextVisible(view: TextView, isEmpty: Int, isFocused: Int) {
 
     view.isVisible = (isEmpty == 0 && isFocused == 1)
 }
+
+@BindingAdapter("showNeededItem")
+fun showNeededItem(view: ImageView, status: String) {
+    view.isVisible = status != "좋음"
+}
