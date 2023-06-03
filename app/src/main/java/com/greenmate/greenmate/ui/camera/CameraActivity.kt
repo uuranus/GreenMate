@@ -53,7 +53,6 @@ class CameraActivity : AppCompatActivity() {
         if (allPermissionGranted()) {
             startCamera()
         } else {
-            println("no permission")
             ActivityCompat.requestPermissions(
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
@@ -112,14 +111,12 @@ class CameraActivity : AppCompatActivity() {
                         setResult(RESULT_OK, intent)
                     }
                     finish()
-//                    navController.navigate(R.id.action_cameraFragment_to_cameraCheckFragment)
                 }
             }
         )
     }
 
     private fun startCamera() {
-        println("startCamera")
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
@@ -164,7 +161,6 @@ class CameraActivity : AppCompatActivity() {
             if (allPermissionGranted()) {
                 startCamera()
             } else {
-                println("noo")
                 Toast.makeText(this, "카메라 권한을 허용해주세요", Toast.LENGTH_SHORT).show()
                 finish()
             }

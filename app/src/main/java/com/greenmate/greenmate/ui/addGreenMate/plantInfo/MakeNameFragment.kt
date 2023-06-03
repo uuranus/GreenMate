@@ -1,5 +1,8 @@
 package com.greenmate.greenmate.ui.addGreenMate.plantInfo
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +17,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
+import com.greenmate.greenmate.databinding.DialogLoadingBinding
 import com.greenmate.greenmate.databinding.FragmentMakeNameBinding
 import com.greenmate.greenmate.ui.addGreenMate.AddGreenMateViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -25,6 +30,15 @@ class MakeNameFragment : Fragment() {
     private var _binding: FragmentMakeNameBinding? = null
     private val binding: FragmentMakeNameBinding get() = _binding!!
     private val addGreenMateViewModel: AddGreenMateViewModel by activityViewModels()
+    private val progressDialog: AlertDialog by lazy {
+        val dialogView = DialogLoadingBinding.inflate(requireActivity().layoutInflater)
+        AlertDialog.Builder(requireContext())
+            .setView(dialogView.root)
+            .setCancelable(false)
+            .create().apply {
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +57,14 @@ class MakeNameFragment : Fragment() {
 
             continueButton.setOnClickListener {
                 if (addGreenMateViewModel.isModuleAdded()) {
+                    progressDialog.show()
                     addGreenMateViewModel.saveGreenMate()
+
+                    lifecycleScope.launch {
+                        delay(5000)
+                        progressDialog.dismiss()
+                    }
+
                 } else {
                     findNavController().navigate(R.id.action_makeNameFragment2_to_serialNumberFragment2)
                 }
@@ -53,23 +74,13 @@ class MakeNameFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 addGreenMateViewModel.isSavedSuccess.collectLatest {
+                    progressDialog.dismiss()
                     if (it) {
                         requireActivity().finish()
                     }
                 }
             }
         }
-
-
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                addGreenMateViewModel.snackBarMessage.collectLatest {
-//                    if (it.isNotEmpty()) {
-//                        Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT).show()
-//                    }
-//                }
-//            }
-//        }
     }
 
     override fun onDestroyView() {

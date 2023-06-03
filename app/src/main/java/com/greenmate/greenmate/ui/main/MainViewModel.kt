@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
     val greenMates: StateFlow<List<GreenMate>> get() = _greenMates
 
     private val _mainGreenMate =
-        MutableStateFlow(GreenMate(name = "", type = "", image = R.drawable.plant1))
+        MutableStateFlow(GreenMate(name = "", type = "", image = ""))
     val mainGreenMate: StateFlow<GreenMate> get() = _mainGreenMate
 
     fun isDataLoaded() = _isDataLoaded.value

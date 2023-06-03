@@ -8,15 +8,15 @@ data class User(
     val id: String,
     val password: String,
     val birth: String,
-    val profileImg: Int = R.drawable.loading1,
+    val profileImg: String = "",
 )
 
-
-fun User.toDTO():UserDTO{
+fun User.toDTO(): UserDTO {
     return UserDTO(
         userName = name,
         userId = id,
         password = password,
-        userBirth = birth
+        userBirth = birth,
+        userProfileImg = profileImg
     )
 }

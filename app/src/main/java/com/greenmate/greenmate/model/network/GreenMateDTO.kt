@@ -18,6 +18,7 @@ data class UserDTO(
     @SerializedName("id") val userId: String,
     @SerializedName("password") val password: String,
     @SerializedName("birth") val userBirth: String,
+    @SerializedName("photo") val userProfileImg: String?,
 )
 
 data class LoginDTO(
@@ -30,6 +31,7 @@ data class AddGreenMateDTO(
     @SerializedName("userId") val userId: String,
     @SerializedName("plantName") val plantName: String,
     @SerializedName("nickname") val nickname: String,
+    @SerializedName("photo") val plantPhoto: String,
 )
 
 data class AllGreenMatesDTO(
@@ -47,6 +49,7 @@ data class GreenMateDTO(
     @SerializedName("humidity") val humidity: Int,
     @SerializedName("temperature") val temperature: Int,
     @SerializedName("illuminance") val illuminance: Int,
+    @SerializedName("photo") val photo: String?,
 )
 
 data class ModuleIdStringDTO(
@@ -68,13 +71,24 @@ data class AddDiaryDTO(
     @SerializedName("dailyRecord") val diaryName: String,
 )
 
+data class UpdateNameDTO(
+    @SerializedName("moduleId") val moduleId: String,
+    @SerializedName("nickname") val plantName: String,
+)
+
+data class UpdateImageDTO(
+    @SerializedName("moduleId") val moduleId: String,
+    @SerializedName("photo") val plantImgUrl: String,
+)
+
 /* Extensions */
 fun UserDTO.toUser(): User {
     return User(
         name = userName,
         id = userId,
         password = password,
-        birth = userBirth
+        birth = userBirth,
+        profileImg = userProfileImg ?: ""
     )
 }
 
@@ -104,7 +118,7 @@ fun GreenMateDTO.toGreenMate(): GreenMate {
         humidity = decideHumidity(soilWater),
         temperature = decideTemperature(temperature),
         soilWater = decideSoilWater(soilWater),
-        image = images[0]
+        image = moduleId ?: ""
     )
 }
 

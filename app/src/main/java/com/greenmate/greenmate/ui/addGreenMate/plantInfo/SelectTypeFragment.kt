@@ -56,9 +56,9 @@ class SelectTypeFragment : Fragment() {
 
             continueButton.setOnClickListener {
                 if (addGreenMateViewModel.isModuleAdded()) {
-                    findNavController().navigate(R.id.action_selectTypeFragment_to_makeNameFragment)
+                    findNavController().navigate(R.id.action_selectTypeFragment_to_cameraCheckFragment)
                 } else {
-                    findNavController().navigate(R.id.action_selectTypeFragment2_to_makeNameFragment2)
+                    findNavController().navigate(R.id.action_selectTypeFragment2_to_cameraCheckFragment2)
                 }
             }
         }

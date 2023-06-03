@@ -38,8 +38,7 @@
         </activity>
         <activity
             android:name=".ui.camera.CameraActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
@@ -49,6 +48,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
     </application>
 
 </manifest>

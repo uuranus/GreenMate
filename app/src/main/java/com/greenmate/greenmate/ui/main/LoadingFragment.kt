@@ -52,7 +52,7 @@ class LoadingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mainViewModel.login(id, password)
+        mainViewModel.getAllGreenMates()
 
         lifecycleScope.launch {
             delay(5000)

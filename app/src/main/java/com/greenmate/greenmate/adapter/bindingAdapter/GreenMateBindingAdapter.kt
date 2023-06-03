@@ -8,18 +8,45 @@ import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.greenmate.greenmate.R
+import com.greenmate.greenmate.util.IMAGE_BASE_URL
 import com.greenmate.greenmate.view.GreenAttributeView
 
 @BindingAdapter("setImage")
-fun setImage(view: ImageView, url: Int?) {
-    if (url == null) {
+fun setImage(view: ImageView, url: String?) {
+    view.clipToOutline = true
+
+    if (url == null || url.isEmpty()) {
         view.setImageResource(R.drawable.plant1)
         return
     }
 
-    view.setImageResource(url)
+    Glide.with(view.context)
+        .load("${IMAGE_BASE_URL}${url}.jpeg")
+        .into(view)
+}
+
+@BindingAdapter("setByteImage")
+fun setByteImage(view: ImageView, url: ByteArray?) {
     view.clipToOutline = true
+
+    if (url == null || url.isEmpty()) {
+        view.setImageResource(R.drawable.plant1)
+        return
+    }
+
+    println("urllll $url")
+    Glide.with(view.context)
+        .load(url)
+        .into(view)
+}
+
+@BindingAdapter("setDrawableImg")
+fun setDrawableImg(view: ImageView, url: Int) {
+    view.clipToOutline = true
+
+    view.setImageResource(url)
 }
 
 @BindingAdapter("setValue")

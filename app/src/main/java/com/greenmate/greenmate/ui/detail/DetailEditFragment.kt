@@ -2,7 +2,10 @@ package com.greenmate.greenmate.ui.detail
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,14 +22,27 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.amazonaws.auth.AWSCredentials
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferNetworkLossHandler
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferState
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility
+import com.amazonaws.regions.Region
+import com.amazonaws.regions.Regions
+import com.amazonaws.services.s3.AmazonS3Client
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.greenmate.greenmate.R
+import com.greenmate.greenmate.databinding.DialogLoadingBinding
 import com.greenmate.greenmate.databinding.DialogYesOrNoBinding
 import com.greenmate.greenmate.databinding.FragmentDetailEditBinding
 import com.greenmate.greenmate.ui.camera.CameraActivity
 import com.greenmate.greenmate.ui.camera.CameraCheckFragment
+import com.greenmate.greenmate.util.IMAGE_BASE_URL
+import com.greenmate.greenmate.util.S3_ACCESS_KEY
+import com.greenmate.greenmate.util.S3_SECRET_KEY
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.io.File
@@ -38,8 +54,18 @@ class DetailEditFragment() : Fragment() {
     private val detailViewModel: DetailViewModel by activityViewModels()
     private lateinit var dialogView: DialogYesOrNoBinding
     private lateinit var deleteAlertDialog: AlertDialog
+    private val progressDialog: android.app.AlertDialog by lazy {
+        val dialogView = DialogLoadingBinding.inflate(requireActivity().layoutInflater)
+        android.app.AlertDialog.Builder(requireContext())
+            .setView(dialogView.root)
+            .setCancelable(false)
+            .create().apply {
+                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            }
+    }
 
     private var cameraActivityLauncher: ActivityResultLauncher<Intent>? = null
+    private var file: File? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,7 +99,50 @@ class DetailEditFragment() : Fragment() {
             lifecycleOwner = this@DetailEditFragment.viewLifecycleOwner
 
             saveButton.setOnClickListener {
-                detailViewModel.changeGreenMateInfo()
+                progressDialog.show()
+                val awsCredentials: AWSCredentials =
+                    BasicAWSCredentials(
+                        S3_ACCESS_KEY,
+                        S3_SECRET_KEY,
+                    )
+
+                val s3Client =
+                    AmazonS3Client(awsCredentials, Region.getRegion(Regions.AP_NORTHEAST_2))
+
+                val transferUtility = TransferUtility.builder().s3Client(s3Client).context(
+                    requireActivity().applicationContext
+                ).build()
+                TransferNetworkLossHandler.getInstance(requireActivity().applicationContext)
+
+                val moduleId = detailViewModel.getCurrentId()
+                val fileName = "${moduleId}.jpeg"
+                val uploadObserver = transferUtility.upload(
+                    "greenmate-test",
+                    fileName,
+                    file
+                ) // (bucket api, file이름, file객체)
+
+
+                uploadObserver.setTransferListener(object : TransferListener {
+                    override fun onStateChanged(id: Int, state: TransferState) {
+                        progressDialog.dismiss()
+                        if (state === TransferState.COMPLETED) {
+                            detailViewModel.saveImageUrl("${IMAGE_BASE_URL}${fileName}")
+
+                            detailViewModel.changeGreenMateInfo()
+                        }
+                    }
+
+                    override fun onProgressChanged(id: Int, current: Long, total: Long) {
+                        val done = (current.toDouble() / total * 100.0).toInt()
+                        Log.d("MYTAG", "UPLOAD - - ID: $id, percent done = $done")
+                    }
+
+                    override fun onError(id: Int, ex: Exception) {
+                        Log.d("MYTAG", "UPLOAD ERROR - - ID: $id - - EX:$ex")
+                    }
+                })
+
             }
         }
 
@@ -138,12 +207,10 @@ class DetailEditFragment() : Fragment() {
                     val imageFilePath =
                         result.data?.getStringExtra(CameraCheckFragment.IMAGE_NAME_KEY)
                             ?: return@registerForActivityResult
-                    val uri = File(URI(imageFilePath))
-                    detailViewModel.setImageUrl(uri.readBytes())
+                    file = File(URI(imageFilePath))
                     Glide.with(requireContext())
-                        .load(uri)
+                        .load(file)
                         .into(binding.greenMateImageView)
-
                 }
             }
 
