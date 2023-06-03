@@ -118,7 +118,7 @@ fun GreenMateDTO.toGreenMate(): GreenMate {
         humidity = decideHumidity(soilWater),
         temperature = decideTemperature(temperature),
         soilWater = decideSoilWater(soilWater),
-        image = photo ?: ""
+        image = moduleId ?: ""
     )
 }
 

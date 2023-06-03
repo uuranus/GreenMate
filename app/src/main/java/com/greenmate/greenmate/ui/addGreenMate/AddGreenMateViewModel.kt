@@ -56,17 +56,11 @@ class AddGreenMateViewModel @Inject constructor(
 
     fun isModuleAdded() = _isModuleFirst.value
 
+    fun getModuleId() = serialNumber.value
+
     fun setCurrentPlantType(name: String) {
         _currentPlantName.value = name
     }
-
-//    fun startCamera() {
-//        _isCameraNeedToStart.value = true
-//    }
-//
-//    fun stopCamera() {
-//        _isCameraNeedToStart.value = false
-//    }
 
     fun saveImage(imageUrl: String) {
         _greenMateImage.value = imageUrl

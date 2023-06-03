@@ -30,6 +30,7 @@ import com.greenmate.greenmate.R
 import com.greenmate.greenmate.databinding.DialogLoadingBinding
 import com.greenmate.greenmate.databinding.FragmentCameraCheckBinding
 import com.greenmate.greenmate.ui.addGreenMate.AddGreenMateViewModel
+import com.greenmate.greenmate.util.IMAGE_BASE_URL
 import java.io.File
 import java.net.URI
 
@@ -111,19 +112,20 @@ class CameraCheckFragment : Fragment() {
                 ).build()
                 TransferNetworkLossHandler.getInstance(requireActivity().applicationContext)
 
-                val fileName = "${System.currentTimeMillis()}.jpeg"
+                val moduleId = addGreenMateViewModel.getModuleId()
+                val fileName = "${moduleId}.jpeg"
                 val uploadObserver = transferUtility.upload(
                     "greenmate-test",
                     fileName,
                     file
                 ) // (bucket api, file이름, file객체)
+                println("fileName ${fileName}")
 
 
                 uploadObserver.setTransferListener(object : TransferListener {
                     override fun onStateChanged(id: Int, state: TransferState) {
-                        progressDialog.dismiss()
                         if (state === TransferState.COMPLETED) {
-                            addGreenMateViewModel.saveImage("https://greenmate-test.s3-ap-southeast-2.amazonaws.com/${fileName}")
+                            addGreenMateViewModel.saveImage("${IMAGE_BASE_URL}${fileName}")
 
                             if (addGreenMateViewModel.isModuleAdded()) {
                                 findNavController().navigate(R.id.action_cameraCheckFragment_to_makeNameFragment)
@@ -136,6 +138,9 @@ class CameraCheckFragment : Fragment() {
                     override fun onProgressChanged(id: Int, current: Long, total: Long) {
                         val done = (current.toDouble() / total * 100.0).toInt()
                         Log.d("MYTAG", "UPLOAD - - ID: $id, percent done = $done")
+                        if (done == 100) {
+                            progressDialog.dismiss()
+                        }
                     }
 
                     override fun onError(id: Int, ex: Exception) {

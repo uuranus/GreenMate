@@ -1,7 +1,7 @@
 package com.greenmate.greenmate.util
 
 val BASE_URL = "http://3.39.202.153:8080"
-val IMAGE_BASE_URL = "http://s3.us-east-1.amazonaws.com/greenmate-test/"
+val IMAGE_BASE_URL = "https://greenmate-test.s3-ap-northeast-2.amazonaws.com/"
 
 private var _userId = "masterUser"
 private var _userPassword = "greenmate1234"

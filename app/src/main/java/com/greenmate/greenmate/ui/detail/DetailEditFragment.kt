@@ -40,6 +40,7 @@ import com.greenmate.greenmate.databinding.DialogYesOrNoBinding
 import com.greenmate.greenmate.databinding.FragmentDetailEditBinding
 import com.greenmate.greenmate.ui.camera.CameraActivity
 import com.greenmate.greenmate.ui.camera.CameraCheckFragment
+import com.greenmate.greenmate.util.IMAGE_BASE_URL
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import java.io.File
@@ -111,7 +112,8 @@ class DetailEditFragment() : Fragment() {
                 ).build()
                 TransferNetworkLossHandler.getInstance(requireActivity().applicationContext)
 
-                val fileName = "${System.currentTimeMillis()}.jpeg"
+                val moduleId = detailViewModel.getCurrentId()
+                val fileName = "${moduleId}.jpeg"
                 val uploadObserver = transferUtility.upload(
                     "greenmate-test",
                     fileName,
@@ -123,7 +125,7 @@ class DetailEditFragment() : Fragment() {
                     override fun onStateChanged(id: Int, state: TransferState) {
                         progressDialog.dismiss()
                         if (state === TransferState.COMPLETED) {
-                            detailViewModel.saveImageUrl("https://greenmate-test.s3-ap-southeast-2.amazonaws.com/${fileName}")
+                            detailViewModel.saveImageUrl("${IMAGE_BASE_URL}${fileName}")
 
                             detailViewModel.changeGreenMateInfo()
                         }

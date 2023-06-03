@@ -10,19 +10,20 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.greenmate.greenmate.R
+import com.greenmate.greenmate.util.IMAGE_BASE_URL
 import com.greenmate.greenmate.view.GreenAttributeView
 
 @BindingAdapter("setImage")
 fun setImage(view: ImageView, url: String?) {
     view.clipToOutline = true
 
-    if (url ==null || url.isEmpty()) {
+    if (url == null || url.isEmpty()) {
         view.setImageResource(R.drawable.plant1)
         return
     }
 
     Glide.with(view.context)
-        .load(url)
+        .load("${IMAGE_BASE_URL}${url}.jpeg")
         .into(view)
 }
 
