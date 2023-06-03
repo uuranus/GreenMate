@@ -31,6 +31,8 @@ import com.greenmate.greenmate.databinding.DialogLoadingBinding
 import com.greenmate.greenmate.databinding.FragmentCameraCheckBinding
 import com.greenmate.greenmate.ui.addGreenMate.AddGreenMateViewModel
 import com.greenmate.greenmate.util.IMAGE_BASE_URL
+import com.greenmate.greenmate.util.S3_ACCESS_KEY
+import com.greenmate.greenmate.util.S3_SECRET_KEY
 import java.io.File
 import java.net.URI
 
@@ -100,8 +102,8 @@ class CameraCheckFragment : Fragment() {
                 progressDialog.show()
                 val awsCredentials: AWSCredentials =
                     BasicAWSCredentials(
-                        "AKIA5RPIQAMQGHQZWFIB",
-                        "xw3IkR9m59wYWZ/Wv4cLGcrLy/dDfUqd4I8JgSaq"
+                        S3_ACCESS_KEY,
+                        S3_SECRET_KEY
                     )
 
                 val s3Client =

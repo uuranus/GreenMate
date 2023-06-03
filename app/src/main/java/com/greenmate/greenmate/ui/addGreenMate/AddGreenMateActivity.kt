@@ -5,6 +5,8 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,16 +21,17 @@ class AddGreenMateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddGreenMateBinding
     private val addGreenMateViewModel: AddGreenMateViewModel by viewModels()
     private val navArgs: AddGreenMateActivityArgs by navArgs()
-
+    private lateinit var navHostFragment: NavHostFragment
+    private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddGreenMateBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
 
-        val navHostFragment =
+        navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navHostFragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        navController = navHostFragment.navController
 
 
         if (navArgs.addModule == 1) {
@@ -49,27 +52,11 @@ class AddGreenMateActivity : AppCompatActivity() {
             )
         }
 
-//        navController.addOnDestinationChangedListener(object :
-//            NavController.OnDestinationChangedListener {
-//            override fun onDestinationChanged(
-//                controller: NavController,
-//                destination: NavDestination,
-//                arguments: Bundle?,
-//            ) {
-//                when (destination.id) {
-//                    R.id.makeNameFragment, R.id.serialNumberFragment2 -> {
-//                        finish()
-//                    }
-//                }
-//            }
-//
-//        })
         addGreenMateViewModel.setModuleAdded(navArgs.addModule == 1)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==android.R.id.home){
-            println("!!!!")
+        if (item.itemId == android.R.id.home) {
         }
         return super.onOptionsItemSelected(item)
     }
