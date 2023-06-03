@@ -5,6 +5,7 @@ import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.GreenMateWithUser
 import com.greenmate.greenmate.model.data.User
 import com.greenmate.greenmate.model.data.toDiaryList
+import java.io.File
 import javax.inject.Inject
 
 class GreenMateRepository @Inject constructor(
@@ -23,12 +24,21 @@ class GreenMateRepository @Inject constructor(
         return dataSource.findSerialNumber(moduleId)
     }
 
+    suspend fun saveGreenMateImage(imageName: String, imageByte: ByteArray): Result<String> {
+        return dataSource.saveImage(imageName, imageByte)
+    }
+
     suspend fun addGreenMate(greenMate: GreenMate): Result<String> {
         return dataSource.addGreenMate(greenMate)
     }
 
-    suspend fun editGreenMate(imageName: String, newUrl: ByteArray): Boolean {
-        dataSource.editGreenMate(imageName, newUrl)
+    suspend fun editGreenMateName(moduleId: String, newName: String): Boolean {
+        dataSource.editGreenMateName(moduleId, newName)
+        return true
+    }
+
+    suspend fun editGreenMateImage(moduleId: String, newUrl: String): Boolean {
+        dataSource.editGreenMateImage(moduleId, newUrl)
         return true
     }
 

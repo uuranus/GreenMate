@@ -51,7 +51,15 @@ interface GreenMateService {
     ): Response<ModuleIdStringDTO>
 
     /** edit **/
+    @POST("/updateGreenmateNickname.do")
+    suspend fun updateGreenmateNickname(
+        @Body data: UpdateNameDTO,
+    ): Response<Map<String, String>>
 
+    @POST("/updateGreenmatePhoto.do")
+    suspend fun updateGreenmatePhoto(
+        @Body data: UpdateImageDTO,
+    ): Response<Map<String, String>>
 
     /** delete **/
     @POST("/deleteGreenmate.do")

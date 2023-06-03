@@ -24,7 +24,7 @@
 
         <ImageView
             android:id="@+id/todoIconImageView"
-            setImage="@{data.icon}"
+            setDrawableImg="@{data.icon}"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/icon_water"

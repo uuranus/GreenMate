@@ -20,7 +20,7 @@
 
         <ImageView
             android:id="@+id/imageView"
-            setImage="@{data.icon}"
+            setDrawableImg="@{data.icon}"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:focusable="true"

@@ -32,7 +32,7 @@ class DetailViewModel @Inject constructor(
     private val _currentInfo = MutableStateFlow(
         GreenMate(
             id = "",
-            name = "", type = "", image = R.drawable.plant1
+            name = "", type = "", image = ""
         )
     )
     val currentInfo: StateFlow<GreenMate> get() = _currentInfo
@@ -59,18 +59,19 @@ class DetailViewModel @Inject constructor(
 
     /** edit **/
     private val _imageUrl = MutableStateFlow(_currentInfo.value.image)
-    private val _changedImageUrl = MutableStateFlow(ByteArray(0))
-    val imageUrl: StateFlow<Int> get() = _imageUrl
+    private val _changedImageUrl = MutableStateFlow("")
+    val changedImageUrl: StateFlow<String> get() = _changedImageUrl
+    val imageUrl: StateFlow<String> get() = _imageUrl
 
     private val _greenMateName = MutableStateFlow("")
     val greenMateName = MutableStateFlow("")
 
-    fun onNameChanged() {
-        _greenMateName.value = greenMateName.value
+    fun saveImageUrl(url: String) {
+        _changedImageUrl.value = url
     }
 
-    fun setImageUrl(url: ByteArray) {
-        _changedImageUrl.value = url
+    fun onNameChanged() {
+        _greenMateName.value = greenMateName.value
     }
 
     fun getCurrentId() = _currentInfo.value.id
@@ -80,15 +81,12 @@ class DetailViewModel @Inject constructor(
             return
         }
 
-        val newGreenMate =
-            _currentInfo.value.copy(
-                image = _imageUrl.value,
-                name = _greenMateName.value,
-                type = _currentInfo.value.type
-            )
+        val newImageUrl =
+            if (_changedImageUrl.value.isNotEmpty()) _changedImageUrl.value else _greenMateName.value
 
         viewModelScope.launch {
-            val response = repository.editGreenMate("testImage", _changedImageUrl.value)
+            val response = repository.editGreenMateName(_currentInfo.value.id, _greenMateName.value)
+            val response2 = repository.editGreenMateImage(_currentInfo.value.id, newImageUrl)
             _isEditSuccess.value = true
         }
     }

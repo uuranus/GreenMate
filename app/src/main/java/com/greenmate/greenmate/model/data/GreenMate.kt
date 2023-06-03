@@ -17,7 +17,7 @@ data class GreenMate(
     val humidity: String = "",
     val temperature: String = "",
     val soilWater: String = "",
-    val image: Int,
+    val image: String = "",
 ) : java.io.Serializable
 
 fun GreenMate.toDTO(): AddGreenMateDTO {
@@ -25,6 +25,7 @@ fun GreenMate.toDTO(): AddGreenMateDTO {
         id,
         USER_ID,
         type,
-        name
+        name,
+        image
     )
 }

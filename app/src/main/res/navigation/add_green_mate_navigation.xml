@@ -34,7 +34,16 @@
         android:label="fragment_select_type"
         tools:layout="@layout/fragment_select_type">
         <action
-            android:id="@+id/action_selectTypeFragment2_to_makeNameFragment2"
+            android:id="@+id/action_selectTypeFragment2_to_cameraCheckFragment2"
+            app:destination="@id/cameraCheckFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/cameraCheckFragment2"
+        android:name="com.greenmate.greenmate.ui.camera.CameraCheckFragment"
+        android:label="fragment_camera_check"
+        tools:layout="@layout/fragment_camera_check" >
+        <action
+            android:id="@+id/action_cameraCheckFragment2_to_makeNameFragment2"
             app:destination="@id/makeNameFragment2" />
     </fragment>
 </navigation>
