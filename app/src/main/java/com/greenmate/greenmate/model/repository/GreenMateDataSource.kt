@@ -122,6 +122,7 @@ class GreenMateDataSource @Inject constructor(
 
     suspend fun addDiary(moduleId: String, diary: String): Result<Boolean> {
         val response = service.addDailyRecord(AddDiaryDTO(moduleId, diary))
+        println("Response ${response.body()}")
         return if (response.isSuccessful) {
             response.body()?.let {
                 Result.success(true)

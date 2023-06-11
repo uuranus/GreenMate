@@ -100,6 +100,19 @@ class CameraCheckFragment : Fragment() {
 
             continueButton.setOnClickListener {
                 progressDialog.show()
+
+                val modulID = addGreenMateViewModel.greenMateImage.value
+
+                if (modulID.isEmpty()) {
+                    progressDialog.dismiss()
+                    if (addGreenMateViewModel.isModuleAdded()) {
+                        findNavController().navigate(R.id.action_cameraCheckFragment_to_makeNameFragment)
+                    } else {
+                        findNavController().navigate(R.id.action_cameraCheckFragment2_to_makeNameFragment2)
+                    }
+                    return@setOnClickListener
+                }
+
                 val awsCredentials: AWSCredentials =
                     BasicAWSCredentials(
                         S3_ACCESS_KEY,

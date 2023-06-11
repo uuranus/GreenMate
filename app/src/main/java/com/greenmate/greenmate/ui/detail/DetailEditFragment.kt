@@ -100,6 +100,14 @@ class DetailEditFragment() : Fragment() {
 
             saveButton.setOnClickListener {
                 progressDialog.show()
+
+                if(file==null){
+                    progressDialog.dismiss()
+
+                    detailViewModel.changeGreenMateInfo()
+                    return@setOnClickListener
+                }
+
                 val awsCredentials: AWSCredentials =
                     BasicAWSCredentials(
                         S3_ACCESS_KEY,

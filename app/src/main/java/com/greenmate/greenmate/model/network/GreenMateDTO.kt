@@ -35,7 +35,7 @@ data class AddGreenMateDTO(
 )
 
 data class AllGreenMatesDTO(
-    @SerializedName("user") val userData: UserDTO,
+    @SerializedName("user") val userData: UserDTO?,
     @SerializedName("greenmateList") val greenmates: List<GreenMateDTO>,
 )
 
@@ -124,7 +124,7 @@ fun GreenMateDTO.toGreenMate(): GreenMate {
 
 fun AllGreenMatesDTO.toGreenMateWithUser(): GreenMateWithUser {
     return GreenMateWithUser(
-        userData = userData.toUser(),
+        userData = userData?.toUser() ?: User("PEPL", "masterUser", "greenmate1234", "20200103"),
         greenMates = greenmates.map { it.toGreenMate() }
     )
 }

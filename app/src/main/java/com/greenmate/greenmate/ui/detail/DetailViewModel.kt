@@ -131,7 +131,7 @@ class DetailViewModel @Inject constructor(
 
     fun getAllDiaries() {
         viewModelScope.launch {
-            val response = repository.getAllDiaries("testModule3")
+            val response = repository.getAllDiaries(_currentInfo.value.id)
             response.getOrNull()?.let {
                 _diaryList.value = it
             }

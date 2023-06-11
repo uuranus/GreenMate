@@ -47,7 +47,7 @@ class AddDiaryViewModel @Inject constructor(
 
     fun saveNewGardening() {
         viewModelScope.launch {
-            val response = repository.addDiary("testModule3", _selectedGardeningActivity.value.name)
+            val response = repository.addDiary(_currentId.value, _selectedGardeningActivity.value.name)
             _isSaveSuccess.value = response.isSuccess
         }
     }
