@@ -33,5 +33,5 @@
 
 |상세페이지|그린메이트 수정|그린메이트 삭제|일기 수동 추가|
 |:--:|:--:|:--:|:--:|
-|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/cb3f2224-7a3d-4e9f-b644-4fd7185b573a" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/ad963ecf-1299-46dd-a022-042b3bcc4a87" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/4d9bfd00-f037-4018-a66c-0e08f1b147be" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/9504a536-178a-4c54-8bc2-a71e822ec589" width="252" height="560">|
+|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/cb3f2224-7a3d-4e9f-b644-4fd7185b573a" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/ad963ecf-1299-46dd-a022-042b3bcc4a87" width="280" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/4d9bfd00-f037-4018-a66c-0e08f1b147be" width="280" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/9504a536-178a-4c54-8bc2-a71e822ec589" width="280" height="560">|
 
