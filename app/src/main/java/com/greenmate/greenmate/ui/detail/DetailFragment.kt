@@ -112,11 +112,11 @@ class DetailFragment : Fragment() {
             diaryRecyclerView.adapter = diaryAdapter
 
             todoTextView.setOnClickListener {
-                detailViewModel.setFocus(true)
+                detailViewModel.setFocus(TODO)
             }
 
             diaryTextView.setOnClickListener {
-                detailViewModel.setFocus(false)
+                detailViewModel.setFocus(DIARY)
             }
 
             addDiaryImageButton.setOnClickListener {
@@ -157,4 +157,10 @@ class DetailFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        const val TODO = true
+        const val DIARY = false
+    }
+
 }

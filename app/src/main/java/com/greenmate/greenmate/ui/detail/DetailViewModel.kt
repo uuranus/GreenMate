@@ -7,6 +7,7 @@ import com.greenmate.greenmate.model.data.Diary
 import com.greenmate.greenmate.model.data.GreenMate
 import com.greenmate.greenmate.model.data.Todo
 import com.greenmate.greenmate.model.repository.GreenMateRepository
+import com.greenmate.greenmate.ui.detail.DetailFragment.Companion.TODO
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,19 +30,19 @@ class DetailViewModel @Inject constructor(
     private val _isSaveSuccess = MutableStateFlow(false)
     val isSaveSuccess: StateFlow<Boolean> get() = _isSaveSuccess
 
-    private val _currentInfo = MutableStateFlow(
+    private val _currentGreenMate = MutableStateFlow(
         GreenMate(
             id = "",
             name = "", type = "", image = ""
         )
     )
-    val currentInfo: StateFlow<GreenMate> get() = _currentInfo
+    val currentGreenMate: StateFlow<GreenMate> get() = _currentGreenMate
 
-    private val _todoState = MutableStateFlow(1)
-    val todoState: StateFlow<Int> get() = _todoState
+    private val _todoFocusState = MutableStateFlow(1)
+    val todoFocusState: StateFlow<Int> get() = _todoFocusState
 
-    private val _diarySate = MutableStateFlow(0)
-    val diaryState: StateFlow<Int> get() = _diarySate
+    private val _diaryFocusSate = MutableStateFlow(0)
+    val diaryFocusSate: StateFlow<Int> get() = _diaryFocusSate
 
     private val _todoList = MutableStateFlow(
         listOf(
@@ -58,7 +59,7 @@ class DetailViewModel @Inject constructor(
     val diaryList: StateFlow<List<Diary>> get() = _diaryList
 
     /** edit **/
-    private val _imageUrl = MutableStateFlow(_currentInfo.value.image)
+    private val _imageUrl = MutableStateFlow(_currentGreenMate.value.image)
     private val _changedImageUrl = MutableStateFlow("")
     val changedImageUrl: StateFlow<String> get() = _changedImageUrl
     val imageUrl: StateFlow<String> get() = _imageUrl
@@ -74,7 +75,7 @@ class DetailViewModel @Inject constructor(
         _greenMateName.value = greenMateName.value
     }
 
-    fun getCurrentId() = _currentInfo.value.id
+    fun getCurrentId() = _currentGreenMate.value.id
     fun changeGreenMateInfo() {
         if (greenMateName.value.isEmpty()) {
             _snackBarMessage.value = "닉네임을 입력하세요!"
@@ -85,8 +86,9 @@ class DetailViewModel @Inject constructor(
             if (_changedImageUrl.value.isNotEmpty()) _changedImageUrl.value else _greenMateName.value
 
         viewModelScope.launch {
-            val response = repository.editGreenMateName(_currentInfo.value.id, _greenMateName.value)
-            val response2 = repository.editGreenMateImage(_currentInfo.value.id, newImageUrl)
+            val response =
+                repository.editGreenMateName(_currentGreenMate.value.id, _greenMateName.value)
+            val response2 = repository.editGreenMateImage(_currentGreenMate.value.id, newImageUrl)
             _isEditSuccess.value = true
         }
     }
@@ -97,30 +99,30 @@ class DetailViewModel @Inject constructor(
 
     fun deleteGreenMate() {
         viewModelScope.launch {
-            val response = repository.deleteGreenMate(_currentInfo.value.id)
+            val response = repository.deleteGreenMate(_currentGreenMate.value.id)
             _isDeleted.value = response.isSuccess
         }
     }
 
-    fun setFocus(isTodo: Boolean) {
-        if (isTodo) {
-            _todoState.value = 1
-            _diarySate.value = 0
+    fun setFocus(isTodoFocused: Boolean) {
+        if (isTodoFocused) {
+            _todoFocusState.value = IS_FOCUSED
+            _diaryFocusSate.value = IS_NOT_FOCUSED
         } else {
-            _todoState.value = 0
-            _diarySate.value = 1
+            _todoFocusState.value = IS_NOT_FOCUSED
+            _diaryFocusSate.value = IS_FOCUSED
         }
     }
 
     fun setCurrentInfo(greenMate: GreenMate) {
-        _currentInfo.value = greenMate
+        _currentGreenMate.value = greenMate
         _imageUrl.value = greenMate.image
-        greenMateName.value = _currentInfo.value.name
+        greenMateName.value = _currentGreenMate.value.name
     }
 
     fun setCurrentInfoAgain() {
         if (_isEditSuccess.value) {
-            _currentInfo.value = _currentInfo.value.copy(
+            _currentGreenMate.value = _currentGreenMate.value.copy(
                 name = _greenMateName.value,
                 image = _imageUrl.value
             )
@@ -131,7 +133,7 @@ class DetailViewModel @Inject constructor(
 
     fun getAllDiaries() {
         viewModelScope.launch {
-            val response = repository.getAllDiaries(_currentInfo.value.id)
+            val response = repository.getAllDiaries(_currentGreenMate.value.id)
             response.getOrNull()?.let {
                 _diaryList.value = it
             }
@@ -148,4 +150,8 @@ class DetailViewModel @Inject constructor(
         }
     }
 
+    companion object {
+        const val IS_FOCUSED = 1
+        const val IS_NOT_FOCUSED = 0
+    }
 }

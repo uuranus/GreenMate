@@ -20,13 +20,13 @@ class GreenMateRepository @Inject constructor(
         return dataSource.getAllGreenMates()
     }
 
-    suspend fun findSerialNumber(moduleId: String): Result<Boolean> {
-        return dataSource.findSerialNumber(moduleId)
+    suspend fun isSerialNumberExist(moduleId: String): Result<Boolean> {
+        return dataSource.isSerialNumberExist(moduleId)
     }
 
-    suspend fun saveGreenMateImage(imageName: String, imageByte: ByteArray): Result<String> {
-        return dataSource.saveImage(imageName, imageByte)
-    }
+//    suspend fun saveGreenMateImage(imageName: String, imageByte: ByteArray): Result<String> {
+//        return dataSource.saveImage(imageName, imageByte)
+//    }
 
     suspend fun addGreenMate(greenMate: GreenMate): Result<String> {
         return dataSource.addGreenMate(greenMate)
