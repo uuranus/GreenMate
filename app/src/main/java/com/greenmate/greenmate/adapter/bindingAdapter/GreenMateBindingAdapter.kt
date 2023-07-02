@@ -24,6 +24,7 @@ fun setImage(view: ImageView, url: String?) {
 
     Glide.with(view.context)
         .load("${IMAGE_BASE_URL}${url}.jpeg")
+        .error(R.drawable.plant1)
         .into(view)
 }
 

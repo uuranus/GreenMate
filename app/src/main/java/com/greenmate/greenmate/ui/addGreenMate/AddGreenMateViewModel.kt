@@ -82,7 +82,7 @@ class AddGreenMateViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            val response = repository.findSerialNumber(serialNumber.value)
+            val response = repository.isSerialNumberExist(serialNumber.value)
             if (response.isSuccess) {
                 response.getOrNull()?.let {
                     if (it) {
