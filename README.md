@@ -16,11 +16,11 @@
 
 ### 그린메이트 추가
 - IoT 디바이스의 시리얼 넘버를 입력해 서버에 등록되어 있는 IoT 디바이스와 매칭합니다.
-- IoT 디바이스를 꽂을 식물의 사진,이름, 식물 종류를 입력합니다.
+- IoT 디바이스를 꽂을 식물의 사진,이름,식물 종류를 입력합니다.
 
-|추가하기|
-|:--:|
-|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/e044d4eb-35d0-473a-9c3d-eeb46f69e5b4" width="252" height="560">|
+|시리얼 넘버 & 식물종류 선택|사진 찍기|애칭정하기|
+|:--:|:--:|:--:|
+|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/b870a6e4-95e2-4c5a-82bc-1d5cc4779fed" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/b84cf1a9-1c62-4235-a522-92b74af1133a" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/7802e3da-877c-4128-b5de-abcbe110f9d5" width="252" height="560">|
 
 
 ### 상세페이지
@@ -33,8 +33,10 @@
 
 |상세페이지|그린메이트 수정|
 |:--:|:--:|
-|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/cb3f2224-7a3d-4e9f-b644-4fd7185b573a" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/ad963ecf-1299-46dd-a022-042b3bcc4a87" width="252" height="560">|
+|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/cb3f2224-7a3d-4e9f-b644-4fd7185b573a" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/dcab0518-f6c3-4fce-84ee-61c087f43e71" width="252" height="560">|
+
 
 |그린메이트 삭제|일기 수동 추가|
 |:--:|:--:|
-|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/4d9bfd00-f037-4018-a66c-0e08f1b147be" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/9504a536-178a-4c54-8bc2-a71e822ec589" width="252" height="560">|
+|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/9f4c1e0c-9d63-4b35-b18d-319d72147b05" width="252" height="560">|<img src = "https://github.com/uuranus/GreenMate/assets/72340294/9a34a8dd-3229-4ffe-a14d-2b85dedeea0f" width="252" height="560">|
+
